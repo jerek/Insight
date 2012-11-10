@@ -1,0 +1,105 @@
+<Bindings>
+	<Binding name="JDHPOPTIONS" header="JDHPPLAYERSIDEHEADER">
+		JDHPOptionsDisplay:Show();
+	</Binding>
+	<Binding name="JDHPPLAYERSIDEHEALTH" header="JDHPPLAYERSIDEHEADER">
+		if(PlayerSideHealth == 0) then
+			PlayerSideHealth = 1;
+		else
+			PlayerSideHealth = 0;
+		end
+		JDHP_RenderPlayerHealth();
+	</Binding>
+	<Binding name="JDHPPLAYERSIDEMANA" header="JDHPPLAYERSIDEHEADER">
+		if(PlayerSideMana == 0) then
+			PlayerSideMana = 1;
+		else
+			PlayerSideMana = 0;
+		end
+		JDHP_RenderPlayerMana();
+	</Binding>
+	<Binding name="JDHPPLAYERSIDEMAXES" header="JDHPPLAYERSIDEHEADER">
+		if(PlayerSideMaxes == 0) then
+			PlayerSideMaxes = 1;
+		else
+			PlayerSideMaxes = 0;
+		end
+		JDHP_RenderPlayerHealth();
+		JDHP_RenderPlayerMana();
+		JDHP_RenderPlayerCharges();
+	</Binding>
+	<Binding name="JDHPPLAYERSIDEMISSING" header="JDHPPLAYERSIDEHEADER">
+		if(PlayerSideMissing == 0) then
+			PlayerSideMissing = 1;
+		else
+			PlayerSideMissing = 0;
+		end
+		JDHP_RenderPlayerHealth();
+		JDHP_RenderPlayerMana();
+		JDHP_RenderPlayerCharges();
+	</Binding>
+	<Binding name="JDHPPLAYERSIDEHEALTHPER" header="JDHPPLAYERSIDEHEADER">
+		if(PlayerSideHealthPer == 0) then
+			PlayerSideHealthPer = 1;
+		else
+			PlayerSideHealthPer = 0;
+		end
+		JDHP_RenderPlayerHealth();
+	</Binding>
+	<Binding name="JDHPPLAYERSIDEMANAPER" header="JDHPPLAYERSIDEHEADER">
+		if(PlayerSideManaPer == 0) then
+			PlayerSideManaPer = 1;
+		else
+			PlayerSideManaPer = 0;
+		end
+		JDHP_RenderPlayerMana();
+	</Binding>
+	<Binding name="JDHPEXP" header="JDHPPLAYERSIDEHEADER">
+		if(Exp == 0) then
+			Exp = 1;
+		else
+			Exp = 0;
+		end
+		JDHP_RenderPlayerExp();
+	</Binding>
+	<Binding name="JDHPTNL" header="JDHPPLAYERSIDEHEADER">
+		if(Tnl == 0) then
+			Tnl = 1;
+		else
+			Tnl = 0;
+		end
+		JDHP_RenderPlayerExp();
+	</Binding>
+	<Binding name="JDHPBAREXP" header="JDHPPLAYERSIDEHEADER">
+		if(BarExp == 0) then
+			BarExp = 1;
+		else
+			BarExp = 0;
+		end
+		JDHP_RenderPlayerExp();
+	</Binding>
+	<Binding name="JDHPCOLORPLAYERHEALTH" header="JDHPPLAYERSIDEHEADER">
+		if(ColorPlayerHealth == 0) then
+			ColorPlayerHealth = 1;
+		else
+			ColorPlayerHealth = 0;
+		end
+		JDHP_RenderPlayerHealth();
+	</Binding>
+	<Binding name="JDHPCOLORPLAYERMANA" header="JDHPPLAYERSIDEHEADER">
+		if(ColorPlayerMana == 0) then
+			ColorPlayerMana = 1;
+		else
+			ColorPlayerMana = 0;
+		end
+		JDHP_RenderPlayerMana();
+	</Binding>
+	<Binding name="JDHPCOLORPLAYERHEALTHBAR" header="JDHPPLAYERSIDEHEADER">
+		if(ColorPlayerHealthBar == 0) then
+			ColorPlayerHealthBar = 1;
+		else
+			ColorPlayerHealthBar = 0;
+		end
+		JDHP_RenderPlayerHealth();
+	</Binding>
+</Bindings>

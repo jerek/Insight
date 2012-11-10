@@ -1,0 +1,1625 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<Script file="localization.lua"/>
+	<Script file="JDHP_Options.lua"/>
+    <Frame name="JDHPOptionsDisplay" toplevel="true" enableMouse="true" movable="true" parent="UIParent" hidden="true">
+
+		<Scripts>
+			<OnShow>
+			    JDHP_OptionsFrame_OnShow();
+			    tinsert(UISpecialFrames,"JDHPOptionsDisplay");
+			</OnShow>
+			<OnLoad>
+			</OnLoad>
+			<OnEvent>
+			</OnEvent>
+			<OnMouseDown>
+ 				if ( arg1 == "LeftButton" ) then
+ 					this:StartMoving();
+ 				elseif (arg1 == "RightButton") then
+					JDHPOptionsDisplay:SetPoint("TOPLEFT", "UIParent", "TOP", -192, -140);
+ 				end
+ 			</OnMouseDown>
+ 			<OnMouseUp>
+ 				if ( arg1 == "LeftButton" ) then
+ 					this:StopMovingOrSizing();
+ 				end
+ 			</OnMouseUp>
+		</Scripts>
+
+		<Size>
+			<AbsDimension x="385" y="660"/>
+		</Size>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+				<Size>
+					<AbsDimension x="128" y="17" />
+				</Size>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Anchors>
+ 			<Anchor point="TOP">
+ 				<Offset>
+ 					<AbsDimension x="0" y="-140"/>
+ 				</Offset>
+ 			</Anchor>
+ 		</Anchors>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="JDHPOptionsDisplayTitle" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="180" y="64" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+
+				<!-- Frame header label -->
+				<FontString inherits="GameFontNormalSmall" text="JDHP Options">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-3" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame setAllPoints="true">
+				<Layers>
+					<Layer level="ARTWORK">
+						<Texture name="$parentPSLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="5" y="-20"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.1953125" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentPSMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="150" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentPSLeft" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentPSRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentPSMiddle" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
+						</Texture>
+						<FontString name="JDHPOptionsDisplayPlayerSideOptions" inherits="GameFontNormalSmall" text="Player Side Options" justifyH="CENTER">
+							<color r="1" g="1" b="1"/>
+							<Size>
+								<AbsDimension x="160" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentPSMiddle" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="-5" y="-30"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<Texture name="$parentTSLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="180" y="-20"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.1953125" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentTSMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="150" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentTSLeft" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentTSRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentTSMiddle" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
+						</Texture>
+						<FontString name="JDHPOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Target Side Options" justifyH="CENTER">
+							<color r="1" g="1" b="1"/>
+							<Size>
+								<AbsDimension x="160" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentTSMiddle" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="-5" y="-30"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<Texture name="$parentPCLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="5" y="-176"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.1953125" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentPCMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="150" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentPCLeft" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentPCRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentPCMiddle" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
+						</Texture>
+						<FontString name="JDHPOptionsDisplayPlayerSideOptions" inherits="GameFontNormalSmall" text="Player Side Colors" justifyH="CENTER">
+							<color r="1" g="1" b="1"/>
+							<Size>
+								<AbsDimension x="160" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentPCMiddle" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="-5" y="-30"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<Texture name="$parentPBLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="5" y="-272"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.1953125" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentPBMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="150" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentPBLeft" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentPBRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentPBMiddle" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
+						</Texture>
+						<FontString name="JDHPOptionsDisplayPlayerSideOptions" inherits="GameFontNormalSmall" text="Player Bar Options" justifyH="CENTER">
+							<color r="1" g="1" b="1"/>
+							<Size>
+								<AbsDimension x="160" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentPBMiddle" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="-5" y="-30"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<Texture name="$parentTCLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="180" y="-176"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.1953125" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentTCMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="150" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentTCLeft" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentTCRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentTCMiddle" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
+						</Texture>
+						<FontString name="JDHPOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Target Side Colors" justifyH="CENTER">
+							<color r="1" g="1" b="1"/>
+							<Size>
+								<AbsDimension x="160" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentTCMiddle" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="-5" y="-30"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<Texture name="$parentTBLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="180" y="-272"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.1953125" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentTBMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="150" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentTBLeft" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentTBRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentTBMiddle" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
+						</Texture>
+						<FontString name="JDHPOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Target Bar Options" justifyH="CENTER">
+							<color r="1" g="1" b="1"/>
+							<Size>
+								<AbsDimension x="160" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentTBMiddle" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="-5" y="-30"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+
+						<Texture name="$parentMiscLeft" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset>
+										<AbsDimension x="5" y="-428"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0" right="0.1953125" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentMiscMiddle" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="325" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentMiscLeft" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.1953125" right="0.8046875" top="0" bottom="1"/>
+						</Texture>
+						<Texture name="$parentMiscRight" file="Interface\Glues\CharacterCreate\CharacterCreate-LabelFrame">
+							<Size>
+								<AbsDimension x="25" y="64"/>
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentMiscMiddle" relativePoint="RIGHT"/>
+							</Anchors>
+							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
+						</Texture>
+						<FontString name="JDHPOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Miscellaneous" justifyH="CENTER">
+							<color r="1" g="1" b="1"/>
+							<Size>
+								<AbsDimension x="335" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="$parentMiscMiddle" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="-5" y="-30"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<!-- Player Side -->
+
+            <CheckButton name="JDHPOptionsDisplayPlayerSideHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentPSLeft">
+						<Offset>
+							<AbsDimension x="15" y="15"/>
+						</Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSHP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayPlayerSideMana" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideHealth">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSMP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayPlayerSideMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideMana">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSMAXES">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayPlayerSideMissing" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideMaxes">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSMISSING">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayPlayerSideHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideMissing">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSHPPER">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayPlayerSideManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideHealthPer">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSMPPER">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+			<!-- Player Bar -->
+
+            <CheckButton name="JDHPOptionsDisplayPlayerBarHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentPBLeft">
+						<Offset>
+							<AbsDimension x="15" y="15"/>
+						</Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBHP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayPlayerBarMana" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerBarHealth">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBMP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayPlayerBarMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerBarMana">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBMAXES">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayPlayerBarMissing" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerBarMaxes">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBMISSING">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayPlayerBarHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerBarMissing">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBHPPER">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayPlayerBarManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerBarHealthPer">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBMPPER">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+            <!-- Player Bar Colors -->
+
+            <CheckButton name="JDHPOptionsDisplayColorPlayerHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentPCLeft">
+						<Offset>
+							<AbsDimension x="15" y="15"/>
+						</Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CPHP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayColorPlayerMana" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayColorPlayerHealth">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CPMP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayColorPlayerHealthBar" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayColorPlayerMana">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CPHPB">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+			<!-- Target Side -->
+
+            <CheckButton name="JDHPOptionsDisplayTargetSideHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentTSLeft">
+						<Offset>
+							<AbsDimension x="15" y="15"/>
+						</Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSHP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayTargetSideMana" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetSideHealth">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSMP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayTargetSideMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetSideMana">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSMAXES">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayTargetSideMissing" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetSideMaxes">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSMISSING">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayTargetSideHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetSideMissing">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSHPPER">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayTargetSideManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetSideHealthPer">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSMPPER">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+			<!-- Target Bar -->
+
+            <CheckButton name="JDHPOptionsDisplayTargetBarHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentTBLeft">
+						<Offset>
+							<AbsDimension x="15" y="15"/>
+						</Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBHP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayTargetBarMana" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetBarHealth">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBMP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayTargetBarMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetBarMana">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBMAXES">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayTargetBarMissing" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetBarMaxes">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBMISSING">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayTargetBarHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetBarMissing">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBHPPER">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayTargetBarManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetBarHealthPer">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBMPPER">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+            <!-- Target Bar Colors -->
+
+            <CheckButton name="JDHPOptionsDisplayColorTargetHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentTCLeft">
+						<Offset>
+							<AbsDimension x="15" y="15"/>
+						</Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CTHP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayColorTargetMana" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayColorTargetHealth">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CTMP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayColorTargetHealthBar" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayColorTargetMana">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CTHPB">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+            <!-- Miscellaneous 2 -->
+
+            <CheckButton name="JDHPOptionsDisplayMoveTarget" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentMiscLeft">
+						<Offset>
+							<AbsDimension x="15" y="15"/>
+						</Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+					<OnUpdate>
+						if (JDHPOptionsDisplayMoveTarget:GetChecked() == 1) then
+							JDHPOptionsDisplayTargetFrameVertPosTemp = 0 - JDHPOptionsDisplayTargetFrameVertPos:GetValue();
+							TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", JDHPOptionsDisplayTargetFramePos:GetValue(), JDHPOptionsDisplayTargetFrameVertPosTemp);
+						else
+							TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 250, -4);
+						end
+					</OnUpdate>
+                </Scripts>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_MOVETARGET">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <Slider name="JDHPOptionsDisplayTargetFramePos" inherits="OptionsSliderTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="165" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentMiscLeft">
+						<Offset>
+							<AbsDimension x="21" y="-10"/>
+						</Offset>
+                    </Anchor>
+                </Anchors>
+				<Scripts>
+					<OnLoad>
+						JDHPOptionsDisplayTargetFramePosHigh:SetText("350");
+						JDHPOptionsDisplayTargetFramePosLow:SetText("250");
+						JDHPOptionsDisplayTargetFramePos:SetMinMaxValues(250,350);
+						JDHPOptionsDisplayTargetFramePos:SetValueStep(5);
+					</OnLoad>
+					<OnValueChanged>
+						if (JDHPOptionsDisplayMoveTarget:GetChecked() == 1) then
+							JDHPOptionsDisplayTargetFrameVertPosTemp = 0 - JDHPOptionsDisplayTargetFrameVertPos:GetValue();
+							TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", JDHPOptionsDisplayTargetFramePos:GetValue(), JDHPOptionsDisplayTargetFrameVertPosTemp);
+						end
+						JDHPOptionsDisplayTargetFramePosCurr:SetText(JDHPOptionsDisplayTargetFramePos:GetValue());
+					</OnValueChanged>
+				</Scripts>
+				<Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTargetFramePosCurr" inherits="GameFontNormalSmall" text="TargetFramePos">
+                            <Anchors>
+                                <Anchor point="TOP" relativePoint="BOTTOM">
+                                    <Offset>
+                                        <AbsDimension x="0" y="3"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Slider>
+            <Slider name="JDHPOptionsDisplayTargetFrameVertPos" inherits="OptionsSliderTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="165" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetFramePos">
+						<Offset>
+							<AbsDimension x="0" y="-15"/>
+						</Offset>
+                    </Anchor>
+                </Anchors>
+				<Scripts>
+					<OnLoad>
+						JDHPOptionsDisplayTargetFrameVertPosHigh:SetText("-104");
+						JDHPOptionsDisplayTargetFrameVertPosLow:SetText("21");
+						JDHPOptionsDisplayTargetFrameVertPos:SetMinMaxValues(-21,104);
+						JDHPOptionsDisplayTargetFrameVertPos:SetValueStep(1);
+					</OnLoad>
+					<OnValueChanged>
+						if (JDHPOptionsDisplayMoveTarget:GetChecked() == 1) then
+							JDHPOptionsDisplayTargetFrameVertPosTemp = 0 - JDHPOptionsDisplayTargetFrameVertPos:GetValue();
+							TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", JDHPOptionsDisplayTargetFramePos:GetValue(), JDHPOptionsDisplayTargetFrameVertPosTemp);
+						end
+						JDHPOptionsDisplayTargetFrameVertPosTemp = 0 - JDHPOptionsDisplayTargetFrameVertPos:GetValue();
+						JDHPOptionsDisplayTargetFrameVertPosCurr:SetText(JDHPOptionsDisplayTargetFrameVertPosTemp);
+					</OnValueChanged>
+				</Scripts>
+				<Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTargetFrameVertPosCurr" inherits="GameFontNormalSmall" text="TargetFramePos">
+                            <Anchors>
+                                <Anchor point="TOP" relativePoint="BOTTOM">
+                                    <Offset>
+                                        <AbsDimension x="0" y="3"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Slider>
+            <CheckButton name="JDHPOptionsDisplayPlayerSideCharges" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetFrameVertPos">
+                        <Offset>
+                            <AbsDimension x="0" y="-15"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSCHARGES">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayEnergyPercent" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideCharges">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_ENRGPER">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayRagePercent" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayEnergyPercent">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_RAGEPER">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+            <!-- Miscellaneous -->
+
+            <CheckButton name="JDHPOptionsDisplayAutohideExp" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$parentMiscLeft">
+						<Offset>
+							<AbsDimension x="190" y="15"/>
+						</Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_HIDEEXP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayExp" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayAutohideExp">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_EXP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayTnl" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayExp">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TNL">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayBarExp" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTnl">
+                                    <Offset>
+                                        <AbsDimension x="0" y="0"/>
+                                    </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_BAREXP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayActualExp" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayBarExp">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_ACTUALEXP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayMoveExp" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayActualExp">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_MOVEEXP">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+            <CheckButton name="JDHPOptionsDisplayColorPlayerName" inherits="OptionsCheckButtonTemplate" checked="false">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayMoveExp">
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer>
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CPNAME">
+                            <Anchors>
+                                <Anchor point="LEFT" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="5" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                            <FontHeight>
+                                <AbsValue val="10" />
+                            </FontHeight>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </CheckButton>
+
+            <!-- Save/Close -->
+
+            <Button name="JDHPOptionsDisplayCloseButton" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="JDHPOptionsDisplay" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-6" y="-6"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<Button name="JDHPOptionsDisplayCancelButton" inherits="UIPanelButtonTemplate" text="Cancel">
+				<Size>
+					<AbsDimension x="77" y="21"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="JDHPOptionsDisplay" relativePoint="BOTTOMRIGHT">
+						<Offset>
+							<AbsDimension x="-19" y="19"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						this:GetParent():Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="JDHPOptionsDisplaySaveButton" inherits="UIPanelButtonTemplate" text="Save">
+				<Size>
+					<AbsDimension x="77" y="21"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="JDHPOptionsDisplayCancelButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-7" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+					    this:GetParent():Hide();
+					    JDHP_OptionsFrame_Save();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+</Ui>

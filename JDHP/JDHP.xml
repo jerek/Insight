@@ -1,0 +1,182 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+	<!--
+		JDHP Release 7
+		Author: Jerek Dain
+		Email: jerekdain@gmail.com
+		Website: http://www.jerekdain.com/
+	-->
+	<Script file="localization.lua"/>
+	<Script file="JDHP_Khaos.lua"/>
+	<Script file="JDHP.lua"/>
+	<Frame name="JDHPPlayerDisplay" parent="PlayerFrame">
+
+		<Scripts>
+			<OnLoad>
+				<!-- Moving default player frame, registering for events -->
+				this:RegisterEvent("VARIABLES_LOADED");
+			</OnLoad>
+			<OnEvent>
+				<!-- Updating display values and moving target frame if pet frame is visible -->
+				if (event == "VARIABLES_LOADED") then
+					JDHP_PlayerFrameOnLoad();
+				end
+				JDHP_PlayerFrameOnEvent(event);
+			</OnEvent>
+		</Scripts>
+
+		<Frames>
+			<Frame setAllPoints="true">
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="JDHPDisplay_PlayerSideHealth" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
+							<Size>
+								<AbsDimension x="100" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="230" y="-47"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="JDHPDisplay_PlayerSideMana" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
+							<Size>
+								<AbsDimension x="100" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="230" y="-58"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="JDHPDisplay_PlayerSideCharges" inherits="GameFontNormal" text="Loading..." justifyH="LEFT">
+							<Size>
+								<AbsDimension x="100" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="230" y="-33"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="1" g="1" b="1"/>
+						</FontString>
+						<FontString name="JDHPDisplay_PlayerBarHealth" inherits="TextStatusBarText" text="" justifyH="CENTER">
+							<Size>
+								<AbsDimension x="115" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="108" y="-46"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="JDHPDisplay_PlayerBarMana" inherits="TextStatusBarText" text="" justifyH="CENTER">
+							<Size>
+								<AbsDimension x="115" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="108" y="-58"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="JDHPDisplay_PlayerExp" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
+							<Size>
+								<AbsDimension x="300" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="105" y="-75"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="1" g="1" b="1"/>
+						</FontString>
+						<FontString name="JDHPDisplay_PlayerTnl" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
+							<Size>
+								<AbsDimension x="300" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="PlayerFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="105" y="-86"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<Color r="1" g="1" b="1"/>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+	</Frame>
+	<Frame name="JDHPTargetDisplay" parent="TargetFrame">
+		<Frames>
+			<Frame setAllPoints="true">
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="JDHPDisplay_TargetSideHealth" inherits="GameFontNormalSmall" text="" justifyH="RIGHT">
+							<Size>
+								<AbsDimension x="115" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="TargetFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="-115" y="-46"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="JDHPDisplay_TargetSideMana" inherits="GameFontNormalSmall" text="" justifyH="RIGHT">
+							<Size>
+								<AbsDimension x="115" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="TargetFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="-115" y="-58"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="JDHPDisplay_TargetBarHealth" inherits="TextStatusBarText" text="" justifyH="CENTER">
+							<Size>
+								<AbsDimension x="120" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="TargetFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="5" y="-46"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="JDHPDisplay_TargetBarMana" inherits="TextStatusBarText" text="" justifyH="CENTER">
+							<Size>
+								<AbsDimension x="120" y="10" />
+							</Size>
+							<Anchors>
+								<Anchor point="LEFT" relativeTo="TargetFrame" relativePoint="TOPLEFT">
+									<Offset>
+										<AbsDimension x="5" y="-58"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+		</Frames>
+	</Frame>
+</Ui>
