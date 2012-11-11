@@ -1,4 +1,4 @@
-JDHP Release 7.1
+JDHP Release 7.2
 ----------------
 Author: Jerek Dain
 Email: jerek@jerekdain.com
@@ -19,6 +19,9 @@ If you have MobInfo-2 or another MobHealth addon JDHP will detect it and use it 
 	+==========+
 	|Change Log|
 	+==========+
+
+RELEASE 7.2 - ???, November ??, 2012
+- Updated to work with WoW patch 5.0.x.
 
 RELEASE 7.1 - Sunday, October 18, 2009
 - Updated to work with WoW patch 3.2 (that was a long gap too).

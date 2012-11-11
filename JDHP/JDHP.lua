@@ -1,5 +1,5 @@
 --[[
-	JDHP Release 7
+	JDHP Release 7.2
 	Author: Jerek Dain
 	Email: jerekdain@gmail.com
 	Website: http://www.jerekdain.com/
@@ -60,7 +60,7 @@ if (Tnl == nil) then Tnl = 1; end   -- Display TNL? (EXP To Next Level) If This 
 if (BarExp == nil) then BarExp = 1; end   -- Display EXP and TNL in terms of bars.
 if (ActualExp == nil) then ActualExp = 1; end   -- Display EXP and TNL in terms of actual values.
 if (MoveExp == nil) then MoveExp = 0; end   -- Move EXP/TNL with pet buffs?
-if (AutohideExp == nil) then AutohideExp = 1; end   -- Hide EXP and TNL when on a level 70 character?
+if (AutohideExp == nil) then AutohideExp = 1; end   -- Hide EXP and TNL when on a max level character?
 
 -- Miscellaneous 2 --
 if (MoveTarget == nil) then MoveTarget = 1; end   -- Adjust the TargetFrame position?
@@ -89,41 +89,46 @@ function JDHP_PlayerFrameOnLoad()
 	SLASH_JDHPOPTIONS1 = "/jdhpoptions";
 	SLASH_JDHPOPTIONS2 = "/jdhpo";
 
-	this:RegisterEvent("PET_BAR_UPDATE");
-	this:RegisterEvent("PET_STABLE_UPDATE");
-	this:RegisterEvent("PET_UI_UPDATE");
-	this:RegisterEvent("PLAYER_ALIVE");
-	this:RegisterEvent("PLAYER_DEAD");
-	this:RegisterEvent("PLAYER_ENTER_COMBAT");
-	this:RegisterEvent("PLAYER_LEAVE_COMBAT");
-	this:RegisterEvent("PLAYER_LEVEL_UP");
-	this:RegisterEvent("PLAYER_TARGET_CHANGED");
-	this:RegisterEvent("PLAYER_XP_UPDATE");
-	this:RegisterEvent("UNIT_AURA");
-	this:RegisterEvent("UNIT_ENERGY");
-	this:RegisterEvent("UNIT_FOCUS");
-	this:RegisterEvent("UNIT_HEALTH");
-	this:RegisterEvent("UNIT_MANA");
-	this:RegisterEvent("UNIT_MODEL_CHANGED");
-	this:RegisterEvent("UNIT_RAGE");
-	this:RegisterEvent("UPDATE_EXHAUSTION");
-	this:RegisterEvent("VARIABLES_LOADED");
+    local blankFrame = CreateFrame('Frame');
+	blankFrame:RegisterEvent("PET_BAR_UPDATE");
+    blankFrame:RegisterEvent("PET_STABLE_UPDATE");
+    blankFrame:RegisterEvent("PET_UI_UPDATE");
+    blankFrame:RegisterEvent("PLAYER_ALIVE");
+    blankFrame:RegisterEvent("PLAYER_DEAD");
+    blankFrame:RegisterEvent("PLAYER_ENTER_COMBAT");
+    blankFrame:RegisterEvent("PLAYER_LEAVE_COMBAT");
+    blankFrame:RegisterEvent("PLAYER_LEVEL_UP");
+    blankFrame:RegisterEvent("PLAYER_TARGET_CHANGED");
+    blankFrame:RegisterEvent("PLAYER_XP_UPDATE");
+    blankFrame:RegisterEvent("UNIT_AURA");
+    blankFrame:RegisterEvent("UNIT_ENERGY");
+    blankFrame:RegisterEvent("UNIT_FOCUS");
+    blankFrame:RegisterEvent("UNIT_HEALTH");
+    blankFrame:RegisterEvent("UNIT_MANA");
+    blankFrame:RegisterEvent("UNIT_MODEL_CHANGED");
+    blankFrame:RegisterEvent("UNIT_RAGE");
+    blankFrame:RegisterEvent("UPDATE_EXHAUSTION");
+    blankFrame:RegisterEvent("VARIABLES_LOADED");
+
+    blankFrame:SetScript("OnEvent", function(self, event, eventArg)
+        JDHP_PlayerFrameOnEvent(event, eventArg);
+    end);
 end
 
 -- ** ONEVENT HANDLERS ** --
 
-function JDHP_PlayerFrameOnEvent (event)
+function JDHP_PlayerFrameOnEvent (event, eventArg)
 	if (event == "UNIT_MANA" or event == "UNIT_RAGE" or event == "UNIT_FOCUS" or event == "UNIT_ENERGY" or event == "UNIT_MODEL_CHANGED") then
-		if (arg1 == "player") then
+		if (eventArg == "player") then
 			JDHP_RenderPlayerMana();
 			JDHP_RenderPlayerCharges();
-		elseif (arg1 == "target") then
+		elseif (eventArg == "target") then
 			JDHP_RenderTargetMana();
 		end
 	elseif (event == "UNIT_HEALTH") then
-		if (arg1 == "player") then
+		if (eventArg == "player") then
 			JDHP_RenderPlayerHealth();
-		elseif (arg1 == "target") then
+		elseif (eventArg == "target") then
 			JDHP_RenderTargetHealth();
 		end
 	elseif (event == "PLAYER_TARGET_CHANGED") then
@@ -724,7 +729,7 @@ end
 
 function JDHP_RenderPlayerExp()
 	Level = UnitLevel("player");
-	if (AutohideExp == 1 and Level == 70) then
+	if (AutohideExp == 1 and Level == 90) then
 		JDHPDisplay_PlayerExp:SetText("");
 		JDHPDisplay_PlayerTnl:SetText("");
 	else

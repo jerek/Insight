@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 	<!--
-		JDHP Release 7
+		JDHP Release 7.2
 		Author: Jerek Dain
 		Email: jerekdain@gmail.com
 		Website: http://www.jerekdain.com/
@@ -14,11 +14,11 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 		<Scripts>
 			<OnLoad>
 				<!-- Moving default player frame, registering for events -->
-				this:RegisterEvent("VARIABLES_LOADED");
+				self:RegisterEvent("ADDON_LOADED");
 			</OnLoad>
 			<OnEvent>
 				<!-- Updating display values and moving target frame if pet frame is visible -->
-				if (event == "VARIABLES_LOADED") then
+				if (event == "ADDON_LOADED") then
 					JDHP_PlayerFrameOnLoad();
 				end
 				JDHP_PlayerFrameOnEvent(event);

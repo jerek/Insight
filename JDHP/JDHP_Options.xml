@@ -15,14 +15,14 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 			</OnEvent>
 			<OnMouseDown>
  				if ( arg1 == "LeftButton" ) then
- 					this:StartMoving();
+ 					self:StartMoving();
  				elseif (arg1 == "RightButton") then
 					JDHPOptionsDisplay:SetPoint("TOPLEFT", "UIParent", "TOP", -192, -140);
  				end
  			</OnMouseDown>
  			<OnMouseUp>
  				if ( arg1 == "LeftButton" ) then
- 					this:StopMovingOrSizing();
+ 					self:StopMovingOrSizing();
  				end
  			</OnMouseUp>
 		</Scripts>
@@ -1598,7 +1598,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						this:GetParent():Hide();
+						self:GetParent():Hide();
 					</OnClick>
 				</Scripts>
 			</Button>
@@ -1615,7 +1615,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 				</Anchors>
 				<Scripts>
 					<OnClick>
-					    this:GetParent():Hide();
+					    self:GetParent():Hide();
 					    JDHP_OptionsFrame_Save();
 					</OnClick>
 				</Scripts>

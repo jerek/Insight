@@ -1,7 +1,7 @@
 -- Version : English - Jerek Dain
 -- Translation by : None
 
--- JDHP Release 7
+-- JDHP Release 7.2
 -- Author: Jerek Dain
 -- Email: jerekdain@gmail.com
 -- Website: http://www.jerekdain.com/
@@ -19,7 +19,7 @@ JDHP_TNL_RESTED						= " rested)";
 
 -- ** SLASH COMMANDS ** --
 
-JDHP_SLASH_JDHP0					= "JDHP Release 7 by Jerek Dain (www.JerekDain.com)";
+JDHP_SLASH_JDHP0					= "JDHP Release 7.2 by Jerek Dain (www.JerekDain.com)";
 JDHP_SLASH_JDHP1					= "List of JDHP Commands:";
 JDHP_SLASH_JDHP2					= "   /jdhp o - /jdhp options - Display options panel.";
 JDHP_SLASH_JDHP3					= "   /rl - /reloadui - Reload UI.";
