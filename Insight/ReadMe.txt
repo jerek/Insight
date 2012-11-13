@@ -1,4 +1,4 @@
-JDHP Release 7.2
+Insight Release 7.2
 ----------------
 Author: Jerek Dain
 Email: jerek@jerekdain.com
@@ -8,13 +8,13 @@ Website: http://www.jerekdain.com/
 	|Introduction|
 	+============+
 
-Type "/jdhp o" or "/jdhp options" to open the options panel. Most PlayerFrame options can also be toggled with keybindings.
+Type "/insight o" or "/insight options" to open the options panel. Most PlayerFrame options can also be toggled with keybindings.
 
-JDHP displays player health, mana/energy/rage, charges (when applicable), and exp info. Also colors player name when auto-attack is enabled, and colors health bar based on health percentage. Health and mana/energy/rage can be displayed as a percentile. it also allows display of health and mana values at your target's portrait.
+Insight displays player health, mana/energy/rage, charges (when applicable), and exp info. Also colors player name when auto-attack is enabled, and colors health bar based on health percentage. Health and mana/energy/rage can be displayed as a percentile. it also allows display of health and mana values at your target's portrait.
 
 The /tnl command sends your TNL (to next level) info to say, party, raid or guild chat, or just displays it for only you. Type /tnl help for more info.
 
-If you have MobInfo-2 or another MobHealth addon JDHP will detect it and use it to determine target HP. If you don't have these mods target HP will always display as a percent.
+If you have MobInfo-2 or another MobHealth addon Insight will detect it and use it to determine target HP. If you don't have these mods target HP will always display as a percent.
 
 	+==========+
 	|Change Log|
@@ -22,6 +22,9 @@ If you have MobInfo-2 or another MobHealth addon JDHP will detect it and use it 
 
 RELEASE 7.2 - ???, November ??, 2012
 - Updated to work with WoW patch 5.0.x.
+- Updated some placement adjustments for various classes. (e.g. Monk chi)
+- Better formatting for large values.
+- Renamed mod from JDHP to Insight.
 
 RELEASE 7.1 - Sunday, October 18, 2009
 - Updated to work with WoW patch 3.2 (that was a long gap too).

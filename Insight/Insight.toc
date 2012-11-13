@@ -1,8 +1,8 @@
 ## Interface: 50001
-## Title: JDHP r7.2 (Patch 5.0)
+## Title: Insight r7.2 (Patch 5.0)
 ## Notes: Display additional info at the player and target portraits.
 ## Author: Jerek Dain, jerekdain@gmail.com, http://www.jerekdain.com/
 ## SavedVariables: PlayerSideHealth, PlayerSideMana, PlayerSideMaxes, PlayerSideMissing, PlayerSideHealthPer, PlayerSideManaPer, ColorPlayerHealth, ColorPlayerMana, ColorPlayerHealthBar, PlayerBarHealth, PlayerBarMana, PlayerBarMaxes, PlayerBarMissing, PlayerBarHealthPer, PlayerBarManaPer, TargetSideHealth, TargetSideMana, TargetSideMaxes, TargetSideMissing, TargetSideHealthPer, TargetSideManaPer, ColorTargetHealth, ColorTargetMana, ColorTargetHealthBar, TargetBarHealth, TargetBarMana, TargetBarMaxes, TargetBarMissing, TargetBarHealthPer, TargetBarManaPer, Exp, Tnl, BarExp, MoveExp, AutohideExp, MoveTarget, TargetFramePos, TargetFrameVertPos, PlayerSideCharges, ColorPlayerName, EnergyPercent, RagePercent
 
-JDHP.xml
-JDHP_Options.xml
+Insight.xml
+Insight_Options.xml

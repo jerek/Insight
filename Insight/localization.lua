@@ -1,7 +1,7 @@
 -- Version : English - Jerek Dain
 -- Translation by : None
 
--- JDHP Release 7.2
+-- Insight Release 7.2
 -- Author: Jerek Dain
 -- Email: jerekdain@gmail.com
 -- Website: http://www.jerekdain.com/
@@ -13,23 +13,23 @@ JDHP_TNL_EXPLANATION2				= "   s = Say     p = Party     r = Raid     g = Guild"
 JDHP_TNL_EXPLANATION3				= "   o = Officer     bg = Battleground";
 JDHP_TNL_EXPLANATION4				= "   [nothing] = Shows only for you";
 JDHP_TNL_EXPLANATION5				= "When sending to a party, raid, guild (or officer chat of a guild) or battleground when you are not in one it will show only for you.";
-JDHP_TNL_REPORT						= "JDHP Report: ";
+JDHP_TNL_REPORT						= "Insight Report: ";
 JDHP_TNL_BARSTO						= " bars to ";
 JDHP_TNL_RESTED						= " rested)";
 
 -- ** SLASH COMMANDS ** --
 
-JDHP_SLASH_JDHP0					= "JDHP Release 7.2 by Jerek Dain (www.JerekDain.com)";
-JDHP_SLASH_JDHP1					= "List of JDHP Commands:";
-JDHP_SLASH_JDHP2					= "   /jdhp o - /jdhp options - Display options panel.";
+JDHP_SLASH_JDHP0					= "Insight Release 7.2 by Jerek Dain (www.JerekDain.com)";
+JDHP_SLASH_JDHP1					= "List of Insight Commands:";
+JDHP_SLASH_JDHP2					= "   /insight o - /insight options - Display options panel.";
 -- JDHP_SLASH_JDHP3					= "   /rl - /reloadui - Reload UI.";
 JDHP_SLASH_JDHP3					= "   /tnl - Display TNL info or send to chat. Type /tnl help for more info.";
 JDHP_SLASH_JDHP98					= "Add \"help\" to the end of any command for more info.";
-JDHP_SLASH_JDHP99					= "Scroll up to see more JDHP options.";
+JDHP_SLASH_JDHP99					= "Scroll up to see more Insight options.";
 
 -- ** BINDINGS TEXT ** --
 
-BINDING_HEADER_JDHPPLAYERSIDEHEADER	= "JDHP";
+BINDING_HEADER_JDHPPLAYERSIDEHEADER	= "Insight";
 BINDING_NAME_JDHPOPTIONS			= "Open the options panel";
 BINDING_NAME_JDHPPLAYERSIDEHEALTH	= "Toggle side health display";
 BINDING_NAME_JDHPPLAYERSIDEMANA		= "Toggle side mana display";
@@ -51,7 +51,7 @@ BINDING_NAME_JDHPCOLORTARGETMANA	= "Toggle target mana coloration";
 BINDING_NAME_JDHPCOLORPLAYERHEALTHBAR	= "Toggle player health bar coloration";
 BINDING_NAME_JDHPCOLORTARGETHEALTHBAR	= "Toggle target health bar coloration";
 
--- ** JDHP OPTIONS PANEL ** --
+-- ** Insight OPTIONS PANEL ** --
 
 JDHP_OPTIONS_PSHP				= "Display health";
 JDHP_OPTIONS_PSMP				= "Display mana";

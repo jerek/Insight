@@ -1,5 +1,5 @@
 --[[
-	JDHP Release 7.2
+	Insight Release 7.2
 	Author: Jerek Dain
 	Email: jerekdain@gmail.com
 	Website: http://www.jerekdain.com/
@@ -9,7 +9,7 @@
 -- ** DEFAULT SETTINGS ** --
 
 -- You can change the numbers to set your default configuration
--- Once you've loaded a character with JDHP installed the defaults will no longer be loaded on that server for that account! It will save your settings and reload those next time.
+-- Once you've loaded a character with Insight installed the defaults will no longer be loaded on that server for that account! It will save your settings and reload those next time.
 -- 0 means Off, 1 means On. Be sure to NOT CHANGE ANYTHING ELSE
 
 -- Player Side Options --
@@ -102,10 +102,13 @@ function JDHP_PlayerFrameOnLoad()
 	SLASH_JDHP_RL1 = "/rl";
 	SLASH_JDHP_RL2 = "/reloadui";
 	SlashCmdList["JDHP"] = JDHP_SlashHandler;
-	SLASH_JDHP1 = "/jdhp";
+	SLASH_JDHP1 = "/insight";
+	SLASH_JDHP2 = "/jdhp";
 	SlashCmdList["JDHPOPTIONS"] = function() JDHPOptionsDisplay:Show(); end
-	SLASH_JDHPOPTIONS1 = "/jdhpoptions";
-	SLASH_JDHPOPTIONS2 = "/jdhpo";
+	SLASH_JDHPOPTIONS1 = "/insightoptions";
+	SLASH_JDHPOPTIONS2 = "/jdhpoptions";
+	SLASH_JDHPOPTIONS3 = "/insighto";
+	SLASH_JDHPOPTIONS4 = "/jdhpo";
 
     local blankFrame = CreateFrame('Frame');
 	blankFrame:RegisterEvent("PET_BAR_UPDATE");
