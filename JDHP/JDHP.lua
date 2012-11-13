@@ -77,6 +77,24 @@ if (RagePercent == nil) then RagePercent = 1; end   -- Allow Rage as a percentil
 
 -- ** ONLOAD SETUP ** --
 
+function JDHP_Log(message)
+    DEFAULT_CHAT_FRAME:AddMessage(message, 1, 1, 1);
+end
+
+function JDHP_NumberFormat(num)
+    local result;
+	if num <= 9999 then
+		result = num
+	elseif num >= 1000000 then
+		result = format("%.1f m", num/1000000)
+        result = string.gsub(result, "\.0 m", " m");
+	elseif num >= 10000 then
+		result = format("%.1f k", num/1000)
+        result = string.gsub(result, "\.0 k", " k");
+	end
+    return result;
+end
+
 function JDHP_PlayerFrameOnLoad()
 	SlashCmdList["JDHP_PRINTTNL"] = JDHP_PrintTNL;
 	SLASH_JDHP_PRINTTNL1 = "/tnl";
@@ -93,32 +111,35 @@ function JDHP_PlayerFrameOnLoad()
 	blankFrame:RegisterEvent("PET_BAR_UPDATE");
     blankFrame:RegisterEvent("PET_STABLE_UPDATE");
     blankFrame:RegisterEvent("PET_UI_UPDATE");
+
     blankFrame:RegisterEvent("PLAYER_ALIVE");
     blankFrame:RegisterEvent("PLAYER_DEAD");
+
     blankFrame:RegisterEvent("PLAYER_ENTER_COMBAT");
     blankFrame:RegisterEvent("PLAYER_LEAVE_COMBAT");
     blankFrame:RegisterEvent("PLAYER_LEVEL_UP");
     blankFrame:RegisterEvent("PLAYER_TARGET_CHANGED");
     blankFrame:RegisterEvent("PLAYER_XP_UPDATE");
+
     blankFrame:RegisterEvent("UNIT_AURA");
-    blankFrame:RegisterEvent("UNIT_ENERGY");
-    blankFrame:RegisterEvent("UNIT_FOCUS");
+    blankFrame:RegisterEvent("UNIT_DISPLAYPOWER");
     blankFrame:RegisterEvent("UNIT_HEALTH");
-    blankFrame:RegisterEvent("UNIT_MANA");
-    blankFrame:RegisterEvent("UNIT_MODEL_CHANGED");
-    blankFrame:RegisterEvent("UNIT_RAGE");
+    blankFrame:RegisterEvent("UNIT_MAXPOWER");
+    -- blankFrame:RegisterEvent("UNIT_MODEL_CHANGED");
+    blankFrame:RegisterEvent("UNIT_POWER");
+
     blankFrame:RegisterEvent("UPDATE_EXHAUSTION");
     blankFrame:RegisterEvent("VARIABLES_LOADED");
 
     blankFrame:SetScript("OnEvent", function(self, event, eventArg)
-        JDHP_PlayerFrameOnEvent(event, eventArg);
+        JDHP_PlayerFrameEventHandler(event, eventArg);
     end);
 end
 
 -- ** ONEVENT HANDLERS ** --
 
-function JDHP_PlayerFrameOnEvent (event, eventArg)
-	if (event == "UNIT_MANA" or event == "UNIT_RAGE" or event == "UNIT_FOCUS" or event == "UNIT_ENERGY" or event == "UNIT_MODEL_CHANGED") then
+function JDHP_PlayerFrameEventHandler (event, eventArg)
+	if (event == "UNIT_POWER" or event == "UNIT_MODEL_CHANGED" or event == "UNIT_DISPLAYPOWER") then
 		if (eventArg == "player") then
 			JDHP_RenderPlayerMana();
 			JDHP_RenderPlayerCharges();
@@ -232,17 +253,17 @@ function JDHP_RenderTargetHealth()
 				if (TargetSideHealthPer == 0 and (UnitIsUnit("target", "player") or (UnitIsPlayer("target") and (UnitInParty("target") or UnitInRaid("target"))) or UnitIsUnit("target", "pet") or MobHealthAvailable == 1) and (PercentOnly == 0 or (PercentOnly == 1 and ((UnitInParty("target") or UnitInRaid("target")) or UnitIsUnit("target", "player"))))) then
 					if (TargetSideMaxes == 1) then
 						if (TargetSideMissing == 0) then
-							JDHPDisplay_TargetSideHealth:SetText(hcur.." / "..total);
+							JDHPDisplay_TargetSideHealth:SetText(JDHP_NumberFormat(hcur).." / "..JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetSideHealth:SetText("");
 							else
-								JDHPDisplay_TargetSideHealth:SetText("-"..missing.." / "..total);
+								JDHPDisplay_TargetSideHealth:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
 						if (TargetSideMissing == 0) then
-							JDHPDisplay_TargetSideHealth:SetText(hcur);
+							JDHPDisplay_TargetSideHealth:SetText(JDHP_NumberFormat(hcur));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetSideHealth:SetText("");
@@ -280,23 +301,24 @@ function JDHP_RenderTargetHealth()
 			JDHPDisplay_TargetSideHealth:SetText("");
 		end
 		if (TargetBarHealth == 1) then
+			TargetFrameTextureFrameHealthBarText:SetWidth(1);
 			if (IsDead == 1) then
 				JDHPDisplay_TargetBarHealth:SetText("");
 			else
 				if (TargetBarHealthPer == 0 and (UnitIsUnit("target", "player") or (UnitIsPlayer("target") and (UnitInParty("target") or UnitInRaid("target"))) or UnitIsUnit("target", "pet") or MobHealthAvailable == 1) and (PercentOnly == 0 or (PercentOnly == 1 and (UnitInParty("target") or UnitInRaid("target")) or UnitIsUnit("target", "player")))) then
 					if (TargetBarMaxes == 1) then
 						if (TargetBarMissing == 0) then
-							JDHPDisplay_TargetBarHealth:SetText(hcur.." / "..total);
+							JDHPDisplay_TargetBarHealth:SetText(JDHP_NumberFormat(hcur).." / "..JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetBarHealth:SetText("");
 							else
-								JDHPDisplay_TargetBarHealth:SetText("-"..missing.." / "..total);
+								JDHPDisplay_TargetBarHealth:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
 						if (TargetBarMissing == 0) then
-							JDHPDisplay_TargetBarHealth:SetText(hcur);
+							JDHPDisplay_TargetBarHealth:SetText(JDHP_NumberFormat(hcur));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetBarHealth:SetText("");
@@ -319,6 +341,7 @@ function JDHP_RenderTargetHealth()
 			end
 		else
 			JDHPDisplay_TargetBarHealth:SetText("");
+			TargetFrameTextureFrameHealthBarText:SetWidth(115);
 		end
 		if (ColorTargetHealthBar == 1) then  --  Old: TargetFrameHealthBar:SetStatusBarColor((100 - percent) / 100, percent / 100, 0);
 			if ((percent <= 100) and (percent > 75)) then
@@ -368,17 +391,17 @@ function JDHP_RenderTargetMana()
 				if (TargetSideManaPer == 0 or (TargetManaType == 1 and RagePercent == 0) or (TargetManaType == 3 and EnergyPercent == 0)) then
 					if (TargetSideMaxes == 1) then
 						if (TargetSideMissing == 0) then
-							JDHPDisplay_TargetSideMana:SetText(mcur.." / "..total);
+							JDHPDisplay_TargetSideMana:SetText(JDHP_NumberFormat(mcur).." / "..JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetSideMana:SetText("");
 							else
-								JDHPDisplay_TargetSideMana:SetText("-"..missing.." / "..total);
+								JDHPDisplay_TargetSideMana:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
 						if (TargetSideMissing == 0) then
-							JDHPDisplay_TargetSideMana:SetText(mcur);
+							JDHPDisplay_TargetSideMana:SetText(JDHP_NumberFormat(mcur));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetSideMana:SetText("");
@@ -416,6 +439,7 @@ function JDHP_RenderTargetMana()
 			JDHPDisplay_TargetSideMana:SetText("");
 		end
 		if (TargetBarMana == 1) then
+			TargetFrameTextureFrameManaBarText:SetWidth(1);
 			if (IsDead == 1 and TargetBarManaPer == 1) then
 				JDHPDisplay_TargetBarMana:SetText("");
 			elseif (total < 1) then
@@ -424,17 +448,17 @@ function JDHP_RenderTargetMana()
 				if (TargetBarManaPer == 0 or (TargetManaType == 1 and RagePercent == 0) or (TargetManaType == 3 and EnergyPercent == 0)) then
 					if (TargetBarMaxes == 1) then
 						if (TargetBarMissing == 0) then
-							JDHPDisplay_TargetBarMana:SetText(mcur.." / "..total);
+							JDHPDisplay_TargetBarMana:SetText(JDHP_NumberFormat(mcur).." / "..JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetBarMana:SetText("");
 							else
-								JDHPDisplay_TargetBarMana:SetText("-"..missing.." / "..total);
+								JDHPDisplay_TargetBarMana:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
 						if (TargetBarMissing == 0) then
-							JDHPDisplay_TargetBarMana:SetText(mcur);
+							JDHPDisplay_TargetBarMana:SetText(JDHP_NumberFormat(mcur));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetBarMana:SetText("");
@@ -457,6 +481,7 @@ function JDHP_RenderTargetMana()
 			end
 		else
 			JDHPDisplay_TargetBarMana:SetText("");
+			TargetFrameTextureFrameManaBarText:SetWidth(35);
 		end
 	else
 		JDHPDisplay_TargetSideMana:SetText("");
@@ -466,7 +491,7 @@ end
 
 function JDHP_RenderPlayerCharges()
 	if (PlayerSideCharges == 1 and PlayerManaType == 3) then
-		local charges = GetComboPoints();
+		local charges = GetComboPoints("player");
 
 		if (charges ~= 0) then
 			local maxcharges = MAX_COMBO_POINTS;
@@ -502,17 +527,17 @@ function JDHP_RenderPlayerHealth()
 				if (PlayerSideHealthPer == 0) then
 					if (PlayerSideMaxes == 1) then
 						if (PlayerSideMissing == 0) then
-							JDHPDisplay_PlayerSideHealth:SetText(hcur.." / "..total);
+							JDHPDisplay_PlayerSideHealth:SetText(JDHP_NumberFormat(hcur).." / "..JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerSideHealth:SetText("");
 							else
-								JDHPDisplay_PlayerSideHealth:SetText("-"..missing.." / "..total);
+								JDHPDisplay_PlayerSideHealth:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
 						if (PlayerSideMissing == 0) then
-							JDHPDisplay_PlayerSideHealth:SetText(hcur);
+							JDHPDisplay_PlayerSideHealth:SetText(JDHP_NumberFormat(hcur));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerSideHealth:SetText("");
@@ -557,17 +582,17 @@ function JDHP_RenderPlayerHealth()
 				if (PlayerBarHealthPer == 0) then
 					if (PlayerBarMaxes == 1) then
 						if (PlayerBarMissing == 0) then
-							JDHPDisplay_PlayerBarHealth:SetText(hcur.." / "..total);
+							JDHPDisplay_PlayerBarHealth:SetText(JDHP_NumberFormat(hcur).." / "..JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerBarHealth:SetText("");
 							else
-								JDHPDisplay_PlayerBarHealth:SetText("-"..missing.." / "..total);
+								JDHPDisplay_PlayerBarHealth:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
 						if (PlayerBarMissing == 0) then
-							JDHPDisplay_PlayerBarHealth:SetText(hcur);
+							JDHPDisplay_PlayerBarHealth:SetText(JDHP_NumberFormat(hcur));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerBarHealth:SetText("");
@@ -625,22 +650,22 @@ function JDHP_RenderPlayerMana()
 		if (PlayerSideMana == 1) then
 			if (IsDead == 1 and PlayerSideManaPer == 1) then
 				JDHPDisplay_PlayerSideMana:SetText("");
-				-- FIX THIS - doesn't set colors if this is the first calculation of their mana
+				-- FIXME - doesn't set colors if this is the first calculation of their mana
 			else
 				if (PlayerSideManaPer == 0 or (PlayerManaType == 1 and RagePercent == 0) or (PlayerManaType == 3 and EnergyPercent == 0)) then
 					if (PlayerSideMaxes == 1) then
 						if (PlayerSideMissing == 0) then
-							JDHPDisplay_PlayerSideMana:SetText(mcur.." / "..total);
+							JDHPDisplay_PlayerSideMana:SetText(JDHP_NumberFormat(mcur).." / "..JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerSideMana:SetText("");
 							else
-								JDHPDisplay_PlayerSideMana:SetText("-"..missing.." / "..total);
+								JDHPDisplay_PlayerSideMana:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
 						if (PlayerSideMissing == 0) then
-							JDHPDisplay_PlayerSideMana:SetText(mcur);
+							JDHPDisplay_PlayerSideMana:SetText(JDHP_NumberFormat(mcur));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerSideMana:SetText("");
@@ -679,22 +704,22 @@ function JDHP_RenderPlayerMana()
 			PlayerFrameManaBarText:SetWidth(1);
 			if (IsDead == 1 and PlayerBarManaPer == 1) then
 				JDHPDisplay_PlayerBarMana:SetText("");
-				-- FIX THIS - doesn't set colors if this is the first calculation of their mana
+				-- FIXME - doesn't set colors if this is the first calculation of their mana
 			else
 				if (PlayerBarManaPer == 0 or (PlayerManaType == 1 and RagePercent == 0) or (PlayerManaType == 3 and EnergyPercent == 0)) then
 					if (PlayerBarMaxes == 1) then
 						if (PlayerBarMissing == 0) then
-							JDHPDisplay_PlayerBarMana:SetText(mcur.." / "..total);
+							JDHPDisplay_PlayerBarMana:SetText(JDHP_NumberFormat(mcur).." / "..JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerBarMana:SetText("");
 							else
-								JDHPDisplay_PlayerBarMana:SetText("-"..missing.." / "..total);
+								JDHPDisplay_PlayerBarMana:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
 						if (PlayerBarMissing == 0) then
-							JDHPDisplay_PlayerBarMana:SetText(mcur);
+							JDHPDisplay_PlayerBarMana:SetText(JDHP_NumberFormat(mcur));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerBarMana:SetText("");
@@ -897,6 +922,5 @@ function JDHP_SlashHandler(msg)
 		DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP1, 1, 1, 0);
 		DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP2, 1, .85, 0);
 		DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP3, 1, .85, 0);
-		DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP4, 1, .85, 0);
 	end
 end

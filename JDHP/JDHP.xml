@@ -21,7 +21,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 				if (event == "ADDON_LOADED") then
 					JDHP_PlayerFrameOnLoad();
 				end
-				JDHP_PlayerFrameOnEvent(event);
+				JDHP_PlayerFrameEventHandler(event);
 			</OnEvent>
 		</Scripts>
 

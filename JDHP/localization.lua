@@ -22,8 +22,8 @@ JDHP_TNL_RESTED						= " rested)";
 JDHP_SLASH_JDHP0					= "JDHP Release 7.2 by Jerek Dain (www.JerekDain.com)";
 JDHP_SLASH_JDHP1					= "List of JDHP Commands:";
 JDHP_SLASH_JDHP2					= "   /jdhp o - /jdhp options - Display options panel.";
-JDHP_SLASH_JDHP3					= "   /rl - /reloadui - Reload UI.";
-JDHP_SLASH_JDHP4					= "   /tnl - Display TNL info or send to chat. Type /tnl help for more info.";
+-- JDHP_SLASH_JDHP3					= "   /rl - /reloadui - Reload UI.";
+JDHP_SLASH_JDHP3					= "   /tnl - Display TNL info or send to chat. Type /tnl help for more info.";
 JDHP_SLASH_JDHP98					= "Add \"help\" to the end of any command for more info.";
 JDHP_SLASH_JDHP99					= "Scroll up to see more JDHP options.";
 
