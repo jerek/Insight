@@ -178,13 +178,6 @@ function JDHP_PlayerFrameEventHandler (event, eventArg)
 		JDHP_RenderPlayerMana();
 		JDHP_RenderPlayerExp();
 	elseif (event == "VARIABLES_LOADED") then
-		if (MobHealthFrame) then
-			MobHealthAvailable = 1;
-			PercentOnly = 0;
-		else
-			MobHealthAvailable = 0;
-			PercentOnly = 1;
-		end
 		JDHP_RenderPlayerCharges();
 		JDHP_RenderPlayerHealth();
 		JDHP_RenderPlayerMana();
@@ -226,36 +219,12 @@ function JDHP_RenderTargetHealth()
 
 		local percent = (tonumber(hcur) / tonumber(total)) * 100;
 
-		if (MobHealthAvailable == 1) then
-			PercentOnly = 0;
-			if (MI2_MobHealthFrame) then
-				MI2_MobHealthFrame:Hide()
-			end
---		elseif (UnitIsUnit("target", "player") == 1) then
---			PercentOnly = 0;
-		else
-			PercentOnly = 1;
-		end
-
-		if (MobHealthAvailable == 1 and UnitIsUnit("target", "player") ~= 1) then
-			hcur = MobHealth_GetTargetCurHP();
-			total = MobHealth_GetTargetMaxHP();
-			if (total == nil) then
-				hcur = UnitHealth("target");
-				total = UnitHealthMax("target");
-				PercentOnly = 1;
-			else
-				PercentOnly = 0;
-			end
-			missing = total - hcur;
-		end
-
 		if (TargetSideHealth == 1) then
 			if (IsDead == 1) then
 				JDHPDisplay_TargetSideHealth:SetText("Dead");
 				JDHPDisplay_TargetSideHealth:SetTextColor(0, 1, 0);
 			else
-				if (TargetSideHealthPer == 0 and (UnitIsUnit("target", "player") or (UnitIsPlayer("target") and (UnitInParty("target") or UnitInRaid("target"))) or UnitIsUnit("target", "pet") or MobHealthAvailable == 1) and (PercentOnly == 0 or (PercentOnly == 1 and ((UnitInParty("target") or UnitInRaid("target")) or UnitIsUnit("target", "player"))))) then
+				if (TargetSideHealthPer == 0) then
 					if (TargetSideMaxes == 1) then
 						if (TargetSideMissing == 0) then
 							JDHPDisplay_TargetSideHealth:SetText(JDHP_NumberFormat(hcur).." / "..JDHP_NumberFormat(total));
@@ -277,7 +246,7 @@ function JDHP_RenderTargetHealth()
 							end
 						end
 					end
-				else -- if percent == 1 or if target is not a player in your party
+				else -- if percent == 1
 					if (TargetSideMissing == 0) then
 						JDHPDisplay_TargetSideHealth:SetText(ceil(percent).."%");
 					else
@@ -310,7 +279,7 @@ function JDHP_RenderTargetHealth()
 			if (IsDead == 1) then
 				JDHPDisplay_TargetBarHealth:SetText("");
 			else
-				if (TargetBarHealthPer == 0 and (UnitIsUnit("target", "player") or (UnitIsPlayer("target") and (UnitInParty("target") or UnitInRaid("target"))) or UnitIsUnit("target", "pet") or MobHealthAvailable == 1) and (PercentOnly == 0 or (PercentOnly == 1 and (UnitInParty("target") or UnitInRaid("target")) or UnitIsUnit("target", "player")))) then
+				if (TargetBarHealthPer == 0) then
 					if (TargetBarMaxes == 1) then
 						if (TargetBarMissing == 0) then
 							JDHPDisplay_TargetBarHealth:SetText(JDHP_NumberFormat(hcur).." / "..JDHP_NumberFormat(total));
@@ -844,7 +813,6 @@ end
 
 function JDHP_AdjustExpPlacement()
     local placementType = false;
-    -- JDHP_Log(UnitClass('player'));
     if (HasPetUI() == 1) then
         placementType = 'pet';
     else
