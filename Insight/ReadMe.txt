@@ -20,9 +20,9 @@ If you have MobInfo-2 or another MobHealth addon Insight will detect it and use 
 	|Change Log|
 	+==========+
 
-RELEASE 7.2 - ???, November ??, 2012
+RELEASE 7.2 - Sunday, November 25, 2012
 - Updated to work with WoW patch 5.0.x.
-- Updated some placement adjustments for various classes. (e.g. Monk chi)
+- Updated some placement adjustments for various classes. (e.g. Monk chi, new Warlock resources, etc)
 - Better formatting for large values.
 - Renamed mod from JDHP to Insight.
 
