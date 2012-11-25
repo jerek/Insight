@@ -1523,6 +1523,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
+            <!--
             <CheckButton name="JDHPOptionsDisplayMoveExp" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
@@ -1548,6 +1549,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
+            -->
             <CheckButton name="JDHPOptionsDisplayColorPlayerName" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>

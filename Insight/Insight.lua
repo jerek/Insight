@@ -59,7 +59,7 @@ if (Exp == nil) then Exp = 1; end   -- Display EXP?
 if (Tnl == nil) then Tnl = 1; end   -- Display TNL? (EXP To Next Level) If This is enabled with EXP off, it will take EXP's place.
 if (BarExp == nil) then BarExp = 1; end   -- Display EXP and TNL in terms of bars.
 if (ActualExp == nil) then ActualExp = 1; end   -- Display EXP and TNL in terms of actual values.
-if (MoveExp == nil) then MoveExp = 0; end   -- Move EXP/TNL with pet buffs?
+-- if (MoveExp == nil) then MoveExp = 0; end   -- Move EXP/TNL with pet buffs? -- TODO: FIXME: Finish removing this.
 if (AutohideExp == nil) then AutohideExp = 1; end   -- Hide EXP and TNL when on a max level character?
 
 -- Miscellaneous 2 --
@@ -86,11 +86,11 @@ function JDHP_NumberFormat(num)
 	if num <= 9999 then
 		result = num
 	elseif num >= 1000000 then
-		result = format("%.1f m", num/1000000)
-        result = string.gsub(result, "\.0 m", " m");
+		result = format("%.1f M", num/1000000)
+        result = string.gsub(result, "\.0 M", " M");
 	elseif num >= 10000 then
-		result = format("%.1f k", num/1000)
-        result = string.gsub(result, "\.0 k", " k");
+		result = format("%.1f K", num/1000)
+        result = string.gsub(result, "\.0 K", " K");
 	end
     return result;
 end
@@ -123,6 +123,7 @@ function JDHP_PlayerFrameOnLoad()
     blankFrame:RegisterEvent("PLAYER_LEVEL_UP");
     blankFrame:RegisterEvent("PLAYER_TARGET_CHANGED");
     blankFrame:RegisterEvent("PLAYER_XP_UPDATE");
+    blankFrame:RegisterEvent("PLAYER_TOTEM_UPDATE");
 
     blankFrame:RegisterEvent("UNIT_AURA");
     blankFrame:RegisterEvent("UNIT_DISPLAYPOWER");
@@ -131,6 +132,7 @@ function JDHP_PlayerFrameOnLoad()
     -- blankFrame:RegisterEvent("UNIT_MODEL_CHANGED");
     blankFrame:RegisterEvent("UNIT_POWER");
 
+    blankFrame:RegisterEvent("UPDATE_SHAPESHIFT_FORM");
     blankFrame:RegisterEvent("UPDATE_EXHAUSTION");
     blankFrame:RegisterEvent("VARIABLES_LOADED");
 
@@ -163,7 +165,7 @@ function JDHP_PlayerFrameEventHandler (event, eventArg)
 		JDHP_RenderPlayerExp();
 	elseif (event == "PLAYER_ENTER_COMBAT" or event == "PLAYER_LEAVE_COMBAT") then
 		JDHP_RenderNameColor();
-	elseif (event == "UNIT_AURA" or event == "PET_BAR_UPDATE" or event == "PET_UI_UPDATE") then
+	elseif (event == "UNIT_AURA" or event == "PET_BAR_UPDATE" or event == "PET_UI_UPDATE" or event == "PLAYER_TOTEM_UPDATE" or event == "UPDATE_SHAPESHIFT_FORM") then
 		JDHP_RenderPlayerExp();
 	elseif (event == "PLAYER_ALIVE" or event == "PLAYER_DEAD") then
 		JDHP_RenderPlayerHealth();
@@ -766,12 +768,7 @@ function JDHP_RenderPlayerExp()
 		local restXP = GetXPExhaustion();
 		local tnlXP = nextXP - currXP;
 
-		if (HasPetUI() == 1) then
-			JDHP_PetBuffUpdate();
-		else
-			JDHPDisplay_PlayerExp:SetPoint("LEFT", "PlayerFrame", "TOPLEFT", 105, -75)
-			JDHPDisplay_PlayerTnl:SetPoint("LEFT", "PlayerFrame", "TOPLEFT", 105, -86)
-		end
+        JDHP_AdjustExpPlacement();
 
 		if (Exp == 1 and (BarExp == 1 or ActualExp == 1)) then
 			if(restXP == nil) then
@@ -845,25 +842,64 @@ end
 
 -- ** MOVE EXP/TNL WITH PET BUFFS ** --
 
-function JDHP_PetBuffUpdate()
-	local moveexpto = 125;
-	if (MoveExp == 1) then
-		local pbcount = 0;
-		local pbdone = 0;
-		while (pbdone == 0) do
-			local pb = UnitBuff("pet", pbcount + 1);
-			if (pb ~= nil) then
-				pbcount = pbcount + 1;
-			else
-				pbdone = 1;
-			end
-		end
-		if (pbcount ~= 0) then
-			moveexpto = 17 * tonumber(pbcount) + 128;
-		end
-	end
-	JDHPDisplay_PlayerExp:SetPoint("LEFT", "PlayerFrame", "TOPLEFT", moveexpto, -110)
-	JDHPDisplay_PlayerTnl:SetPoint("LEFT", "PlayerFrame", "TOPLEFT", moveexpto, -121)
+function JDHP_AdjustExpPlacement()
+    local placementType = false;
+    -- JDHP_Log(UnitClass('player'));
+    if (HasPetUI() == 1) then
+        placementType = 'pet';
+    else
+        placementType = UnitClass('player');
+    end
+
+    local x = 105;
+    local y = -75;
+    -- FIXME: TODO: Druids and Shaman
+    if (placementType == 'pet') then
+        x = 125;
+        y = -110;
+    elseif (placementType == 'Monk') then
+        y = -100;
+    elseif (placementType == 'Death Knight') then
+        y = -95;
+    elseif (placementType == 'Priest') then
+        local currentSpec = GetSpecialization()
+        if (currentSpec) then
+            local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
+            if (currentSpecName == 'Shadow') then
+                y = -104;
+            end
+        end
+    elseif (placementType == 'Druid') then
+        local currentSpec = GetSpecialization()
+        if (currentSpec) then
+            local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
+            if (currentSpecName == 'Balance') then
+                y = -100;
+            end
+        end
+        local form = GetShapeshiftForm();
+        if (form == 1 or form == 3) then -- Bear or Cat
+            y = -87;
+        elseif (form == 2 or form == 4 or form == 6) then -- Aquatic, Travel, or Flight
+            y = -75;
+        end
+    elseif (placementType == 'Shaman') then
+        if (select(1, GetTotemInfo(1)) == true or select(1, GetTotemInfo(2)) == true or select(1, GetTotemInfo(3)) == true or select(1, GetTotemInfo(4)) == true) then
+            y = -113;
+        end
+    elseif (placementType == 'Warlock') then
+        local currentSpec = GetSpecialization()
+        if (currentSpec) then
+            local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
+            if (currentSpecName and currentSpecName ~= 'None') then
+                y = -110;
+            end
+        end
+    elseif (placementType == 'Paladin') then
+        y = -107;
+    end
+	JDHPDisplay_PlayerExp:SetPoint('LEFT', 'PlayerFrame', 'TOPLEFT', x, y)
+	JDHPDisplay_PlayerTnl:SetPoint('LEFT', 'PlayerFrame', 'TOPLEFT', x, y - 11)
 end
 
 -- ** TNL'S PRINT COMMAND ** --
@@ -884,7 +920,7 @@ function JDHP_PrintTNL(msg)
 	else
 		tnlinfo = JDHP_TNL_REPORT..barsTNL..JDHP_TNL_BARSTO..nextlvl..". "..tnlXP.." experience needed.";
 	end
-	if ((msg == "party" or msg == "p") and GetNumPartyMembers() ~= 0 or (msg == "raid" or msg == "r") and GetNumRaidMembers() ~= 0 or msg == "say" or msg == "s" or msg == "battleground" or msg == "bg" or msg == "b" or (msg == "guild" or msg == "g" or msg == "officer" or msg == "o") and IsInGuild() == 1) then
+	if ((msg == "party" or msg == "p") and UnitInParty("player") or (msg == "raid" or msg == "r") and UnitInRaid("player") or msg == "say" or msg == "s" or msg == "battleground" or msg == "bg" or msg == "b" or (msg == "guild" or msg == "g" or msg == "officer" or msg == "o") and IsInGuild() == 1) then
 		if (msg == "p") then
 			msg = "PARTY";
 		elseif (msg == "g") then
@@ -902,28 +938,26 @@ function JDHP_PrintTNL(msg)
 	elseif (msg == "w") then
 		local wtarget = "FeatureIncomplete";
 		SendChatMessage(tnlinfo, "WHISPER", nil, wtarget);
-	elseif ((msg == "raid" or msg == "r") and GetNumRaidMembers() == 0 and GetNumPartyMembers() ~= 0) then
+	elseif ((msg == "raid" or msg == "r") and not UnitInRaid("player") and UnitInParty("player")) then
 		SendChatMessage(tnlinfo, "PARTY");
 	elseif (msg == "" or msg == "party" or msg == "p" or msg == "raid" or msg == "r" or msg == "guild" or msg == "g" or msg == "officer" or msg == "o") then
 		DEFAULT_CHAT_FRAME:AddMessage(tnlinfo, 0, 1, 1);
 	else
 		DEFAULT_CHAT_FRAME:AddMessage(JDHP_TNL_EXPLANATION1, 1, 1, 0);
-		DEFAULT_CHAT_FRAME:AddMessage(JDHP_TNL_EXPLANATION2, 1, .85, 0);
-		DEFAULT_CHAT_FRAME:AddMessage(JDHP_TNL_EXPLANATION3, 1, .85, 0);
-		DEFAULT_CHAT_FRAME:AddMessage(JDHP_TNL_EXPLANATION4, 1, .85, 0);
-		DEFAULT_CHAT_FRAME:AddMessage(JDHP_TNL_EXPLANATION5, 1, 1, 0);
+		DEFAULT_CHAT_FRAME:AddMessage(JDHP_TNL_EXPLANATION2, 1, .65, 0);
+		DEFAULT_CHAT_FRAME:AddMessage(JDHP_TNL_EXPLANATION3, 1, .65, 0);
+		DEFAULT_CHAT_FRAME:AddMessage(JDHP_TNL_EXPLANATION4, 1, .65, 0);
+		-- DEFAULT_CHAT_FRAME:AddMessage(JDHP_TNL_EXPLANATION5, 1, 1, 0);
 	end
 end
 
 -- ** SLASH HANDLER FUNCTIONS ** --
 
 function JDHP_SlashHandler(msg)
-	if (msg == "o" or msg == "options") then
-		JDHPOptionsDisplay:Show();
-	else
-		DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP0, 1, 1, 0);
-		DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP1, 1, 1, 0);
-		DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP2, 1, .85, 0);
-		DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP3, 1, .85, 0);
-	end
+	-- if (msg == "o" or msg == "options") then
+    JDHPOptionsDisplay:Show();
+    DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP0, 1, 1, 0);
+    DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP1, 1, 1, 0);
+    DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP2, 1, .65, 0);
+    DEFAULT_CHAT_FRAME:AddMessage(JDHP_SLASH_JDHP3, 1, .65, 0);
 end

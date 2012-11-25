@@ -12,7 +12,7 @@ JDHP_TNL_EXPLANATION1				= "Type \"/tnl *\" to send TNL info to chat, where the 
 JDHP_TNL_EXPLANATION2				= "   s = Say     p = Party     r = Raid     g = Guild";
 JDHP_TNL_EXPLANATION3				= "   o = Officer     bg = Battleground";
 JDHP_TNL_EXPLANATION4				= "   [nothing] = Shows only for you";
-JDHP_TNL_EXPLANATION5				= "When sending to a party, raid, guild (or officer chat of a guild) or battleground when you are not in one it will show only for you.";
+-- JDHP_TNL_EXPLANATION5				= "When sending to a party, raid, guild (or officer chat of a guild) or battleground when you are not in one it will show only for you.";
 JDHP_TNL_REPORT						= "Insight Report: ";
 JDHP_TNL_BARSTO						= " bars to ";
 JDHP_TNL_RESTED						= " rested)";
