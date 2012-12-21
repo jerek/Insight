@@ -1523,8 +1523,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <!--
-            <CheckButton name="JDHPOptionsDisplayMoveExp" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="JDHPOptionsDisplayForceDecimals" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
@@ -1534,7 +1533,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_MOVEEXP">
+                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_FORCEDECIMALS">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1549,7 +1548,6 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            -->
             <CheckButton name="JDHPOptionsDisplayColorPlayerName" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>

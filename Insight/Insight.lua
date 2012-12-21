@@ -1,5 +1,5 @@
 --[[
-	Insight Release 7.2
+	Insight Release 8
 	Author: Jerek Dain
 	Email: jerekdain@gmail.com
 	Website: http://www.jerekdain.com/
@@ -59,7 +59,7 @@ if (Exp == nil) then Exp = 1; end   -- Display EXP?
 if (Tnl == nil) then Tnl = 1; end   -- Display TNL? (EXP To Next Level) If This is enabled with EXP off, it will take EXP's place.
 if (BarExp == nil) then BarExp = 1; end   -- Display EXP and TNL in terms of bars.
 if (ActualExp == nil) then ActualExp = 1; end   -- Display EXP and TNL in terms of actual values.
--- if (MoveExp == nil) then MoveExp = 0; end   -- Move EXP/TNL with pet buffs? -- TODO: FIXME: Finish removing this.
+if (ForceDecimals == nil) then ForceDecimals = 0; end   -- Force display of decimals for values over 9,999.
 if (AutohideExp == nil) then AutohideExp = 1; end   -- Hide EXP and TNL when on a max level character?
 
 -- Miscellaneous 2 --
@@ -86,11 +86,19 @@ function JDHP_NumberFormat(num)
 	if num <= 9999 then
 		result = num
 	elseif num >= 1000000 then
-		result = format("%.1f M", num/1000000)
-        result = string.gsub(result, "\.0 M", " M");
+	    if num < 20000000 or ForceDecimals == 1 then
+            result = format("%.1f M", num/1000000)
+            result = string.gsub(result, "\.0 M", " M");
+        else
+            result = format("%d M", num/1000000)
+        end
 	elseif num >= 10000 then
-		result = format("%.1f K", num/1000)
-        result = string.gsub(result, "\.0 K", " K");
+	    if num < 20000 or ForceDecimals == 1 then
+            result = format("%.1f K", num/1000)
+            result = string.gsub(result, "\.0 K", " K");
+	    else
+            result = format("%d K", num/1000)
+	    end
 	end
     return result;
 end
@@ -227,12 +235,12 @@ function JDHP_RenderTargetHealth()
 				if (TargetSideHealthPer == 0) then
 					if (TargetSideMaxes == 1) then
 						if (TargetSideMissing == 0) then
-							JDHPDisplay_TargetSideHealth:SetText(JDHP_NumberFormat(hcur).." / "..JDHP_NumberFormat(total));
+							JDHPDisplay_TargetSideHealth:SetText(JDHP_NumberFormat(hcur) .. " / " .. JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetSideHealth:SetText("");
 							else
-								JDHPDisplay_TargetSideHealth:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
+								JDHPDisplay_TargetSideHealth:SetText("-" .. missing .. " / " .. JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
@@ -242,18 +250,18 @@ function JDHP_RenderTargetHealth()
 							if (missing == 0) then
 								JDHPDisplay_TargetSideHealth:SetText("");
 							else
-								JDHPDisplay_TargetSideHealth:SetText("-"..missing);
+								JDHPDisplay_TargetSideHealth:SetText("-" .. missing);
 							end
 						end
 					end
 				else -- if percent == 1
 					if (TargetSideMissing == 0) then
-						JDHPDisplay_TargetSideHealth:SetText(ceil(percent).."%");
+						JDHPDisplay_TargetSideHealth:SetText(ceil(percent) .. "%");
 					else
 						if (missing == 0) then
 							JDHPDisplay_TargetSideHealth:SetText("");
 						else
-							JDHPDisplay_TargetSideHealth:SetText("-"..ceil(100 - percent).."%");
+							JDHPDisplay_TargetSideHealth:SetText("-" .. ceil(100 - percent) .. "%");
 						end
 					end
 				end
@@ -282,12 +290,12 @@ function JDHP_RenderTargetHealth()
 				if (TargetBarHealthPer == 0) then
 					if (TargetBarMaxes == 1) then
 						if (TargetBarMissing == 0) then
-							JDHPDisplay_TargetBarHealth:SetText(JDHP_NumberFormat(hcur).." / "..JDHP_NumberFormat(total));
+							JDHPDisplay_TargetBarHealth:SetText(JDHP_NumberFormat(hcur) .. " / " .. JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetBarHealth:SetText("");
 							else
-								JDHPDisplay_TargetBarHealth:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
+								JDHPDisplay_TargetBarHealth:SetText("-" .. missing .. " / " .. JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
@@ -297,18 +305,18 @@ function JDHP_RenderTargetHealth()
 							if (missing == 0) then
 								JDHPDisplay_TargetBarHealth:SetText("");
 							else
-								JDHPDisplay_TargetBarHealth:SetText("-"..missing);
+								JDHPDisplay_TargetBarHealth:SetText("-" .. missing);
 							end
 						end
 					end
 				else -- if percent == 0
 					if (TargetBarMissing == 0) then
-						JDHPDisplay_TargetBarHealth:SetText(ceil(percent).."%");
+						JDHPDisplay_TargetBarHealth:SetText(ceil(percent) .. "%");
 					else
 						if (missing == 0) then
 							JDHPDisplay_TargetBarHealth:SetText("");
 						else
-							JDHPDisplay_TargetBarHealth:SetText("-"..ceil(100 - percent).."%");
+							JDHPDisplay_TargetBarHealth:SetText("-" .. ceil(100 - percent) .. "%");
 						end
 					end
 				end
@@ -365,12 +373,12 @@ function JDHP_RenderTargetMana()
 				if (TargetSideManaPer == 0 or (TargetManaType == 1 and RagePercent == 0) or (TargetManaType == 3 and EnergyPercent == 0)) then
 					if (TargetSideMaxes == 1) then
 						if (TargetSideMissing == 0) then
-							JDHPDisplay_TargetSideMana:SetText(JDHP_NumberFormat(mcur).." / "..JDHP_NumberFormat(total));
+							JDHPDisplay_TargetSideMana:SetText(JDHP_NumberFormat(mcur) .. " / " .. JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetSideMana:SetText("");
 							else
-								JDHPDisplay_TargetSideMana:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
+								JDHPDisplay_TargetSideMana:SetText("-" .. missing .. " / " .. JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
@@ -380,18 +388,18 @@ function JDHP_RenderTargetMana()
 							if (missing == 0) then
 								JDHPDisplay_TargetSideMana:SetText("");
 							else
-								JDHPDisplay_TargetSideMana:SetText("-"..missing);
+								JDHPDisplay_TargetSideMana:SetText("-" .. missing);
 							end
 						end
 					end
 				else -- if percent == 1
 					if (TargetSideMissing == 0) then
-						JDHPDisplay_TargetSideMana:SetText(ceil(percent).."%");
+						JDHPDisplay_TargetSideMana:SetText(ceil(percent) .. "%");
 					else
 						if (missing == 0) then
 							JDHPDisplay_TargetSideMana:SetText("");
 						else
-							JDHPDisplay_TargetSideMana:SetText("-"..ceil(100 - percent).."%");
+							JDHPDisplay_TargetSideMana:SetText("-" .. ceil(100 - percent) .. "%");
 						end
 					end
 				end
@@ -422,12 +430,12 @@ function JDHP_RenderTargetMana()
 				if (TargetBarManaPer == 0 or (TargetManaType == 1 and RagePercent == 0) or (TargetManaType == 3 and EnergyPercent == 0)) then
 					if (TargetBarMaxes == 1) then
 						if (TargetBarMissing == 0) then
-							JDHPDisplay_TargetBarMana:SetText(JDHP_NumberFormat(mcur).." / "..JDHP_NumberFormat(total));
+							JDHPDisplay_TargetBarMana:SetText(JDHP_NumberFormat(mcur) .. " / " .. JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_TargetBarMana:SetText("");
 							else
-								JDHPDisplay_TargetBarMana:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
+								JDHPDisplay_TargetBarMana:SetText("-" .. missing .. " / " .. JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
@@ -437,18 +445,18 @@ function JDHP_RenderTargetMana()
 							if (missing == 0) then
 								JDHPDisplay_TargetBarMana:SetText("");
 							else
-								JDHPDisplay_TargetBarMana:SetText("-"..missing);
+								JDHPDisplay_TargetBarMana:SetText("-" .. missing);
 							end
 						end
 					end
 				else -- if percent == 1
 					if (TargetBarMissing == 0) then
-						JDHPDisplay_TargetBarMana:SetText(ceil(percent).."%");
+						JDHPDisplay_TargetBarMana:SetText(ceil(percent) .. "%");
 					else
 						if (missing == 0) then
 							JDHPDisplay_TargetBarMana:SetText("");
 						else
-							JDHPDisplay_TargetBarMana:SetText("-"..ceil(100 - percent).."%");
+							JDHPDisplay_TargetBarMana:SetText("-" .. ceil(100 - percent) .. "%");
 						end
 					end
 				end
@@ -470,7 +478,7 @@ function JDHP_RenderPlayerCharges()
 		if (charges ~= 0) then
 			local maxcharges = MAX_COMBO_POINTS;
 			if (PlayerSideMaxes == 1) then
-				chargeinfo = charges.." / "..maxcharges;
+				chargeinfo = charges .. " / " .. maxcharges;
 			else
 				chargeinfo = charges;
 			end
@@ -501,12 +509,12 @@ function JDHP_RenderPlayerHealth()
 				if (PlayerSideHealthPer == 0) then
 					if (PlayerSideMaxes == 1) then
 						if (PlayerSideMissing == 0) then
-							JDHPDisplay_PlayerSideHealth:SetText(JDHP_NumberFormat(hcur).." / "..JDHP_NumberFormat(total));
+							JDHPDisplay_PlayerSideHealth:SetText(JDHP_NumberFormat(hcur) .. " / " .. JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerSideHealth:SetText("");
 							else
-								JDHPDisplay_PlayerSideHealth:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
+								JDHPDisplay_PlayerSideHealth:SetText("-" .. missing .. " / " .. JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
@@ -516,18 +524,18 @@ function JDHP_RenderPlayerHealth()
 							if (missing == 0) then
 								JDHPDisplay_PlayerSideHealth:SetText("");
 							else
-								JDHPDisplay_PlayerSideHealth:SetText("-"..missing);
+								JDHPDisplay_PlayerSideHealth:SetText("-" .. missing);
 							end
 						end
 					end
 				else -- if percent == 0
 					if (PlayerSideMissing == 0) then
-						JDHPDisplay_PlayerSideHealth:SetText(ceil(percent).."%");
+						JDHPDisplay_PlayerSideHealth:SetText(ceil(percent) .. "%");
 					else
 						if (missing == 0) then
 							JDHPDisplay_PlayerSideHealth:SetText("");
 						else
-							JDHPDisplay_PlayerSideHealth:SetText("-"..ceil(100 - percent).."%");
+							JDHPDisplay_PlayerSideHealth:SetText("-" .. ceil(100 - percent) .. "%");
 						end
 					end
 				end
@@ -556,12 +564,12 @@ function JDHP_RenderPlayerHealth()
 				if (PlayerBarHealthPer == 0) then
 					if (PlayerBarMaxes == 1) then
 						if (PlayerBarMissing == 0) then
-							JDHPDisplay_PlayerBarHealth:SetText(JDHP_NumberFormat(hcur).." / "..JDHP_NumberFormat(total));
+							JDHPDisplay_PlayerBarHealth:SetText(JDHP_NumberFormat(hcur) .. " / " .. JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerBarHealth:SetText("");
 							else
-								JDHPDisplay_PlayerBarHealth:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
+								JDHPDisplay_PlayerBarHealth:SetText("-" .. missing .. " / " .. JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
@@ -571,18 +579,18 @@ function JDHP_RenderPlayerHealth()
 							if (missing == 0) then
 								JDHPDisplay_PlayerBarHealth:SetText("");
 							else
-								JDHPDisplay_PlayerBarHealth:SetText("-"..missing);
+								JDHPDisplay_PlayerBarHealth:SetText("-" .. missing);
 							end
 						end
 					end
 				else -- if percent == 0
 					if (PlayerBarMissing == 0) then
-						JDHPDisplay_PlayerBarHealth:SetText(ceil(percent).."%");
+						JDHPDisplay_PlayerBarHealth:SetText(ceil(percent) .. "%");
 					else
 						if (missing == 0) then
 							JDHPDisplay_PlayerBarHealth:SetText("");
 						else
-							JDHPDisplay_PlayerBarHealth:SetText("-"..ceil(100 - percent).."%");
+							JDHPDisplay_PlayerBarHealth:SetText("-" .. ceil(100 - percent) .. "%");
 						end
 					end
 				end
@@ -629,12 +637,12 @@ function JDHP_RenderPlayerMana()
 				if (PlayerSideManaPer == 0 or (PlayerManaType == 1 and RagePercent == 0) or (PlayerManaType == 3 and EnergyPercent == 0)) then
 					if (PlayerSideMaxes == 1) then
 						if (PlayerSideMissing == 0) then
-							JDHPDisplay_PlayerSideMana:SetText(JDHP_NumberFormat(mcur).." / "..JDHP_NumberFormat(total));
+							JDHPDisplay_PlayerSideMana:SetText(JDHP_NumberFormat(mcur) .. " / " .. JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerSideMana:SetText("");
 							else
-								JDHPDisplay_PlayerSideMana:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
+								JDHPDisplay_PlayerSideMana:SetText("-" .. missing .. " / " .. JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
@@ -644,18 +652,18 @@ function JDHP_RenderPlayerMana()
 							if (missing == 0) then
 								JDHPDisplay_PlayerSideMana:SetText("");
 							else
-								JDHPDisplay_PlayerSideMana:SetText("-"..missing);
+								JDHPDisplay_PlayerSideMana:SetText("-" .. missing);
 							end
 						end
 					end
 				else -- if percent == 1
 					if (PlayerSideMissing == 0) then
-						JDHPDisplay_PlayerSideMana:SetText(ceil(percent).."%");
+						JDHPDisplay_PlayerSideMana:SetText(ceil(percent) .. "%");
 					else
 						if (missing == 0) then
 							JDHPDisplay_PlayerSideMana:SetText("");
 						else
-							JDHPDisplay_PlayerSideMana:SetText("-"..ceil(100 - percent).."%");
+							JDHPDisplay_PlayerSideMana:SetText("-" .. ceil(100 - percent) .. "%");
 						end
 					end
 				end
@@ -683,12 +691,12 @@ function JDHP_RenderPlayerMana()
 				if (PlayerBarManaPer == 0 or (PlayerManaType == 1 and RagePercent == 0) or (PlayerManaType == 3 and EnergyPercent == 0)) then
 					if (PlayerBarMaxes == 1) then
 						if (PlayerBarMissing == 0) then
-							JDHPDisplay_PlayerBarMana:SetText(JDHP_NumberFormat(mcur).." / "..JDHP_NumberFormat(total));
+							JDHPDisplay_PlayerBarMana:SetText(JDHP_NumberFormat(mcur) .. " / " .. JDHP_NumberFormat(total));
 						else
 							if (missing == 0) then
 								JDHPDisplay_PlayerBarMana:SetText("");
 							else
-								JDHPDisplay_PlayerBarMana:SetText("-"..missing.." / "..JDHP_NumberFormat(total));
+								JDHPDisplay_PlayerBarMana:SetText("-" .. missing .. " / " .. JDHP_NumberFormat(total));
 							end
 						end
 					else -- if maxes == 0
@@ -698,18 +706,18 @@ function JDHP_RenderPlayerMana()
 							if (missing == 0) then
 								JDHPDisplay_PlayerBarMana:SetText("");
 							else
-								JDHPDisplay_PlayerBarMana:SetText("-"..missing);
+								JDHPDisplay_PlayerBarMana:SetText("-" .. missing);
 							end
 						end
 					end
 				else -- if percent == 0
 					if (PlayerBarMissing == 0) then
-						JDHPDisplay_PlayerBarMana:SetText(ceil(percent).."%");
+						JDHPDisplay_PlayerBarMana:SetText(ceil(percent) .. "%");
 					else
 						if (missing == 0) then
 							JDHPDisplay_PlayerBarMana:SetText("");
 						else
-							JDHPDisplay_PlayerBarMana:SetText("-"..ceil(100 - percent).."%");
+							JDHPDisplay_PlayerBarMana:SetText("-" .. ceil(100 - percent) .. "%");
 						end
 					end
 				end
@@ -737,41 +745,45 @@ function JDHP_RenderPlayerExp()
 		local restXP = GetXPExhaustion();
 		local tnlXP = nextXP - currXP;
 
+		local currXPFormatted = JDHP_NumberFormat(currXP);
+		local nextXPFormatted = JDHP_NumberFormat(nextXP);
+		local tnlXPFormatted = JDHP_NumberFormat(tnlXP);
+
         JDHP_AdjustExpPlacement();
 
 		if (Exp == 1 and (BarExp == 1 or ActualExp == 1)) then
 			if(restXP == nil) then
 				if (BarExp == 1 and ActualExp == 0) then
 					local barsXP = (floor(200 * (currXP / nextXP))) / 10;
-					JDHPDisplay_PlayerExp:SetText("EXP: "..barsXP.." bars");
+					JDHPDisplay_PlayerExp:SetText("EXP: " .. barsXP .. " bars");
 				elseif (BarExp == 1 and ActualExp == 1) then
 					local barsXP = (floor(200 * (currXP / nextXP))) / 10;
-					JDHPDisplay_PlayerExp:SetText("EXP: "..barsXP.." bars ("..currXP.." / "..nextXP..")");
+					JDHPDisplay_PlayerExp:SetText("EXP: " .. barsXP .. " bars   |cFFAAAAAA" .. JDHP_NumberFormat(currXP) .. " / " .. JDHP_NumberFormat(nextXP));
 				else
-					JDHPDisplay_PlayerExp:SetText(currXP.." / "..nextXP);
+					JDHPDisplay_PlayerExp:SetText(JDHP_NumberFormat(currXP) .. " / " .. JDHP_NumberFormat(nextXP));
 				end
 			else
 				if (BarExp == 1 and ActualExp == 0) then
 					local barsXP = (floor(200 * (currXP / nextXP))) / 10;
 					local restbars = (floor(200 * (restXP / nextXP))) / 10;
-					JDHPDisplay_PlayerExp:SetText(barsXP.." bars ("..restbars.." rested)");
+					JDHPDisplay_PlayerExp:SetText(barsXP .. " bars   |cFFAAAAAA" .. restbars .. " rested");
 				elseif (BarExp == 1 and ActualExp == 1) then
 					local barsXP = (floor(200 * (currXP / nextXP))) / 10;
 					local restbars = (floor(200 * (restXP / nextXP))) / 10;
-					JDHPDisplay_PlayerExp:SetText(barsXP.." bars ("..currXP.." / "..nextXP..") - "..restbars.." rested");
+					JDHPDisplay_PlayerExp:SetText(barsXP .. " bars   |cFFAAAAAA" .. JDHP_NumberFormat(currXP) .. " / " .. JDHP_NumberFormat(nextXP) .. "   |cFFFFFFFF" .. restbars .. " rested");
 				else
-					JDHPDisplay_PlayerExp:SetText(currXP.." / "..nextXP.." (+"..(tonumber(restXP)/2)..")");
+					JDHPDisplay_PlayerExp:SetText(JDHP_NumberFormat(currXP) .. " / " .. JDHP_NumberFormat(nextXP) .. " (+" .. (tonumber(restXP)/2) .. ")");
 				end
 			end
 			if (Tnl == 1) then
 				if (BarExp == 1 and ActualExp == 0) then
 					local barsTNL = (ceil(200 * (tnlXP / nextXP))) / 10;
-					JDHPDisplay_PlayerTnl:SetText("TNL: "..barsTNL.." bars");
+					JDHPDisplay_PlayerTnl:SetText("TNL: " .. barsTNL .. " bars");
 				elseif (BarExp == 1 and ActualExp == 1) then
 					local barsTNL = (ceil(200 * (tnlXP / nextXP))) / 10;
-					JDHPDisplay_PlayerTnl:SetText("TNL: "..barsTNL.." bars ("..tnlXP..")");
+					JDHPDisplay_PlayerTnl:SetText("TNL: " .. barsTNL .. " bars   |cFFAAAAAA" .. JDHP_NumberFormat(tnlXP));
 				else
-					JDHPDisplay_PlayerTnl:SetText("TNL: "..tnlXP);
+					JDHPDisplay_PlayerTnl:SetText("TNL: " .. JDHP_NumberFormat(tnlXP));
 				end
 			else
 				JDHPDisplay_PlayerTnl:SetText("");
@@ -783,23 +795,23 @@ function JDHP_RenderPlayerExp()
 					if (BarExp == 1 and ActualExp == 0) then
 						local barsTNL = (ceil(200 * (tnlXP / nextXP))) / 10;
 						local restbars = (floor(200 * (restXP / nextXP))) / 10;
-						JDHPDisplay_PlayerExp:SetText(barsTNL.." bars ("..restbars.." rested)");
+						JDHPDisplay_PlayerExp:SetText(barsTNL .. " bars (" .. restbars .. " rested)");
 					elseif (BarExp == 1 and ActualExp == 1) then
 						local barsTNL = (ceil(200 * (tnlXP / nextXP))) / 10;
 						local restbars = (floor(200 * (restXP / nextXP))) / 10;
-						JDHPDisplay_PlayerExp:SetText(barsTNL.." bars ("..tnlXP..") - "..restbars.." rested");
+						JDHPDisplay_PlayerExp:SetText(barsTNL .. " bars (" .. JDHP_NumberFormat(tnlXP) .. ")   |cFFFFFFFF" .. restbars .. " rested");
 					else
-						JDHPDisplay_PlayerExp:SetText(tnlXP.." (+"..(tonumber(restXP)/2)..")");
+						JDHPDisplay_PlayerExp:SetText(JDHP_NumberFormat(tnlXP) .. " (+" .. JDHP_NumberFormat(tonumber(restXP)/2) .. ")");
 					end
 				else
 					if (BarExp == 1 and ActualExp == 0) then
 						local barsTNL = (ceil(200 * (tnlXP / nextXP))) / 10;
-						JDHPDisplay_PlayerExp:SetText("TNL: "..barsTNL.." bars");
+						JDHPDisplay_PlayerExp:SetText("TNL: " .. barsTNL .. " bars");
 					elseif (BarExp == 1 and ActualExp == 1) then
 						local barsTNL = (ceil(200 * (tnlXP / nextXP))) / 10;
-						JDHPDisplay_PlayerExp:SetText("TNL: "..barsTNL.." bars ("..tnlXP..")");
+						JDHPDisplay_PlayerExp:SetText("TNL: " .. barsTNL .. " bars   |cFFAAAAAA" .. JDHP_NumberFormat(tnlXP));
 					else
-						JDHPDisplay_PlayerExp:SetText("TNL: "..tnlXP);
+						JDHPDisplay_PlayerExp:SetText("TNL: " .. JDHP_NumberFormat(tnlXP));
 					end
 				end
 			else
@@ -884,9 +896,9 @@ function JDHP_PrintTNL(msg)
 	local tnlinfo = nil;
 	if (restXP) then
 		local restbars = (floor(200 * (restXP / nextXP))) / 10;
-		tnlinfo = JDHP_TNL_REPORT..barsTNL..JDHP_TNL_BARSTO..nextlvl.." ("..restbars..JDHP_TNL_RESTED..". "..tnlXP.." experience needed - "..restXP.." rested.";
+		tnlinfo = JDHP_TNL_REPORT .. barsTNL .. JDHP_TNL_BARSTO .. nextlvl .. " (" .. restbars .. JDHP_TNL_RESTED .. ". " .. tnlXP .. " experience needed   " .. restXP .. " rested.";
 	else
-		tnlinfo = JDHP_TNL_REPORT..barsTNL..JDHP_TNL_BARSTO..nextlvl..". "..tnlXP.." experience needed.";
+		tnlinfo = JDHP_TNL_REPORT .. barsTNL .. JDHP_TNL_BARSTO .. nextlvl .. ". " .. tnlXP .. " experience needed.";
 	end
 	if ((msg == "party" or msg == "p") and UnitInParty("player") or (msg == "raid" or msg == "r") and UnitInRaid("player") or msg == "say" or msg == "s" or msg == "battleground" or msg == "bg" or msg == "b" or (msg == "guild" or msg == "g" or msg == "officer" or msg == "o") and IsInGuild() == 1) then
 		if (msg == "p") then

@@ -1,7 +1,7 @@
 -- Version : English - Jerek Dain
 -- Translation by : None
 
--- Insight Release 7.2
+-- Insight Release 8
 -- Author: Jerek Dain
 -- Email: jerekdain@gmail.com
 -- Website: http://www.jerekdain.com/
@@ -19,7 +19,7 @@ JDHP_TNL_RESTED						= " rested)";
 
 -- ** SLASH COMMANDS ** --
 
-JDHP_SLASH_JDHP0					= "Insight Release 7.2 by Jerek Dain (www.JerekDain.com)";
+JDHP_SLASH_JDHP0					= "Insight Release 8 by Jerek Dain (www.JerekDain.com)";
 JDHP_SLASH_JDHP1					= "List of Insight Commands:";
 JDHP_SLASH_JDHP2					= "   /insight o - /insight options - Display options panel.";
 -- JDHP_SLASH_JDHP3					= "   /rl - /reloadui - Reload UI.";
@@ -41,7 +41,7 @@ BINDING_NAME_JDHPPLAYERSIDEMANAPER	= "Toggle side mana as percent";
 BINDING_NAME_JDHPEXP				= "Toggle display EXP";
 BINDING_NAME_JDHPTNL				= "Toggle display TNL";
 BINDING_NAME_JDHPBAREXP				= "Toggle EXP/TNL in bars";
-BINDING_NAME_JDHPMOVEEXP			= "Toggle EXP/TNL moving with pet buffs";
+BINDING_NAME_JDHPFORCEDECIMALS      = "Toggle always display decimals";
 BINDING_NAME_JDHPAUTOHIDEEXP		= "Toggle EXP/TNL hiding on lvl 70s";
 BINDING_NAME_JDHPCOLORPLAYERNAME	= "Toggle name coloration";
 BINDING_NAME_JDHPCOLORPLAYERHEALTH	= "Toggle player health coloration";
@@ -93,7 +93,7 @@ JDHP_OPTIONS_EXP				= "Display EXP";
 JDHP_OPTIONS_TNL				= "Display TNL";
 JDHP_OPTIONS_BAREXP				= "EXP/TNL in bars";
 JDHP_OPTIONS_ACTUALEXP			= "EXP/TNL in actual values";
-JDHP_OPTIONS_MOVEEXP			= "Move EXP/TNL w/ pet buffs";
+JDHP_OPTIONS_FORCEDECIMALS      = "Thousands plus always show decimals";
 JDHP_OPTIONS_HIDEEXP			= "Hide EXP/TNL on level 70s";
 
 JDHP_OPTIONS_MOVETARGET			= "Adjust TargetFrame position";
@@ -151,7 +151,7 @@ JDHP_TOOLTIP_TBMPPER			= "Target's mana on the bar of the PlayerFrame as a perce
 JDHP_TOOLTIP_EXP				= "Display experience below the PlayerFrame.";
 JDHP_TOOLTIP_TNL				= "Display experience To Next Level below experience,\nor in its place if Display EXP is off.";
 JDHP_TOOLTIP_BAREXP				= "Display EXP and TNL in terms of bars instead of actual values.";
-JDHP_TOOLTIP_MOVEEXP			= "Move EXP and TNL over when your pet gains or loses buffs (for working with mods that always display pet buffs).";
+JDHP_TOOLTIP_FORCEDECIMALS		= "Always show decimals when values are over 9,999. (E.g. 214.7 K instead of 214 K)";
 JDHP_TOOLTIP_HIDEEXP			= "Hide EXP and TNL when on level 70 characters.";
 
 JDHP_TOOLTIP_PSCHARGES			= "Display player's charges on the side of the PlayerFrame when the character has at least one charge on the target.";

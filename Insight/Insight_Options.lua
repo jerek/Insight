@@ -39,7 +39,7 @@
 	JDHPOptionsDisplayTnl:SetChecked(Tnl);
 	JDHPOptionsDisplayBarExp:SetChecked(BarExp);
 	JDHPOptionsDisplayActualExp:SetChecked(ActualExp);
-	-- JDHPOptionsDisplayMoveExp:SetChecked(MoveExp);
+	JDHPOptionsDisplayForceDecimals:SetChecked(ForceDecimals);
 	JDHPOptionsDisplayAutohideExp:SetChecked(AutohideExp);
 
 	JDHPOptionsDisplayMoveTarget:SetChecked(MoveTarget);
@@ -243,11 +243,11 @@ function JDHP_OptionsFrame_Save()
 	else
 		ActualExp = 0;
 	end
-	-- if(JDHPOptionsDisplayMoveExp:GetChecked() == 1) then
-	-- 	MoveExp = 1;
-	-- else
-	-- 	MoveExp = 0;
-	-- end
+	if(JDHPOptionsDisplayForceDecimals:GetChecked() == 1) then
+		ForceDecimals = 1;
+	else
+		ForceDecimals = 0;
+	end
 	if(JDHPOptionsDisplayAutohideExp:GetChecked() == 1) then
 		AutohideExp = 1;
 	else

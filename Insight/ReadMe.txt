@@ -1,5 +1,5 @@
-Insight Release 7.2
-----------------
+Insight Release 8
+-----------------
 Author: Jerek Dain
 Email: jerek@jerekdain.com
 Website: http://www.jerekdain.com/
@@ -20,9 +20,13 @@ If you have MobInfo-2 or another MobHealth addon Insight will detect it and use 
 	|Change Log|
 	+==========+
 
+RELEASE 8 - Thursday, December 20, 2012
+- Improved styling of the experience display beneath the player portrait to use nice number formatting and use colors to distinguish between areas of the text.
+- Use of decimals for large values (e.g. turning 375,218 in to 375.2 K) no longer always uses decimals unless you have the option enabled. Without the option it will still use decimals for low shorthand values (e.g. 11,632 to 11.6 K, but 375,218 to 375 K).
+
 RELEASE 7.2 - Sunday, November 25, 2012
 - Updated to work with WoW patch 5.0.x.
-- Updated some placement adjustments for various classes. (e.g. Monk chi, new Warlock resources, etc)
+- Updated some EXP/TNL placement adjustments for various class resources. (e.g. Monk chi, new Warlock resources, etc)
 - Better formatting for large values.
 - Renamed mod from JDHP to Insight.
 

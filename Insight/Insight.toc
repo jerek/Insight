@@ -1,8 +1,8 @@
 ## Interface: 50100
-## Title: Insight r7.2 (Patch 5.1)
+## Title: Insight r8 (Patch 5.1)
 ## Notes: Display additional info at the player and target portraits.
 ## Author: Jerek Dain, jerekdain@gmail.com, http://www.jerekdain.com/
-## SavedVariables: PlayerSideHealth, PlayerSideMana, PlayerSideMaxes, PlayerSideMissing, PlayerSideHealthPer, PlayerSideManaPer, ColorPlayerHealth, ColorPlayerMana, ColorPlayerHealthBar, PlayerBarHealth, PlayerBarMana, PlayerBarMaxes, PlayerBarMissing, PlayerBarHealthPer, PlayerBarManaPer, TargetSideHealth, TargetSideMana, TargetSideMaxes, TargetSideMissing, TargetSideHealthPer, TargetSideManaPer, ColorTargetHealth, ColorTargetMana, ColorTargetHealthBar, TargetBarHealth, TargetBarMana, TargetBarMaxes, TargetBarMissing, TargetBarHealthPer, TargetBarManaPer, Exp, Tnl, BarExp, MoveExp, AutohideExp, MoveTarget, TargetFramePos, TargetFrameVertPos, PlayerSideCharges, ColorPlayerName, EnergyPercent, RagePercent
+## SavedVariables: PlayerSideHealth, PlayerSideMana, PlayerSideMaxes, PlayerSideMissing, PlayerSideHealthPer, PlayerSideManaPer, ColorPlayerHealth, ColorPlayerMana, ColorPlayerHealthBar, PlayerBarHealth, PlayerBarMana, PlayerBarMaxes, PlayerBarMissing, PlayerBarHealthPer, PlayerBarManaPer, TargetSideHealth, TargetSideMana, TargetSideMaxes, TargetSideMissing, TargetSideHealthPer, TargetSideManaPer, ColorTargetHealth, ColorTargetMana, ColorTargetHealthBar, TargetBarHealth, TargetBarMana, TargetBarMaxes, TargetBarMissing, TargetBarHealthPer, TargetBarManaPer, Exp, Tnl, BarExp, ForceDecimals, AutohideExp, MoveTarget, TargetFramePos, TargetFrameVertPos, PlayerSideCharges, ColorPlayerName, EnergyPercent, RagePercent
 
 Insight.xml
 Insight_Options.xml
