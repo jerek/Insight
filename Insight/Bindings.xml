@@ -1,105 +1,105 @@
 <Bindings>
-	<Binding name="JDHPOPTIONS" header="JDHPPLAYERSIDEHEADER">
-		JDHPOptionsDisplay:Show();
+	<Binding name="INSIGHTOPTIONS" header="INSIGHTPLAYERSIDEHEADER">
+		InsightOptionsDisplay:Show();
 	</Binding>
-	<Binding name="JDHPPLAYERSIDEHEALTH" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTPLAYERSIDEHEALTH" header="INSIGHTPLAYERSIDEHEADER">
 		if(PlayerSideHealth == 0) then
 			PlayerSideHealth = 1;
 		else
 			PlayerSideHealth = 0;
 		end
-		JDHP_RenderPlayerHealth();
+		Insight_RenderPlayerHealth();
 	</Binding>
-	<Binding name="JDHPPLAYERSIDEMANA" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTPLAYERSIDEMANA" header="INSIGHTPLAYERSIDEHEADER">
 		if(PlayerSideMana == 0) then
 			PlayerSideMana = 1;
 		else
 			PlayerSideMana = 0;
 		end
-		JDHP_RenderPlayerMana();
+		Insight_RenderPlayerMana();
 	</Binding>
-	<Binding name="JDHPPLAYERSIDEMAXES" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTPLAYERSIDEMAXES" header="INSIGHTPLAYERSIDEHEADER">
 		if(PlayerSideMaxes == 0) then
 			PlayerSideMaxes = 1;
 		else
 			PlayerSideMaxes = 0;
 		end
-		JDHP_RenderPlayerHealth();
-		JDHP_RenderPlayerMana();
-		JDHP_RenderPlayerCharges();
+		Insight_RenderPlayerHealth();
+		Insight_RenderPlayerMana();
+		Insight_RenderPlayerCharges();
 	</Binding>
-	<Binding name="JDHPPLAYERSIDEMISSING" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTPLAYERSIDEMISSING" header="INSIGHTPLAYERSIDEHEADER">
 		if(PlayerSideMissing == 0) then
 			PlayerSideMissing = 1;
 		else
 			PlayerSideMissing = 0;
 		end
-		JDHP_RenderPlayerHealth();
-		JDHP_RenderPlayerMana();
-		JDHP_RenderPlayerCharges();
+		Insight_RenderPlayerHealth();
+		Insight_RenderPlayerMana();
+		Insight_RenderPlayerCharges();
 	</Binding>
-	<Binding name="JDHPPLAYERSIDEHEALTHPER" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTPLAYERSIDEHEALTHPER" header="INSIGHTPLAYERSIDEHEADER">
 		if(PlayerSideHealthPer == 0) then
 			PlayerSideHealthPer = 1;
 		else
 			PlayerSideHealthPer = 0;
 		end
-		JDHP_RenderPlayerHealth();
+		Insight_RenderPlayerHealth();
 	</Binding>
-	<Binding name="JDHPPLAYERSIDEMANAPER" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTPLAYERSIDEMANAPER" header="INSIGHTPLAYERSIDEHEADER">
 		if(PlayerSideManaPer == 0) then
 			PlayerSideManaPer = 1;
 		else
 			PlayerSideManaPer = 0;
 		end
-		JDHP_RenderPlayerMana();
+		Insight_RenderPlayerMana();
 	</Binding>
-	<Binding name="JDHPEXP" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTEXP" header="INSIGHTPLAYERSIDEHEADER">
 		if(Exp == 0) then
 			Exp = 1;
 		else
 			Exp = 0;
 		end
-		JDHP_RenderPlayerExp();
+		Insight_RenderPlayerExp();
 	</Binding>
-	<Binding name="JDHPTNL" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTTNL" header="INSIGHTPLAYERSIDEHEADER">
 		if(Tnl == 0) then
 			Tnl = 1;
 		else
 			Tnl = 0;
 		end
-		JDHP_RenderPlayerExp();
+		Insight_RenderPlayerExp();
 	</Binding>
-	<Binding name="JDHPBAREXP" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTBAREXP" header="INSIGHTPLAYERSIDEHEADER">
 		if(BarExp == 0) then
 			BarExp = 1;
 		else
 			BarExp = 0;
 		end
-		JDHP_RenderPlayerExp();
+		Insight_RenderPlayerExp();
 	</Binding>
-	<Binding name="JDHPCOLORPLAYERHEALTH" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTCOLORPLAYERHEALTH" header="INSIGHTPLAYERSIDEHEADER">
 		if(ColorPlayerHealth == 0) then
 			ColorPlayerHealth = 1;
 		else
 			ColorPlayerHealth = 0;
 		end
-		JDHP_RenderPlayerHealth();
+		Insight_RenderPlayerHealth();
 	</Binding>
-	<Binding name="JDHPCOLORPLAYERMANA" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTCOLORPLAYERMANA" header="INSIGHTPLAYERSIDEHEADER">
 		if(ColorPlayerMana == 0) then
 			ColorPlayerMana = 1;
 		else
 			ColorPlayerMana = 0;
 		end
-		JDHP_RenderPlayerMana();
+		Insight_RenderPlayerMana();
 	</Binding>
-	<Binding name="JDHPCOLORPLAYERHEALTHBAR" header="JDHPPLAYERSIDEHEADER">
+	<Binding name="INSIGHTCOLORPLAYERHEALTHBAR" header="INSIGHTPLAYERSIDEHEADER">
 		if(ColorPlayerHealthBar == 0) then
 			ColorPlayerHealthBar = 1;
 		else
 			ColorPlayerHealthBar = 0;
 		end
-		JDHP_RenderPlayerHealth();
+		Insight_RenderPlayerHealth();
 	</Binding>
 </Bindings>

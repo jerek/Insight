@@ -8,7 +8,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 	-->
 	<Script file="localization.lua"/>
 	<Script file="Insight.lua"/>
-	<Frame name="JDHPPlayerDisplay" parent="PlayerFrame">
+	<Frame name="InsightPlayerDisplay" parent="PlayerFrame">
 
 		<Scripts>
 			<OnLoad>
@@ -18,9 +18,9 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 			<OnEvent>
 				<!-- Updating display values and moving target frame if pet frame is visible -->
 				if (event == "ADDON_LOADED") then
-					JDHP_PlayerFrameOnLoad();
+					Insight_PlayerFrameOnLoad();
 				end
-				JDHP_PlayerFrameEventHandler(event);
+				Insight_PlayerFrameEventHandler(event);
 			</OnEvent>
 		</Scripts>
 
@@ -28,7 +28,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 			<Frame setAllPoints="true">
 				<Layers>
 					<Layer level="OVERLAY">
-						<FontString name="JDHPDisplay_PlayerSideHealth" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
+						<FontString name="InsightDisplay_PlayerSideHealth" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
 							<Size>
 								<AbsDimension x="100" y="10" />
 							</Size>
@@ -40,7 +40,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 								</Anchor>
 							</Anchors>
 						</FontString>
-						<FontString name="JDHPDisplay_PlayerSideMana" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
+						<FontString name="InsightDisplay_PlayerSideMana" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
 							<Size>
 								<AbsDimension x="100" y="10" />
 							</Size>
@@ -52,7 +52,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 								</Anchor>
 							</Anchors>
 						</FontString>
-						<FontString name="JDHPDisplay_PlayerSideCharges" inherits="GameFontNormal" text="Loading..." justifyH="LEFT">
+						<FontString name="InsightDisplay_PlayerSideCharges" inherits="GameFontNormal" text="Loading..." justifyH="LEFT">
 							<Size>
 								<AbsDimension x="100" y="10" />
 							</Size>
@@ -65,7 +65,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 							</Anchors>
 							<Color r="1" g="1" b="1"/>
 						</FontString>
-						<FontString name="JDHPDisplay_PlayerBarHealth" inherits="TextStatusBarText" text="" justifyH="CENTER">
+						<FontString name="InsightDisplay_PlayerBarHealth" inherits="TextStatusBarText" text="" justifyH="CENTER">
 							<Size>
 								<AbsDimension x="115" y="10" />
 							</Size>
@@ -77,7 +77,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 								</Anchor>
 							</Anchors>
 						</FontString>
-						<FontString name="JDHPDisplay_PlayerBarMana" inherits="TextStatusBarText" text="" justifyH="CENTER">
+						<FontString name="InsightDisplay_PlayerBarMana" inherits="TextStatusBarText" text="" justifyH="CENTER">
 							<Size>
 								<AbsDimension x="115" y="10" />
 							</Size>
@@ -89,7 +89,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 								</Anchor>
 							</Anchors>
 						</FontString>
-						<FontString name="JDHPDisplay_PlayerExp" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
+						<FontString name="InsightDisplay_PlayerExp" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
 							<Size>
 								<AbsDimension x="300" y="10" />
 							</Size>
@@ -102,7 +102,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 							</Anchors>
 							<Color r="1" g="1" b="1"/>
 						</FontString>
-						<FontString name="JDHPDisplay_PlayerTnl" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
+						<FontString name="InsightDisplay_PlayerTnl" inherits="GameFontNormalSmall" text="Loading..." justifyH="LEFT">
 							<Size>
 								<AbsDimension x="300" y="10" />
 							</Size>
@@ -120,12 +120,12 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 			</Frame>
 		</Frames>
 	</Frame>
-	<Frame name="JDHPTargetDisplay" parent="TargetFrame">
+	<Frame name="InsightTargetDisplay" parent="TargetFrame">
 		<Frames>
 			<Frame setAllPoints="true">
 				<Layers>
 					<Layer level="OVERLAY">
-						<FontString name="JDHPDisplay_TargetSideHealth" inherits="GameFontNormalSmall" text="" justifyH="RIGHT">
+						<FontString name="InsightDisplay_TargetSideHealth" inherits="GameFontNormalSmall" text="" justifyH="RIGHT">
 							<Size>
 								<AbsDimension x="115" y="10" />
 							</Size>
@@ -137,7 +137,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 								</Anchor>
 							</Anchors>
 						</FontString>
-						<FontString name="JDHPDisplay_TargetSideMana" inherits="GameFontNormalSmall" text="" justifyH="RIGHT">
+						<FontString name="InsightDisplay_TargetSideMana" inherits="GameFontNormalSmall" text="" justifyH="RIGHT">
 							<Size>
 								<AbsDimension x="115" y="10" />
 							</Size>
@@ -149,7 +149,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 								</Anchor>
 							</Anchors>
 						</FontString>
-						<FontString name="JDHPDisplay_TargetBarHealth" inherits="TextStatusBarText" text="" justifyH="CENTER">
+						<FontString name="InsightDisplay_TargetBarHealth" inherits="TextStatusBarText" text="" justifyH="CENTER">
 							<Size>
 								<AbsDimension x="120" y="10" />
 							</Size>
@@ -161,7 +161,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 								</Anchor>
 							</Anchors>
 						</FontString>
-						<FontString name="JDHPDisplay_TargetBarMana" inherits="TextStatusBarText" text="" justifyH="CENTER">
+						<FontString name="InsightDisplay_TargetBarMana" inherits="TextStatusBarText" text="" justifyH="CENTER">
 							<Size>
 								<AbsDimension x="120" y="10" />
 							</Size>

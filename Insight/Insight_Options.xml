@@ -2,12 +2,12 @@
 C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 	<Script file="localization.lua"/>
 	<Script file="Insight_Options.lua"/>
-    <Frame name="JDHPOptionsDisplay" toplevel="true" enableMouse="true" movable="true" parent="UIParent" hidden="true">
+    <Frame name="InsightOptionsDisplay" toplevel="true" enableMouse="true" movable="true" parent="UIParent" hidden="true">
 
 		<Scripts>
 			<OnShow>
-			    JDHP_OptionsFrame_OnShow();
-			    tinsert(UISpecialFrames,"JDHPOptionsDisplay");
+			    Insight_OptionsFrame_OnShow();
+			    tinsert(UISpecialFrames,"InsightOptionsDisplay");
 			</OnShow>
 			<OnLoad>
 			</OnLoad>
@@ -17,7 +17,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
  				if ( arg1 == "LeftButton" ) then
  					self:StartMoving();
  				elseif (arg1 == "RightButton") then
-					JDHPOptionsDisplay:SetPoint("TOPLEFT", "UIParent", "TOP", -192, -140);
+					InsightOptionsDisplay:SetPoint("TOPLEFT", "UIParent", "TOP", -192, -140);
  				end
  			</OnMouseDown>
  			<OnMouseUp>
@@ -53,7 +53,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
  		</Anchors>
 		<Layers>
 			<Layer level="ARTWORK">
-				<Texture name="JDHPOptionsDisplayTitle" file="Interface\DialogFrame\UI-DialogBox-Header">
+				<Texture name="InsightOptionsDisplayTitle" file="Interface\DialogFrame\UI-DialogBox-Header">
 					<Size>
 						<AbsDimension x="180" y="64" />
 					</Size>
@@ -113,7 +113,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 							</Anchors>
 							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
 						</Texture>
-						<FontString name="JDHPOptionsDisplayPlayerSideOptions" inherits="GameFontNormalSmall" text="Player Side Options" justifyH="CENTER">
+						<FontString name="InsightOptionsDisplayPlayerSideOptions" inherits="GameFontNormalSmall" text="Player Side Options" justifyH="CENTER">
 							<color r="1" g="1" b="1"/>
 							<Size>
 								<AbsDimension x="160" y="10" />
@@ -157,7 +157,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 							</Anchors>
 							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
 						</Texture>
-						<FontString name="JDHPOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Target Side Options" justifyH="CENTER">
+						<FontString name="InsightOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Target Side Options" justifyH="CENTER">
 							<color r="1" g="1" b="1"/>
 							<Size>
 								<AbsDimension x="160" y="10" />
@@ -201,7 +201,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 							</Anchors>
 							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
 						</Texture>
-						<FontString name="JDHPOptionsDisplayPlayerSideOptions" inherits="GameFontNormalSmall" text="Player Side Colors" justifyH="CENTER">
+						<FontString name="InsightOptionsDisplayPlayerSideOptions" inherits="GameFontNormalSmall" text="Player Side Colors" justifyH="CENTER">
 							<color r="1" g="1" b="1"/>
 							<Size>
 								<AbsDimension x="160" y="10" />
@@ -245,7 +245,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 							</Anchors>
 							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
 						</Texture>
-						<FontString name="JDHPOptionsDisplayPlayerSideOptions" inherits="GameFontNormalSmall" text="Player Bar Options" justifyH="CENTER">
+						<FontString name="InsightOptionsDisplayPlayerSideOptions" inherits="GameFontNormalSmall" text="Player Bar Options" justifyH="CENTER">
 							<color r="1" g="1" b="1"/>
 							<Size>
 								<AbsDimension x="160" y="10" />
@@ -289,7 +289,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 							</Anchors>
 							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
 						</Texture>
-						<FontString name="JDHPOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Target Side Colors" justifyH="CENTER">
+						<FontString name="InsightOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Target Side Colors" justifyH="CENTER">
 							<color r="1" g="1" b="1"/>
 							<Size>
 								<AbsDimension x="160" y="10" />
@@ -333,7 +333,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 							</Anchors>
 							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
 						</Texture>
-						<FontString name="JDHPOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Target Bar Options" justifyH="CENTER">
+						<FontString name="InsightOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Target Bar Options" justifyH="CENTER">
 							<color r="1" g="1" b="1"/>
 							<Size>
 								<AbsDimension x="160" y="10" />
@@ -378,7 +378,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 							</Anchors>
 							<TexCoords left="0.8046875" right="1" top="0" bottom="1"/>
 						</Texture>
-						<FontString name="JDHPOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Miscellaneous" justifyH="CENTER">
+						<FontString name="InsightOptionsDisplayTargetSideOptions" inherits="GameFontNormalSmall" text="Miscellaneous" justifyH="CENTER">
 							<color r="1" g="1" b="1"/>
 							<Size>
 								<AbsDimension x="335" y="10" />
@@ -397,7 +397,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
 			<!-- Player Side -->
 
-            <CheckButton name="JDHPOptionsDisplayPlayerSideHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerSideHealth" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
@@ -410,7 +410,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSHP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PSHP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -425,17 +425,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayPlayerSideMana" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerSideMana" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideHealth">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayPlayerSideHealth">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSMP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PSMP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -450,17 +450,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayPlayerSideMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerSideMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideMana">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayPlayerSideMana">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSMAXES">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PSMAXES">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -475,17 +475,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayPlayerSideMissing" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerSideMissing" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideMaxes">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayPlayerSideMaxes">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSMISSING">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PSMISSING">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -500,17 +500,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayPlayerSideHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerSideHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideMissing">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayPlayerSideMissing">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSHPPER">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PSHPPER">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -525,17 +525,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayPlayerSideManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerSideManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideHealthPer">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayPlayerSideHealthPer">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSMPPER">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PSMPPER">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -553,7 +553,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
 			<!-- Player Bar -->
 
-            <CheckButton name="JDHPOptionsDisplayPlayerBarHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerBarHealth" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
@@ -566,7 +566,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBHP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PBHP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -581,17 +581,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayPlayerBarMana" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerBarMana" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerBarHealth">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayPlayerBarHealth">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBMP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PBMP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -606,17 +606,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayPlayerBarMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerBarMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerBarMana">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayPlayerBarMana">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBMAXES">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PBMAXES">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -631,17 +631,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayPlayerBarMissing" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerBarMissing" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerBarMaxes">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayPlayerBarMaxes">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBMISSING">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PBMISSING">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -656,17 +656,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayPlayerBarHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerBarHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerBarMissing">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayPlayerBarMissing">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBHPPER">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PBHPPER">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -681,17 +681,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayPlayerBarManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerBarManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerBarHealthPer">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayPlayerBarHealthPer">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PBMPPER">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PBMPPER">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -709,7 +709,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
             <!-- Player Bar Colors -->
 
-            <CheckButton name="JDHPOptionsDisplayColorPlayerHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayColorPlayerHealth" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
@@ -722,7 +722,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CPHP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_CPHP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -737,17 +737,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayColorPlayerMana" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayColorPlayerMana" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayColorPlayerHealth">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayColorPlayerHealth">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CPMP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_CPMP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -762,17 +762,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayColorPlayerHealthBar" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayColorPlayerHealthBar" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayColorPlayerMana">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayColorPlayerMana">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CPHPB">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_CPHPB">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -790,7 +790,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
 			<!-- Target Side -->
 
-            <CheckButton name="JDHPOptionsDisplayTargetSideHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetSideHealth" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
@@ -803,7 +803,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSHP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TSHP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -818,17 +818,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayTargetSideMana" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetSideMana" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetSideHealth">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetSideHealth">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSMP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TSMP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -843,17 +843,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayTargetSideMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetSideMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetSideMana">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetSideMana">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSMAXES">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TSMAXES">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -868,17 +868,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayTargetSideMissing" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetSideMissing" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetSideMaxes">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetSideMaxes">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSMISSING">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TSMISSING">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -893,17 +893,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayTargetSideHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetSideHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetSideMissing">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetSideMissing">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSHPPER">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TSHPPER">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -918,17 +918,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayTargetSideManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetSideManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetSideHealthPer">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetSideHealthPer">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TSMPPER">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TSMPPER">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -946,7 +946,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
 			<!-- Target Bar -->
 
-            <CheckButton name="JDHPOptionsDisplayTargetBarHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetBarHealth" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
@@ -959,7 +959,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBHP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TBHP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -974,17 +974,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayTargetBarMana" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetBarMana" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetBarHealth">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetBarHealth">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBMP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TBMP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -999,17 +999,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayTargetBarMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetBarMaxes" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetBarMana">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetBarMana">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBMAXES">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TBMAXES">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1024,17 +1024,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayTargetBarMissing" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetBarMissing" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetBarMaxes">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetBarMaxes">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBMISSING">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TBMISSING">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1049,17 +1049,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayTargetBarHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetBarHealthPer" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetBarMissing">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetBarMissing">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBHPPER">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TBHPPER">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1074,17 +1074,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayTargetBarManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTargetBarManaPer" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetBarHealthPer">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetBarHealthPer">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TBMPPER">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TBMPPER">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1102,7 +1102,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
             <!-- Target Bar Colors -->
 
-            <CheckButton name="JDHPOptionsDisplayColorTargetHealth" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayColorTargetHealth" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
@@ -1115,7 +1115,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CTHP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_CTHP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1130,17 +1130,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayColorTargetMana" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayColorTargetMana" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayColorTargetHealth">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayColorTargetHealth">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CTMP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_CTMP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1155,17 +1155,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayColorTargetHealthBar" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayColorTargetHealthBar" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayColorTargetMana">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayColorTargetMana">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CTHPB">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_CTHPB">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1183,7 +1183,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
             <!-- Miscellaneous 2 -->
 
-            <CheckButton name="JDHPOptionsDisplayMoveTarget" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayMoveTarget" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
@@ -1196,9 +1196,9 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Scripts>
 					<OnUpdate>
-						if (JDHPOptionsDisplayMoveTarget:GetChecked() == 1) then
-							JDHPOptionsDisplayTargetFrameVertPosTemp = 0 - JDHPOptionsDisplayTargetFrameVertPos:GetValue();
-							TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", JDHPOptionsDisplayTargetFramePos:GetValue(), JDHPOptionsDisplayTargetFrameVertPosTemp);
+						if (InsightOptionsDisplayMoveTarget:GetChecked() == 1) then
+							InsightOptionsDisplayTargetFrameVertPosTemp = 0 - InsightOptionsDisplayTargetFrameVertPos:GetValue();
+							TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", InsightOptionsDisplayTargetFramePos:GetValue(), InsightOptionsDisplayTargetFrameVertPosTemp);
 						else
 							TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 250, -4);
 						end
@@ -1206,7 +1206,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Scripts>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_MOVETARGET">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_MOVETARGET">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1221,7 +1221,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <Slider name="JDHPOptionsDisplayTargetFramePos" inherits="OptionsSliderTemplate" checked="false">
+            <Slider name="InsightOptionsDisplayTargetFramePos" inherits="OptionsSliderTemplate" checked="false">
                 <Size>
                     <AbsDimension x="165" y="20"/>
                 </Size>
@@ -1234,22 +1234,22 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
 				<Scripts>
 					<OnLoad>
-						JDHPOptionsDisplayTargetFramePosHigh:SetText("350");
-						JDHPOptionsDisplayTargetFramePosLow:SetText("250");
-						JDHPOptionsDisplayTargetFramePos:SetMinMaxValues(250,350);
-						JDHPOptionsDisplayTargetFramePos:SetValueStep(5);
+						InsightOptionsDisplayTargetFramePosHigh:SetText("350");
+						InsightOptionsDisplayTargetFramePosLow:SetText("250");
+						InsightOptionsDisplayTargetFramePos:SetMinMaxValues(250,350);
+						InsightOptionsDisplayTargetFramePos:SetValueStep(5);
 					</OnLoad>
 					<OnValueChanged>
-						if (JDHPOptionsDisplayMoveTarget:GetChecked() == 1) then
-							JDHPOptionsDisplayTargetFrameVertPosTemp = 0 - JDHPOptionsDisplayTargetFrameVertPos:GetValue();
-							TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", JDHPOptionsDisplayTargetFramePos:GetValue(), JDHPOptionsDisplayTargetFrameVertPosTemp);
+						if (InsightOptionsDisplayMoveTarget:GetChecked() == 1) then
+							InsightOptionsDisplayTargetFrameVertPosTemp = 0 - InsightOptionsDisplayTargetFrameVertPos:GetValue();
+							TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", InsightOptionsDisplayTargetFramePos:GetValue(), InsightOptionsDisplayTargetFrameVertPosTemp);
 						end
-						JDHPOptionsDisplayTargetFramePosCurr:SetText(JDHPOptionsDisplayTargetFramePos:GetValue());
+						InsightOptionsDisplayTargetFramePosCurr:SetText(InsightOptionsDisplayTargetFramePos:GetValue());
 					</OnValueChanged>
 				</Scripts>
 				<Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTargetFramePosCurr" inherits="GameFontNormalSmall" text="TargetFramePos">
+                        <FontString name="InsightOptionsDisplayTargetFramePosCurr" inherits="GameFontNormalSmall" text="TargetFramePos">
                             <Anchors>
                                 <Anchor point="TOP" relativePoint="BOTTOM">
                                     <Offset>
@@ -1264,12 +1264,12 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </Slider>
-            <Slider name="JDHPOptionsDisplayTargetFrameVertPos" inherits="OptionsSliderTemplate" checked="false">
+            <Slider name="InsightOptionsDisplayTargetFrameVertPos" inherits="OptionsSliderTemplate" checked="false">
                 <Size>
                     <AbsDimension x="165" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetFramePos">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetFramePos">
 						<Offset>
 							<AbsDimension x="0" y="-15"/>
 						</Offset>
@@ -1277,23 +1277,23 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
 				<Scripts>
 					<OnLoad>
-						JDHPOptionsDisplayTargetFrameVertPosHigh:SetText("-104");
-						JDHPOptionsDisplayTargetFrameVertPosLow:SetText("21");
-						JDHPOptionsDisplayTargetFrameVertPos:SetMinMaxValues(-21,104);
-						JDHPOptionsDisplayTargetFrameVertPos:SetValueStep(1);
+						InsightOptionsDisplayTargetFrameVertPosHigh:SetText("-104");
+						InsightOptionsDisplayTargetFrameVertPosLow:SetText("21");
+						InsightOptionsDisplayTargetFrameVertPos:SetMinMaxValues(-21,104);
+						InsightOptionsDisplayTargetFrameVertPos:SetValueStep(1);
 					</OnLoad>
 					<OnValueChanged>
-						if (JDHPOptionsDisplayMoveTarget:GetChecked() == 1) then
-							JDHPOptionsDisplayTargetFrameVertPosTemp = 0 - JDHPOptionsDisplayTargetFrameVertPos:GetValue();
-							TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", JDHPOptionsDisplayTargetFramePos:GetValue(), JDHPOptionsDisplayTargetFrameVertPosTemp);
+						if (InsightOptionsDisplayMoveTarget:GetChecked() == 1) then
+							InsightOptionsDisplayTargetFrameVertPosTemp = 0 - InsightOptionsDisplayTargetFrameVertPos:GetValue();
+							TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", InsightOptionsDisplayTargetFramePos:GetValue(), InsightOptionsDisplayTargetFrameVertPosTemp);
 						end
-						JDHPOptionsDisplayTargetFrameVertPosTemp = 0 - JDHPOptionsDisplayTargetFrameVertPos:GetValue();
-						JDHPOptionsDisplayTargetFrameVertPosCurr:SetText(JDHPOptionsDisplayTargetFrameVertPosTemp);
+						InsightOptionsDisplayTargetFrameVertPosTemp = 0 - InsightOptionsDisplayTargetFrameVertPos:GetValue();
+						InsightOptionsDisplayTargetFrameVertPosCurr:SetText(InsightOptionsDisplayTargetFrameVertPosTemp);
 					</OnValueChanged>
 				</Scripts>
 				<Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTargetFrameVertPosCurr" inherits="GameFontNormalSmall" text="TargetFramePos">
+                        <FontString name="InsightOptionsDisplayTargetFrameVertPosCurr" inherits="GameFontNormalSmall" text="TargetFramePos">
                             <Anchors>
                                 <Anchor point="TOP" relativePoint="BOTTOM">
                                     <Offset>
@@ -1308,12 +1308,12 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </Slider>
-            <CheckButton name="JDHPOptionsDisplayPlayerSideCharges" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayPlayerSideCharges" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTargetFrameVertPos">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTargetFrameVertPos">
                         <Offset>
                             <AbsDimension x="0" y="-15"/>
                         </Offset>
@@ -1321,7 +1321,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_PSCHARGES">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_PSCHARGES">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1336,17 +1336,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayEnergyPercent" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayEnergyPercent" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayPlayerSideCharges">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayPlayerSideCharges">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_ENRGPER">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_ENRGPER">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1361,17 +1361,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayRagePercent" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayRagePercent" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayEnergyPercent">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayEnergyPercent">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_RAGEPER">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_RAGEPER">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1389,7 +1389,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
             <!-- Miscellaneous -->
 
-            <CheckButton name="JDHPOptionsDisplayAutohideExp" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayAutohideExp" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
@@ -1402,7 +1402,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_HIDEEXP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_HIDEEXP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1417,12 +1417,12 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayExp" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayExp" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayAutohideExp">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayAutohideExp">
 						<Offset>
 							<AbsDimension x="0" y="0"/>
 						</Offset>
@@ -1430,7 +1430,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_EXP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_EXP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1445,17 +1445,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayTnl" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayTnl" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayExp">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayExp">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_TNL">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_TNL">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1470,12 +1470,12 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayBarExp" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayBarExp" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayTnl">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayTnl">
                                     <Offset>
                                         <AbsDimension x="0" y="0"/>
                                     </Offset>
@@ -1483,7 +1483,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_BAREXP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_BAREXP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1498,17 +1498,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayActualExp" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayActualExp" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayBarExp">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayBarExp">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_ACTUALEXP">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_ACTUALEXP">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1523,17 +1523,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayForceDecimals" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayForceDecimals" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayActualExp">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayActualExp">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_FORCEDECIMALS">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_FORCEDECIMALS">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1548,17 +1548,17 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
                     </Layer>
                 </Layers>
             </CheckButton>
-            <CheckButton name="JDHPOptionsDisplayColorPlayerName" inherits="OptionsCheckButtonTemplate" checked="false">
+            <CheckButton name="InsightOptionsDisplayColorPlayerName" inherits="OptionsCheckButtonTemplate" checked="false">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="JDHPOptionsDisplayMoveExp">
+                    <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="InsightOptionsDisplayMoveExp">
                     </Anchor>
                 </Anchors>
                 <Layers>
                     <Layer>
-                        <FontString name="JDHPOptionsDisplayTitle" inherits="GameFontNormalSmall" text="JDHP_OPTIONS_CPNAME">
+                        <FontString name="InsightOptionsDisplayTitle" inherits="GameFontNormalSmall" text="INSIGHT_OPTIONS_CPNAME">
                             <Anchors>
                                 <Anchor point="LEFT" relativePoint="RIGHT">
                                     <Offset>
@@ -1576,21 +1576,21 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
             <!-- Save/Close -->
 
-            <Button name="JDHPOptionsDisplayCloseButton" inherits="UIPanelCloseButton">
+            <Button name="InsightOptionsDisplayCloseButton" inherits="UIPanelCloseButton">
 				<Anchors>
-					<Anchor point="TOPRIGHT" relativeTo="JDHPOptionsDisplay" relativePoint="TOPRIGHT">
+					<Anchor point="TOPRIGHT" relativeTo="InsightOptionsDisplay" relativePoint="TOPRIGHT">
 						<Offset>
 							<AbsDimension x="-6" y="-6"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
 			</Button>
-			<Button name="JDHPOptionsDisplayCancelButton" inherits="UIPanelButtonTemplate" text="Cancel">
+			<Button name="InsightOptionsDisplayCancelButton" inherits="UIPanelButtonTemplate" text="Cancel">
 				<Size>
 					<AbsDimension x="77" y="21"/>
 				</Size>
 				<Anchors>
-					<Anchor point="BOTTOMRIGHT" relativeTo="JDHPOptionsDisplay" relativePoint="BOTTOMRIGHT">
+					<Anchor point="BOTTOMRIGHT" relativeTo="InsightOptionsDisplay" relativePoint="BOTTOMRIGHT">
 						<Offset>
 							<AbsDimension x="-19" y="19"/>
 						</Offset>
@@ -1602,12 +1602,12 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Button name="JDHPOptionsDisplaySaveButton" inherits="UIPanelButtonTemplate" text="Save">
+			<Button name="InsightOptionsDisplaySaveButton" inherits="UIPanelButtonTemplate" text="Save">
 				<Size>
 					<AbsDimension x="77" y="21"/>
 				</Size>
 				<Anchors>
-					<Anchor point="RIGHT" relativeTo="JDHPOptionsDisplayCancelButton" relativePoint="LEFT">
+					<Anchor point="RIGHT" relativeTo="InsightOptionsDisplayCancelButton" relativePoint="LEFT">
 						<Offset>
 							<AbsDimension x="-7" y="0"/>
 						</Offset>
@@ -1616,7 +1616,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 				<Scripts>
 					<OnClick>
 					    self:GetParent():Hide();
-					    JDHP_OptionsFrame_Save();
+					    Insight_OptionsFrame_Save();
 					</OnClick>
 				</Scripts>
 			</Button>
