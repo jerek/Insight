@@ -78,29 +78,29 @@ if (RagePercent == nil) then RagePercent = 1; end   -- Allow Rage as a percentil
 -- ** ONLOAD SETUP ** --
 
 function Insight_Log(message)
-    DEFAULT_CHAT_FRAME:AddMessage(message, 1, 1, 1);
+	DEFAULT_CHAT_FRAME:AddMessage(message, 1, 1, 1);
 end
 
 function Insight_NumberFormat(num)
-    local result;
+	local result;
 	if num <= 9999 then
 		result = num
 	elseif num >= 1000000 then
-	    if num < 20000000 or ForceDecimals == 1 then
-            result = format("%.1f M", num/1000000)
-            result = string.gsub(result, "\.0 M", " M");
-        else
-            result = format("%d M", num/1000000)
-        end
+		if num < 20000000 or ForceDecimals == 1 then
+			result = format("%.1f M", num/1000000)
+			result = string.gsub(result, "\.0 M", " M");
+		else
+			result = format("%d M", num/1000000)
+		end
 	elseif num >= 10000 then
-	    if num < 20000 or ForceDecimals == 1 then
-            result = format("%.1f K", num/1000)
-            result = string.gsub(result, "\.0 K", " K");
-	    else
-            result = format("%d K", num/1000)
-	    end
+		if num < 20000 or ForceDecimals == 1 then
+			result = format("%.1f K", num/1000)
+			result = string.gsub(result, "\.0 K", " K");
+		else
+			result = format("%d K", num/1000)
+		end
 	end
-    return result;
+	return result;
 end
 
 function Insight_PlayerFrameOnLoad()
@@ -118,35 +118,35 @@ function Insight_PlayerFrameOnLoad()
 	SLASH_INSIGHTOPTIONS3 = "/insighto";
 	SLASH_INSIGHTOPTIONS4 = "/jdhpo";
 
-    local blankFrame = CreateFrame('Frame');
+	local blankFrame = CreateFrame('Frame');
 	blankFrame:RegisterEvent("PET_BAR_UPDATE");
-    blankFrame:RegisterEvent("PET_STABLE_UPDATE");
-    blankFrame:RegisterEvent("PET_UI_UPDATE");
+	blankFrame:RegisterEvent("PET_STABLE_UPDATE");
+	blankFrame:RegisterEvent("PET_UI_UPDATE");
 
-    blankFrame:RegisterEvent("PLAYER_ALIVE");
-    blankFrame:RegisterEvent("PLAYER_DEAD");
+	blankFrame:RegisterEvent("PLAYER_ALIVE");
+	blankFrame:RegisterEvent("PLAYER_DEAD");
 
-    blankFrame:RegisterEvent("PLAYER_ENTER_COMBAT");
-    blankFrame:RegisterEvent("PLAYER_LEAVE_COMBAT");
-    blankFrame:RegisterEvent("PLAYER_LEVEL_UP");
-    blankFrame:RegisterEvent("PLAYER_TARGET_CHANGED");
-    blankFrame:RegisterEvent("PLAYER_XP_UPDATE");
-    blankFrame:RegisterEvent("PLAYER_TOTEM_UPDATE");
+	blankFrame:RegisterEvent("PLAYER_ENTER_COMBAT");
+	blankFrame:RegisterEvent("PLAYER_LEAVE_COMBAT");
+	blankFrame:RegisterEvent("PLAYER_LEVEL_UP");
+	blankFrame:RegisterEvent("PLAYER_TARGET_CHANGED");
+	blankFrame:RegisterEvent("PLAYER_XP_UPDATE");
+	blankFrame:RegisterEvent("PLAYER_TOTEM_UPDATE");
 
-    blankFrame:RegisterEvent("UNIT_AURA");
-    blankFrame:RegisterEvent("UNIT_DISPLAYPOWER");
-    blankFrame:RegisterEvent("UNIT_HEALTH");
-    blankFrame:RegisterEvent("UNIT_MAXPOWER");
-    -- blankFrame:RegisterEvent("UNIT_MODEL_CHANGED");
-    blankFrame:RegisterEvent("UNIT_POWER");
+	blankFrame:RegisterEvent("UNIT_AURA");
+	blankFrame:RegisterEvent("UNIT_DISPLAYPOWER");
+	blankFrame:RegisterEvent("UNIT_HEALTH");
+	blankFrame:RegisterEvent("UNIT_MAXPOWER");
+	-- blankFrame:RegisterEvent("UNIT_MODEL_CHANGED");
+	blankFrame:RegisterEvent("UNIT_POWER");
 
-    blankFrame:RegisterEvent("UPDATE_SHAPESHIFT_FORM");
-    blankFrame:RegisterEvent("UPDATE_EXHAUSTION");
-    blankFrame:RegisterEvent("VARIABLES_LOADED");
+	blankFrame:RegisterEvent("UPDATE_SHAPESHIFT_FORM");
+	blankFrame:RegisterEvent("UPDATE_EXHAUSTION");
+	blankFrame:RegisterEvent("VARIABLES_LOADED");
 
-    blankFrame:SetScript("OnEvent", function(self, event, eventArg)
-        Insight_PlayerFrameEventHandler(event, eventArg);
-    end);
+	blankFrame:SetScript("OnEvent", function(self, event, eventArg)
+		Insight_PlayerFrameEventHandler(event, eventArg);
+	end);
 end
 
 -- ** ONEVENT HANDLERS ** --
@@ -154,21 +154,21 @@ end
 function Insight_PlayerFrameEventHandler (event, eventArg)
 	if (event == "UNIT_POWER" or event == "UNIT_MODEL_CHANGED" or event == "UNIT_DISPLAYPOWER") then
 		if (eventArg == "player") then
-            Insight_RenderUnitValues('player', 'mana');
+			Insight_RenderUnitValues('player', 'mana');
 			Insight_RenderPlayerCharges();
 		elseif (eventArg == "target") then
-            Insight_RenderUnitValues('target', 'mana');
+			Insight_RenderUnitValues('target', 'mana');
 		end
 	elseif (event == "UNIT_HEALTH") then
 		if (eventArg == "player") then
 			Insight_RenderUnitValues('player', 'health');
 		elseif (eventArg == "target") then
-            Insight_RenderUnitValues('target', 'health');
+			Insight_RenderUnitValues('target', 'health');
 		end
 	elseif (event == "PLAYER_TARGET_CHANGED") then
 		Insight_RenderPlayerCharges();
-        Insight_RenderUnitValues('target', 'health');
-        Insight_RenderUnitValues('target', 'mana');
+		Insight_RenderUnitValues('target', 'health');
+		Insight_RenderUnitValues('target', 'mana');
 	elseif(event == "PLAYER_XP_UPDATE" or event == "UPDATE_EXHAUSTION" or event == "PLAYER_LEVEL_UP") then
 		Insight_RenderPlayerExp();
 	elseif (event == "PLAYER_ENTER_COMBAT" or event == "PLAYER_LEAVE_COMBAT") then
@@ -176,19 +176,19 @@ function Insight_PlayerFrameEventHandler (event, eventArg)
 	elseif (event == "UNIT_AURA" or event == "PET_BAR_UPDATE" or event == "PET_UI_UPDATE" or event == "PLAYER_TOTEM_UPDATE" or event == "UPDATE_SHAPESHIFT_FORM") then
 		Insight_RenderPlayerExp();
 	elseif (event == "PLAYER_ALIVE" or event == "PLAYER_DEAD") then
-        Insight_RenderUnitValues('player', 'health');
-        Insight_RenderUnitValues('player', 'mana');
+		Insight_RenderUnitValues('player', 'health');
+		Insight_RenderUnitValues('player', 'mana');
 		Insight_RenderPlayerCharges();
 		Insight_RenderPlayerExp();
 	elseif (event == "PLAYER_ENTERING_WORLD") then
 		Insight_RenderPlayerCharges();
-        Insight_RenderUnitValues('player', 'health');
-        Insight_RenderUnitValues('player', 'mana');
+		Insight_RenderUnitValues('player', 'health');
+		Insight_RenderUnitValues('player', 'mana');
 		Insight_RenderPlayerExp();
 	elseif (event == "VARIABLES_LOADED") then
 		Insight_RenderPlayerCharges();
-        Insight_RenderUnitValues('player', 'health');
-        Insight_RenderUnitValues('player', 'mana');
+		Insight_RenderUnitValues('player', 'health');
+		Insight_RenderUnitValues('player', 'mana');
 		Insight_RenderPlayerExp();
 	end
 end
@@ -231,265 +231,265 @@ function Insight_RenderPlayerCharges()
 end
 
 function Insight_FormatValues(type, value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing)
-    local currentText = Insight_FormatCurrentValue(type, value_current, value_max, Option_AsPer, Option_ShowMissing);
-    if (currentText == '') then
-        return '';
-    end
-    return currentText .. Insight_FormatMaxValue(type, value_max, Option_AsPer, Option_ShowMaxes);
+	local currentText = Insight_FormatCurrentValue(type, value_current, value_max, Option_AsPer, Option_ShowMissing);
+	if (currentText == '') then
+		return '';
+	end
+	return currentText .. Insight_FormatMaxValue(type, value_max, Option_AsPer, Option_ShowMaxes);
 end
 
 function Insight_PercentageAllowedForThisType(type)
-    if (type ~= 'mana') then
-        return 1;
-    elseif (type == 'mana' and PlayerManaType == 1 and RagePercent == 1) then
-        return 1;
-    elseif (type == 'mana' and PlayerManaType == 3 and EnergyPercent == 1) then
-        return 1;
-    end
-    return 0;
+	if (type ~= 'mana') then
+		return 1;
+	elseif (type == 'mana' and PlayerManaType == 1 and RagePercent == 1) then
+		return 1;
+	elseif (type == 'mana' and PlayerManaType == 3 and EnergyPercent == 1) then
+		return 1;
+	end
+	return 0;
 end
 
 function Insight_FormatCurrentValue(type, value_current, value_max, Option_AsPer, Option_ShowMissing)
-    local percent = (tonumber(value_current) / tonumber(value_max)) * 100;
-    if (Option_ShowMissing == 1) then
-        local missing = value_max - value_current;
-        if (missing == 0) then
-            return '';
-        end
-        if (Option_AsPer == 1 and Insight_PercentageAllowedForThisType(type) == 1) then
-            return '-' .. ceil(100 - percent) .. '%';
-        else
-            return '-' .. Insight_NumberFormat(missing);
-        end
-    else
-        if (Option_AsPer == 1 and Insight_PercentageAllowedForThisType(type) == 1) then
-            return ceil(percent) .. '%';
-        else
-            return Insight_NumberFormat(value_current);
-        end
-    end
+	local percent = (tonumber(value_current) / tonumber(value_max)) * 100;
+	if (Option_ShowMissing == 1) then
+		local missing = value_max - value_current;
+		if (missing == 0) then
+			return '';
+		end
+		if (Option_AsPer == 1 and Insight_PercentageAllowedForThisType(type) == 1) then
+			return '-' .. ceil(100 - percent) .. '%';
+		else
+			return '-' .. Insight_NumberFormat(missing);
+		end
+	else
+		if (Option_AsPer == 1 and Insight_PercentageAllowedForThisType(type) == 1) then
+			return ceil(percent) .. '%';
+		else
+			return Insight_NumberFormat(value_current);
+		end
+	end
 end
 
 function Insight_FormatMaxValue(type, value_max, Option_AsPer, Option_ShowMaxes)
-    if (Option_ShowMaxes == 0) then
-        return '';
-    end;
+	if (Option_ShowMaxes == 0) then
+		return '';
+	end;
 
-    if (Option_AsPer == 1 and Insight_PercentageAllowedForThisType(type) == 1) then
-        return ' / 100%';
-    else
-        return ' / ' .. Insight_NumberFormat(value_max);
-    end
+	if (Option_AsPer == 1 and Insight_PercentageAllowedForThisType(type) == 1) then
+		return ' / 100%';
+	else
+		return ' / ' .. Insight_NumberFormat(value_max);
+	end
 end
 
 function Insight_UpdateText(unit, type, spot, Option_Show, TextFrame, value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing, Option_Color, Frame_Bar, status_dead)
-    if (Option_Show == 1) then
-        if (spot == 'bar') then
-            if (unit == 'player') then
-                if (type == 'health') then
-                    PlayerFrameHealthBarText:SetWidth(1);
-                elseif (type == 'mana') then
-                    PlayerFrameManaBarText:SetWidth(1);
-                end
-            elseif (unit == 'target') then
-                if (type == 'health') then
-                    TargetFrameTextureFrameHealthBarText:SetWidth(1);
-                elseif (type == 'mana') then
-                    TargetFrameTextureFrameManaBarText:SetWidth(1);
-                end
-            end
-        end
-        if (status_dead == 1) then
-            if (Option_AsPer == 1 and unit ~= 'target' and type == 'health') then
-                TextFrame:SetText('Dead');
-                if (spot == 'side') then
-                    TextFrame:SetTextColor(1, 0, 0);
-                end
-            else
-                TextFrame:SetText('');
-            end
-        else
-            TextFrame:SetText(Insight_FormatValues(type,   value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing));
-            if (type == 'health') then
-                Insight_UpdateHealthColor(spot, TextFrame, value_current, value_max, Option_Color, Frame_Bar);
-            elseif (type == 'mana') then
-                Insight_UpdateManaColor(  spot, TextFrame,                           Option_Color);
-            end
-        end
-    else
-        TextFrame:SetText("");
-        if (spot == 'bar') then
-            TextFrame:SetWidth(115);
-        end
-    end
+	if (Option_Show == 1) then
+		if (spot == 'bar') then
+			if (unit == 'player') then
+				if (type == 'health') then
+					PlayerFrameHealthBarText:SetWidth(1);
+				elseif (type == 'mana') then
+					PlayerFrameManaBarText:SetWidth(1);
+				end
+			elseif (unit == 'target') then
+				if (type == 'health') then
+					TargetFrameTextureFrameHealthBarText:SetWidth(1);
+				elseif (type == 'mana') then
+					TargetFrameTextureFrameManaBarText:SetWidth(1);
+				end
+			end
+		end
+		if (status_dead == 1) then
+			if (Option_AsPer == 1 and unit ~= 'target' and type == 'health') then
+				TextFrame:SetText('Dead');
+				if (spot == 'side') then
+					TextFrame:SetTextColor(1, 0, 0);
+				end
+			else
+				TextFrame:SetText('');
+			end
+		else
+			TextFrame:SetText(Insight_FormatValues(type,   value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing));
+			if (type == 'health') then
+				Insight_UpdateHealthColor(spot, TextFrame, value_current, value_max, Option_Color, Frame_Bar);
+			elseif (type == 'mana') then
+				Insight_UpdateManaColor(  spot, TextFrame,						   Option_Color);
+			end
+		end
+	else
+		TextFrame:SetText("");
+		if (spot == 'bar') then
+			TextFrame:SetWidth(115);
+		end
+	end
 end
 
 function Insight_UpdateHealthColor(spot, TextFrame, value_current, value_max, Option_Color, Frame_Bar)
-    local percent = (tonumber(value_current) / tonumber(value_max)) * 100;
-    if (spot == 'side') then
-        if (Option_Color == 1) then
-            if ((percent <= 100) and (percent > 75)) then
-                TextFrame:SetTextColor(0, 1, 0);
-            elseif ((percent <= 75) and (percent > 50)) then
-                TextFrame:SetTextColor(1, 1, 0);
-            elseif ((percent <= 50) and (percent > 25)) then
-                TextFrame:SetTextColor(1, 0.5, 0);
-            else
-                TextFrame:SetTextColor(1, 0, 0);
-            end
-        else
-            TextFrame:SetTextColor(0, 1, 0);
-        end
-    end
-    if (spot == 'bar') then
-        if (Option_Color == 1 and Frame_Bar ~= 0) then
-            if ((percent <= 100) and (percent > 75)) then
-                Frame_Bar:SetStatusBarColor(0, 1, 0);
-            elseif ((percent <= 75) and (percent > 50)) then
-                Frame_Bar:SetStatusBarColor(1, 1, 0);
-            elseif ((percent <= 50) and (percent > 25)) then
-                Frame_Bar:SetStatusBarColor(1, 0.5, 0);
-            else
-                Frame_Bar:SetStatusBarColor(1, 0, 0);
-            end
-        else
-            Frame_Bar:SetStatusBarColor(0, 1, 0);
-        end
-    end
+	local percent = (tonumber(value_current) / tonumber(value_max)) * 100;
+	if (spot == 'side') then
+		if (Option_Color == 1) then
+			if ((percent <= 100) and (percent > 75)) then
+				TextFrame:SetTextColor(0, 1, 0);
+			elseif ((percent <= 75) and (percent > 50)) then
+				TextFrame:SetTextColor(1, 1, 0);
+			elseif ((percent <= 50) and (percent > 25)) then
+				TextFrame:SetTextColor(1, 0.5, 0);
+			else
+				TextFrame:SetTextColor(1, 0, 0);
+			end
+		else
+			TextFrame:SetTextColor(0, 1, 0);
+		end
+	end
+	if (spot == 'bar') then
+		if (Option_Color == 1 and Frame_Bar ~= 0) then
+			if ((percent <= 100) and (percent > 75)) then
+				Frame_Bar:SetStatusBarColor(0, 1, 0);
+			elseif ((percent <= 75) and (percent > 50)) then
+				Frame_Bar:SetStatusBarColor(1, 1, 0);
+			elseif ((percent <= 50) and (percent > 25)) then
+				Frame_Bar:SetStatusBarColor(1, 0.5, 0);
+			else
+				Frame_Bar:SetStatusBarColor(1, 0, 0);
+			end
+		else
+			Frame_Bar:SetStatusBarColor(0, 1, 0);
+		end
+	end
 end
 
 function Insight_UpdateManaColor(spot, TextFrame, Option_Color)
-    if (spot == 'side') then
-        if (Option_Color == 1) then
-            if (PlayerManaType == 1) then
-                TextFrame:SetTextColor(1, 0.50, 0.50);
-            elseif (PlayerManaType == 3) then
-                TextFrame:SetTextColor(1, 1, 0);
-            else
-                TextFrame:SetTextColor(0.75, 0.75, 1);
-            end
-        else
-            TextFrame:SetTextColor(0, 1, 0);
-        end
-    end
+	if (spot == 'side') then
+		if (Option_Color == 1) then
+			if (PlayerManaType == 1) then
+				TextFrame:SetTextColor(1, 0.50, 0.50);
+			elseif (PlayerManaType == 3) then
+				TextFrame:SetTextColor(1, 1, 0);
+			else
+				TextFrame:SetTextColor(0.75, 0.75, 1);
+			end
+		else
+			TextFrame:SetTextColor(0, 1, 0);
+		end
+	end
 end
 
 function Insight_ProcessValues(unit, type)
-    if (unit == 'player') then
-        if (type == 'health') then
-            if (PlayerSideHealth == 1 or PlayerBarHealth == 1 or ColorPlayerHealthBar == 1) then
-                return 1;
-            end
-        elseif (type == 'mana') then
-            if (PlayerSideMana == 1 or PlayerBarMana == 1) then
-                return 1;
-            end
-        end
-    elseif (unit == 'target') then
-        if (type == 'health') then
-            if ((TargetSideHealth == 1 or TargetBarHealth == 1) and UnitExists("target") == 1) then
-                -- KEEPING OLD CODE FOR REFERENCE: and ((UnitIsPlayer("target") == 0) or (UnitInParty("target") or UnitInRaid("target") or UnitIsUnit("target", "pet")))
-                return 1;
-            end
-        elseif (type == 'mana') then
-            if ((TargetSideMana == 1 or TargetBarMana == 1) and UnitExists("target") == 1) then
-                return 1;
-            end
-        end
-    end
-    return 0;
+	if (unit == 'player') then
+		if (type == 'health') then
+			if (PlayerSideHealth == 1 or PlayerBarHealth == 1 or ColorPlayerHealthBar == 1) then
+				return 1;
+			end
+		elseif (type == 'mana') then
+			if (PlayerSideMana == 1 or PlayerBarMana == 1) then
+				return 1;
+			end
+		end
+	elseif (unit == 'target') then
+		if (type == 'health') then
+			if ((TargetSideHealth == 1 or TargetBarHealth == 1) and UnitExists("target") == 1) then
+				-- KEEPING OLD CODE FOR REFERENCE: and ((UnitIsPlayer("target") == 0) or (UnitInParty("target") or UnitInRaid("target") or UnitIsUnit("target", "pet")))
+				return 1;
+			end
+		elseif (type == 'mana') then
+			if ((TargetSideMana == 1 or TargetBarMana == 1) and UnitExists("target") == 1) then
+				return 1;
+			end
+		end
+	end
+	return 0;
 end
 
 function Insight_RenderUnitValues(unit, type)
-    local TextFrame_Side, TextFrame_Bar = 0;
-    if (unit == 'player' and type == 'health') then
-        TextFrame_Side = InsightDisplay_PlayerSideHealth;
-        TextFrame_Bar  = InsightDisplay_PlayerBarHealth;
-    elseif (unit == 'player' and type == 'mana') then
-        TextFrame_Side = InsightDisplay_PlayerSideMana;
-        TextFrame_Bar  = InsightDisplay_PlayerBarMana;
-    elseif (unit == 'target' and type == 'health') then
-        TextFrame_Side = InsightDisplay_TargetSideHealth;
-        TextFrame_Bar  = InsightDisplay_TargetBarHealth;
-    elseif (unit == 'target' and type == 'mana') then
-        TextFrame_Side = InsightDisplay_TargetSideMana;
-        TextFrame_Bar  = InsightDisplay_TargetBarMana;
-    end
+	local TextFrame_Side, TextFrame_Bar = 0;
+	if (unit == 'player' and type == 'health') then
+		TextFrame_Side = InsightDisplay_PlayerSideHealth;
+		TextFrame_Bar  = InsightDisplay_PlayerBarHealth;
+	elseif (unit == 'player' and type == 'mana') then
+		TextFrame_Side = InsightDisplay_PlayerSideMana;
+		TextFrame_Bar  = InsightDisplay_PlayerBarMana;
+	elseif (unit == 'target' and type == 'health') then
+		TextFrame_Side = InsightDisplay_TargetSideHealth;
+		TextFrame_Bar  = InsightDisplay_TargetBarHealth;
+	elseif (unit == 'target' and type == 'mana') then
+		TextFrame_Side = InsightDisplay_TargetSideMana;
+		TextFrame_Bar  = InsightDisplay_TargetBarMana;
+	end
 	if (Insight_ProcessValues(unit, type) == 1) then
-	    if (unit == 'target') then
-            if (MoveTarget == 1) then
-                TargetFrameVertPosTemp = 0 - TargetFrameVertPos;
-                TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", TargetFramePos, TargetFrameVertPosTemp);
-            else
-                TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 250, -4);
-            end
-	    end
-	    -- situational variables
-        local value_current, value_max = 0;
-        local status_dead = UnitIsDeadOrGhost(unit);
-        -- Options and Frames
-		local Option_Side_Show, Option_Side_AsPer, Option_Side_ShowMaxes, Option_Side_ShowMissing, Option_Side_Color           = 0;
+		if (unit == 'target') then
+			if (MoveTarget == 1) then
+				TargetFrameVertPosTemp = 0 - TargetFrameVertPos;
+				TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", TargetFramePos, TargetFrameVertPosTemp);
+			else
+				TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 250, -4);
+			end
+		end
+		-- situational variables
+		local value_current, value_max = 0;
+		local status_dead = UnitIsDeadOrGhost(unit);
+		-- Options and Frames
+		local Option_Side_Show, Option_Side_AsPer, Option_Side_ShowMaxes, Option_Side_ShowMissing, Option_Side_Color		   = 0;
 		local Option_Bar_Show,  Option_Bar_AsPer,  Option_Bar_ShowMaxes,  Option_Bar_ShowMissing,  Option_Bar_Color, Frame_Bar = 0;
 
-        if (unit == 'player') then
-            Option_Side_ShowMaxes = PlayerSideMaxes;
-            Option_Side_ShowMissing = PlayerSideMissing;
-            Option_Bar_ShowMaxes = PlayerBarMaxes;
-            Option_Bar_ShowMissing = PlayerBarMissing;
-        elseif (unit == 'target') then
-            Option_Side_ShowMaxes = TargetSideMaxes;
-            Option_Side_ShowMissing = TargetSideMissing;
-            Option_Bar_ShowMaxes = TargetBarMaxes;
-            Option_Bar_ShowMissing = TargetBarMissing;
-        end
+		if (unit == 'player') then
+			Option_Side_ShowMaxes = PlayerSideMaxes;
+			Option_Side_ShowMissing = PlayerSideMissing;
+			Option_Bar_ShowMaxes = PlayerBarMaxes;
+			Option_Bar_ShowMissing = PlayerBarMissing;
+		elseif (unit == 'target') then
+			Option_Side_ShowMaxes = TargetSideMaxes;
+			Option_Side_ShowMissing = TargetSideMissing;
+			Option_Bar_ShowMaxes = TargetBarMaxes;
+			Option_Bar_ShowMissing = TargetBarMissing;
+		end
 		if (type == 'health') then
-            value_current = UnitHealth(unit);
-            value_max = UnitHealthMax(unit);
+			value_current = UnitHealth(unit);
+			value_max = UnitHealthMax(unit);
 
-            if (unit == 'player') then
-                Option_Side_Show = PlayerSideHealth;
-                Option_Side_AsPer = PlayerSideHealthPer;
-                Option_Side_Color = ColorPlayerHealth;
-                Option_Bar_Show = PlayerBarHealth;
-                Option_Bar_AsPer = PlayerBarHealthPer;
-                Option_Bar_Color = ColorPlayerHealthBar;
-                Frame_Bar = PlayerFrameHealthBar;
-            elseif (unit == 'target') then
-                Option_Side_Show = TargetSideHealth;
-                Option_Side_AsPer = TargetSideHealthPer;
-                Option_Side_Color = ColorTargetHealth;
-                Option_Bar_Show = TargetBarHealth;
-                Option_Bar_AsPer = TargetBarHealthPer;
-                Option_Bar_Color = ColorTargetHealthBar;
-                Frame_Bar = TargetFrameHealthBar;
-            end
-        elseif (type == 'mana') then
-            value_current = UnitMana(unit);
-            value_max = UnitManaMax(unit);
-            PlayerManaType = UnitPowerType(unit); -- 0 = mana; 1 = rage; 2 = focus; 3 = energy; 4 = happiness
+			if (unit == 'player') then
+				Option_Side_Show = PlayerSideHealth;
+				Option_Side_AsPer = PlayerSideHealthPer;
+				Option_Side_Color = ColorPlayerHealth;
+				Option_Bar_Show = PlayerBarHealth;
+				Option_Bar_AsPer = PlayerBarHealthPer;
+				Option_Bar_Color = ColorPlayerHealthBar;
+				Frame_Bar = PlayerFrameHealthBar;
+			elseif (unit == 'target') then
+				Option_Side_Show = TargetSideHealth;
+				Option_Side_AsPer = TargetSideHealthPer;
+				Option_Side_Color = ColorTargetHealth;
+				Option_Bar_Show = TargetBarHealth;
+				Option_Bar_AsPer = TargetBarHealthPer;
+				Option_Bar_Color = ColorTargetHealthBar;
+				Frame_Bar = TargetFrameHealthBar;
+			end
+		elseif (type == 'mana') then
+			value_current = UnitMana(unit);
+			value_max = UnitManaMax(unit);
+			PlayerManaType = UnitPowerType(unit); -- 0 = mana; 1 = rage; 2 = focus; 3 = energy; 4 = happiness
 
-            if (unit == 'player') then
-                Option_Side_Show = PlayerSideMana;
-                Option_Side_AsPer = PlayerSideManaPer;
-                Option_Side_Color = ColorPlayerMana;
-                Option_Bar_Show = PlayerBarMana;
-                Option_Bar_AsPer = PlayerBarManaPer;
-                Option_Bar_Color = ColorPlayerManaBar;
-                Frame_Bar = PlayerFrameManaBar;
-            elseif (unit == 'target') then
-                Option_Side_Show = TargetSideMana;
-                Option_Side_AsPer = TargetSideManaPer;
-                Option_Side_Color = ColorTargetMana;
-                Option_Bar_Show = TargetBarMana;
-                Option_Bar_AsPer = TargetBarManaPer;
-                Option_Bar_Color = ColorTargetManaBar;
-                Frame_Bar = TargetFrameManaBar;
-            end
+			if (unit == 'player') then
+				Option_Side_Show = PlayerSideMana;
+				Option_Side_AsPer = PlayerSideManaPer;
+				Option_Side_Color = ColorPlayerMana;
+				Option_Bar_Show = PlayerBarMana;
+				Option_Bar_AsPer = PlayerBarManaPer;
+				Option_Bar_Color = ColorPlayerManaBar;
+				Frame_Bar = PlayerFrameManaBar;
+			elseif (unit == 'target') then
+				Option_Side_Show = TargetSideMana;
+				Option_Side_AsPer = TargetSideManaPer;
+				Option_Side_Color = ColorTargetMana;
+				Option_Bar_Show = TargetBarMana;
+				Option_Bar_AsPer = TargetBarManaPer;
+				Option_Bar_Color = ColorTargetManaBar;
+				Frame_Bar = TargetFrameManaBar;
+			end
 		end
 
-        Insight_UpdateText(unit, type, 'side', Option_Side_Show, TextFrame_Side, value_current, value_max, Option_Side_AsPer, Option_Side_ShowMaxes, Option_Side_ShowMissing, Option_Side_Color, 0,         status_dead);
-        Insight_UpdateText(unit, type, 'bar',  Option_Bar_Show,  TextFrame_Bar,  value_current, value_max, Option_Bar_AsPer,  Option_Bar_ShowMaxes,  Option_Bar_ShowMissing,  Option_Bar_Color,  Frame_Bar, status_dead);
-    else
+		Insight_UpdateText(unit, type, 'side', Option_Side_Show, TextFrame_Side, value_current, value_max, Option_Side_AsPer, Option_Side_ShowMaxes, Option_Side_ShowMissing, Option_Side_Color, 0,		 status_dead);
+		Insight_UpdateText(unit, type, 'bar',  Option_Bar_Show,  TextFrame_Bar,  value_current, value_max, Option_Bar_AsPer,  Option_Bar_ShowMaxes,  Option_Bar_ShowMissing,  Option_Bar_Color,  Frame_Bar, status_dead);
+	else
 		TextFrame_Side:SetText("");
 	end
 end
@@ -511,7 +511,7 @@ function Insight_RenderPlayerExp()
 		local nextXPFormatted = Insight_NumberFormat(nextXP);
 		local tnlXPFormatted = Insight_NumberFormat(tnlXP);
 
-        Insight_AdjustExpPlacement();
+		Insight_AdjustExpPlacement();
 
 		if (Exp == 1 and (BarExp == 1 or ActualExp == 1)) then
 			if(restXP == nil) then
@@ -586,60 +586,60 @@ end
 -- ** MOVE EXP/TNL WITH PET BUFFS ** --
 
 function Insight_AdjustExpPlacement()
-    local placementType = false;
-    if (HasPetUI() == 1) then
-        placementType = 'pet';
-    else
-        placementType = UnitClass('player');
-    end
+	local placementType = false;
+	if (HasPetUI() == 1) then
+		placementType = 'pet';
+	else
+		placementType = UnitClass('player');
+	end
 
-    local x = 105;
-    local y = -75;
-    -- FIXME: TODO: Druids and Shaman
-    if (placementType == 'pet') then
-        x = 125;
-        y = -110;
-    elseif (placementType == 'Monk') then
-        y = -100;
-    elseif (placementType == 'Death Knight') then
-        y = -95;
-    elseif (placementType == 'Priest') then
-        local currentSpec = GetSpecialization()
-        if (currentSpec) then
-            local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
-            if (currentSpecName == 'Shadow') then
-                y = -104;
-            end
-        end
-    elseif (placementType == 'Druid') then
-        local currentSpec = GetSpecialization()
-        if (currentSpec) then
-            local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
-            if (currentSpecName == 'Balance') then
-                y = -100;
-            end
-        end
-        local form = GetShapeshiftForm();
-        if (form == 1 or form == 3) then -- Bear or Cat
-            y = -87;
-        elseif (form == 2 or form == 4 or form == 6) then -- Aquatic, Travel, or Flight
-            y = -75;
-        end
-    elseif (placementType == 'Shaman') then
-        if (select(1, GetTotemInfo(1)) == true or select(1, GetTotemInfo(2)) == true or select(1, GetTotemInfo(3)) == true or select(1, GetTotemInfo(4)) == true) then
-            y = -113;
-        end
-    elseif (placementType == 'Warlock') then
-        local currentSpec = GetSpecialization()
-        if (currentSpec) then
-            local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
-            if (currentSpecName and currentSpecName ~= 'None') then
-                y = -110;
-            end
-        end
-    elseif (placementType == 'Paladin') then
-        y = -107;
-    end
+	local x = 105;
+	local y = -75;
+	-- FIXME: TODO: Druids and Shaman
+	if (placementType == 'pet') then
+		x = 125;
+		y = -110;
+	elseif (placementType == 'Monk') then
+		y = -100;
+	elseif (placementType == 'Death Knight') then
+		y = -95;
+	elseif (placementType == 'Priest') then
+		local currentSpec = GetSpecialization()
+		if (currentSpec) then
+			local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
+			if (currentSpecName == 'Shadow') then
+				y = -104;
+			end
+		end
+	elseif (placementType == 'Druid') then
+		local currentSpec = GetSpecialization()
+		if (currentSpec) then
+			local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
+			if (currentSpecName == 'Balance') then
+				y = -100;
+			end
+		end
+		local form = GetShapeshiftForm();
+		if (form == 1 or form == 3) then -- Bear or Cat
+			y = -87;
+		elseif (form == 2 or form == 4 or form == 6) then -- Aquatic, Travel, or Flight
+			y = -75;
+		end
+	elseif (placementType == 'Shaman') then
+		if (select(1, GetTotemInfo(1)) == true or select(1, GetTotemInfo(2)) == true or select(1, GetTotemInfo(3)) == true or select(1, GetTotemInfo(4)) == true) then
+			y = -113;
+		end
+	elseif (placementType == 'Warlock') then
+		local currentSpec = GetSpecialization()
+		if (currentSpec) then
+			local currentSpecName = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
+			if (currentSpecName and currentSpecName ~= 'None') then
+				y = -110;
+			end
+		end
+	elseif (placementType == 'Paladin') then
+		y = -107;
+	end
 	InsightDisplay_PlayerExp:SetPoint('LEFT', 'PlayerFrame', 'TOPLEFT', x, y)
 	InsightDisplay_PlayerTnl:SetPoint('LEFT', 'PlayerFrame', 'TOPLEFT', x, y - 11)
 end
@@ -697,9 +697,9 @@ end
 
 function Insight_SlashHandler(msg)
 	-- if (msg == "o" or msg == "options") then
-    InsightOptionsDisplay:Show();
-    DEFAULT_CHAT_FRAME:AddMessage(INSIGHT_SLASH_INSIGHT0, 1, 1, 0);
-    DEFAULT_CHAT_FRAME:AddMessage(INSIGHT_SLASH_INSIGHT1, 1, 1, 0);
-    DEFAULT_CHAT_FRAME:AddMessage(INSIGHT_SLASH_INSIGHT2, 1, .65, 0);
-    DEFAULT_CHAT_FRAME:AddMessage(INSIGHT_SLASH_INSIGHT3, 1, .65, 0);
+	InsightOptionsDisplay:Show();
+	DEFAULT_CHAT_FRAME:AddMessage(INSIGHT_SLASH_INSIGHT0, 1, 1, 0);
+	DEFAULT_CHAT_FRAME:AddMessage(INSIGHT_SLASH_INSIGHT1, 1, 1, 0);
+	DEFAULT_CHAT_FRAME:AddMessage(INSIGHT_SLASH_INSIGHT2, 1, .65, 0);
+	DEFAULT_CHAT_FRAME:AddMessage(INSIGHT_SLASH_INSIGHT3, 1, .65, 0);
 end
