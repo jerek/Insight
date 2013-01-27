@@ -154,21 +154,21 @@ end
 function Insight_PlayerFrameEventHandler (event, eventArg)
 	if (event == "UNIT_POWER" or event == "UNIT_MODEL_CHANGED" or event == "UNIT_DISPLAYPOWER") then
 		if (eventArg == "player") then
-			Insight_RenderPlayerMana();
+            Insight_RenderUnitValues('player', 'mana');
 			Insight_RenderPlayerCharges();
 		elseif (eventArg == "target") then
-			Insight_RenderTargetMana();
+            Insight_RenderUnitValues('target', 'mana');
 		end
 	elseif (event == "UNIT_HEALTH") then
 		if (eventArg == "player") then
-			Insight_RenderPlayerHealth();
+			Insight_RenderUnitValues('player', 'health');
 		elseif (eventArg == "target") then
-			Insight_RenderTargetHealth();
+            Insight_RenderUnitValues('target', 'health');
 		end
 	elseif (event == "PLAYER_TARGET_CHANGED") then
 		Insight_RenderPlayerCharges();
-		Insight_RenderTargetHealth();
-		Insight_RenderTargetMana();
+        Insight_RenderUnitValues('target', 'health');
+        Insight_RenderUnitValues('target', 'mana');
 	elseif(event == "PLAYER_XP_UPDATE" or event == "UPDATE_EXHAUSTION" or event == "PLAYER_LEVEL_UP") then
 		Insight_RenderPlayerExp();
 	elseif (event == "PLAYER_ENTER_COMBAT" or event == "PLAYER_LEAVE_COMBAT") then
@@ -176,19 +176,19 @@ function Insight_PlayerFrameEventHandler (event, eventArg)
 	elseif (event == "UNIT_AURA" or event == "PET_BAR_UPDATE" or event == "PET_UI_UPDATE" or event == "PLAYER_TOTEM_UPDATE" or event == "UPDATE_SHAPESHIFT_FORM") then
 		Insight_RenderPlayerExp();
 	elseif (event == "PLAYER_ALIVE" or event == "PLAYER_DEAD") then
-		Insight_RenderPlayerHealth();
-		Insight_RenderPlayerMana();
+        Insight_RenderUnitValues('player', 'health');
+        Insight_RenderUnitValues('player', 'mana');
 		Insight_RenderPlayerCharges();
 		Insight_RenderPlayerExp();
 	elseif (event == "PLAYER_ENTERING_WORLD") then
 		Insight_RenderPlayerCharges();
-		Insight_RenderPlayerHealth();
-		Insight_RenderPlayerMana();
+        Insight_RenderUnitValues('player', 'health');
+        Insight_RenderUnitValues('player', 'mana');
 		Insight_RenderPlayerExp();
 	elseif (event == "VARIABLES_LOADED") then
 		Insight_RenderPlayerCharges();
-		Insight_RenderPlayerHealth();
-		Insight_RenderPlayerMana();
+        Insight_RenderUnitValues('player', 'health');
+        Insight_RenderUnitValues('player', 'mana');
 		Insight_RenderPlayerExp();
 	end
 end
@@ -210,267 +210,6 @@ end
 
 -- ** TEXT DISPLAY FUNCTIONS ** --
 
-function Insight_RenderTargetHealth()
-	if ((TargetSideHealth == 1 or TargetBarHealth == 1) and UnitExists("target") == 1) then --  and ((UnitIsPlayer("target") == 0) or (UnitInParty("target") or UnitInRaid("target") or UnitIsUnit("target", "pet")))
-		if (MoveTarget == 1) then
-			TargetFrameVertPosTemp = 0 - TargetFrameVertPos;
-			TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", TargetFramePos, TargetFrameVertPosTemp);
-		else
-			TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 250, -4);
-		end
-
-		local IsDead = UnitIsDeadOrGhost("target");
-
-		local hcur = UnitHealth("target");
-		local total = UnitHealthMax("target");
-		local missing = total - hcur;
-
-		local percent = (tonumber(hcur) / tonumber(total)) * 100;
-
-		if (TargetSideHealth == 1) then
-			if (IsDead == 1) then
-				InsightDisplay_TargetSideHealth:SetText("Dead");
-				InsightDisplay_TargetSideHealth:SetTextColor(0, 1, 0);
-			else
-				if (TargetSideHealthPer == 0) then
-					if (TargetSideMaxes == 1) then
-						if (TargetSideMissing == 0) then
-							InsightDisplay_TargetSideHealth:SetText(Insight_NumberFormat(hcur) .. " / " .. Insight_NumberFormat(total));
-						else
-							if (missing == 0) then
-								InsightDisplay_TargetSideHealth:SetText("");
-							else
-								InsightDisplay_TargetSideHealth:SetText("-" .. missing .. " / " .. Insight_NumberFormat(total));
-							end
-						end
-					else -- if maxes == 0
-						if (TargetSideMissing == 0) then
-							InsightDisplay_TargetSideHealth:SetText(Insight_NumberFormat(hcur));
-						else
-							if (missing == 0) then
-								InsightDisplay_TargetSideHealth:SetText("");
-							else
-								InsightDisplay_TargetSideHealth:SetText("-" .. missing);
-							end
-						end
-					end
-				else -- if percent == 1
-					if (TargetSideMissing == 0) then
-						InsightDisplay_TargetSideHealth:SetText(ceil(percent) .. "%");
-					else
-						if (missing == 0) then
-							InsightDisplay_TargetSideHealth:SetText("");
-						else
-							InsightDisplay_TargetSideHealth:SetText("-" .. ceil(100 - percent) .. "%");
-						end
-					end
-				end
-				if (ColorTargetHealth == 1) then
-					if ((percent <= 100) and (percent > 75)) then
-						InsightDisplay_TargetSideHealth:SetTextColor(0, 1, 0);
-					elseif ((percent <= 75) and (percent > 50)) then
-						InsightDisplay_TargetSideHealth:SetTextColor(1, 1, 0);
-					elseif ((percent <= 50) and (percent > 25)) then
-						InsightDisplay_TargetSideHealth:SetTextColor(1, 0.5, 0);
-					else
-						InsightDisplay_TargetSideHealth:SetTextColor(1, 0, 0);
-					end
-				else
-					InsightDisplay_TargetSideHealth:SetTextColor(0, 1, 0);
-				end
-			end
-		else -- if TargetSideHealth == 0 then
-			InsightDisplay_TargetSideHealth:SetText("");
-		end
-		if (TargetBarHealth == 1) then
-			TargetFrameTextureFrameHealthBarText:SetWidth(1);
-			if (IsDead == 1) then
-				InsightDisplay_TargetBarHealth:SetText("");
-			else
-				if (TargetBarHealthPer == 0) then
-					if (TargetBarMaxes == 1) then
-						if (TargetBarMissing == 0) then
-							InsightDisplay_TargetBarHealth:SetText(Insight_NumberFormat(hcur) .. " / " .. Insight_NumberFormat(total));
-						else
-							if (missing == 0) then
-								InsightDisplay_TargetBarHealth:SetText("");
-							else
-								InsightDisplay_TargetBarHealth:SetText("-" .. missing .. " / " .. Insight_NumberFormat(total));
-							end
-						end
-					else -- if maxes == 0
-						if (TargetBarMissing == 0) then
-							InsightDisplay_TargetBarHealth:SetText(Insight_NumberFormat(hcur));
-						else
-							if (missing == 0) then
-								InsightDisplay_TargetBarHealth:SetText("");
-							else
-								InsightDisplay_TargetBarHealth:SetText("-" .. missing);
-							end
-						end
-					end
-				else -- if percent == 0
-					if (TargetBarMissing == 0) then
-						InsightDisplay_TargetBarHealth:SetText(ceil(percent) .. "%");
-					else
-						if (missing == 0) then
-							InsightDisplay_TargetBarHealth:SetText("");
-						else
-							InsightDisplay_TargetBarHealth:SetText("-" .. ceil(100 - percent) .. "%");
-						end
-					end
-				end
-			end
-		else
-			InsightDisplay_TargetBarHealth:SetText("");
-			TargetFrameTextureFrameHealthBarText:SetWidth(115);
-		end
-		if (ColorTargetHealthBar == 1) then  --  Old: TargetFrameHealthBar:SetStatusBarColor((100 - percent) / 100, percent / 100, 0);
-			if ((percent <= 100) and (percent > 75)) then
-				TargetFrameHealthBar:SetStatusBarColor(0, 1, 0);
-			elseif ((percent <= 75) and (percent > 50)) then
-				TargetFrameHealthBar:SetStatusBarColor(1, 1, 0);
-			elseif ((percent <= 50) and (percent > 25)) then
-				TargetFrameHealthBar:SetStatusBarColor(1, 0.5, 0);
-			else
-				TargetFrameHealthBar:SetStatusBarColor(1, 0, 0);
-			end
-		else
-			TargetFrameHealthBar:SetStatusBarColor(0, 1, 0);
-		end
-	else
-		InsightDisplay_TargetSideHealth:SetText("");
-		InsightDisplay_TargetBarHealth:SetText("");
-	end
-end
-
-
-function Insight_RenderTargetMana()
-	if ((TargetSideMana == 1 or TargetBarMana == 1) and UnitExists("target") == 1) then
-		if (MoveTarget == 1) then
-			TargetFrameVertPosTemp = 0 - TargetFrameVertPos;
-			TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", TargetFramePos, TargetFrameVertPosTemp);
-		else
-			TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 250, -4);
-		end
-
-		local TargetManaType = UnitPowerType("target");
-
-		local mcur = UnitMana("target");
-		local total = UnitManaMax("target");
-		local missing = total - mcur;
-
-		local percent = (tonumber(mcur) / tonumber(total)) * 100;
-
-		local IsDead = UnitIsDeadOrGhost("target");
-
-		if (TargetSideMana == 1) then
-			if (IsDead == 1 and TargetSideManaPer == 1) then
-				InsightDisplay_TargetSideMana:SetText("");
-			elseif (total < 1) then
-				InsightDisplay_TargetSideMana:SetText("");
-			else
-				if (TargetSideManaPer == 0 or (TargetManaType == 1 and RagePercent == 0) or (TargetManaType == 3 and EnergyPercent == 0)) then
-					if (TargetSideMaxes == 1) then
-						if (TargetSideMissing == 0) then
-							InsightDisplay_TargetSideMana:SetText(Insight_NumberFormat(mcur) .. " / " .. Insight_NumberFormat(total));
-						else
-							if (missing == 0) then
-								InsightDisplay_TargetSideMana:SetText("");
-							else
-								InsightDisplay_TargetSideMana:SetText("-" .. missing .. " / " .. Insight_NumberFormat(total));
-							end
-						end
-					else -- if maxes == 0
-						if (TargetSideMissing == 0) then
-							InsightDisplay_TargetSideMana:SetText(Insight_NumberFormat(mcur));
-						else
-							if (missing == 0) then
-								InsightDisplay_TargetSideMana:SetText("");
-							else
-								InsightDisplay_TargetSideMana:SetText("-" .. missing);
-							end
-						end
-					end
-				else -- if percent == 1
-					if (TargetSideMissing == 0) then
-						InsightDisplay_TargetSideMana:SetText(ceil(percent) .. "%");
-					else
-						if (missing == 0) then
-							InsightDisplay_TargetSideMana:SetText("");
-						else
-							InsightDisplay_TargetSideMana:SetText("-" .. ceil(100 - percent) .. "%");
-						end
-					end
-				end
-				if (ColorTargetMana == 1) then
-					if (TargetManaType == 1) then
-						InsightDisplay_TargetSideMana:SetTextColor(1, 0.50, 0.50);
-					elseif (TargetManaType == 3) then
-						InsightDisplay_TargetSideMana:SetTextColor(1, 1, 0);
-					elseif (TargetManaType == 2) then
-						InsightDisplay_TargetSideMana:SetTextColor(0.85, 0.5, 0);
-					else
-						InsightDisplay_TargetSideMana:SetTextColor(0.75, 0.75, 1);
-					end
-				else
-					InsightDisplay_TargetSideMana:SetTextColor(0, 1, 0);
-				end
-			end
-		else -- if TargetSideMana == 0 then
-			InsightDisplay_TargetSideMana:SetText("");
-		end
-		if (TargetBarMana == 1) then
-			TargetFrameTextureFrameManaBarText:SetWidth(1);
-			if (IsDead == 1 and TargetBarManaPer == 1) then
-				InsightDisplay_TargetBarMana:SetText("");
-			elseif (total < 1) then
-				InsightDisplay_TargetBarMana:SetText("");
-			else
-				if (TargetBarManaPer == 0 or (TargetManaType == 1 and RagePercent == 0) or (TargetManaType == 3 and EnergyPercent == 0)) then
-					if (TargetBarMaxes == 1) then
-						if (TargetBarMissing == 0) then
-							InsightDisplay_TargetBarMana:SetText(Insight_NumberFormat(mcur) .. " / " .. Insight_NumberFormat(total));
-						else
-							if (missing == 0) then
-								InsightDisplay_TargetBarMana:SetText("");
-							else
-								InsightDisplay_TargetBarMana:SetText("-" .. missing .. " / " .. Insight_NumberFormat(total));
-							end
-						end
-					else -- if maxes == 0
-						if (TargetBarMissing == 0) then
-							InsightDisplay_TargetBarMana:SetText(Insight_NumberFormat(mcur));
-						else
-							if (missing == 0) then
-								InsightDisplay_TargetBarMana:SetText("");
-							else
-								InsightDisplay_TargetBarMana:SetText("-" .. missing);
-							end
-						end
-					end
-				else -- if percent == 1
-					if (TargetBarMissing == 0) then
-						InsightDisplay_TargetBarMana:SetText(ceil(percent) .. "%");
-					else
-						if (missing == 0) then
-							InsightDisplay_TargetBarMana:SetText("");
-						else
-							InsightDisplay_TargetBarMana:SetText("-" .. ceil(100 - percent) .. "%");
-						end
-					end
-				end
-			end
-		else
-			InsightDisplay_TargetBarMana:SetText("");
-			TargetFrameTextureFrameManaBarText:SetWidth(35);
-		end
-	else
-		InsightDisplay_TargetSideMana:SetText("");
-		InsightDisplay_TargetBarMana:SetText("");
-	end
-end
-
 function Insight_RenderPlayerCharges()
 	if (PlayerSideCharges == 1 and PlayerManaType == 3) then
 		local charges = GetComboPoints("player");
@@ -491,244 +230,267 @@ function Insight_RenderPlayerCharges()
 	end
 end
 
-function Insight_RenderPlayerHealth()
-	if (PlayerSideHealth == 1 or PlayerBarHealth == 1 or ColorPlayerHealthBar == 1) then
-		local hcur = UnitHealth("player");
-		local total = UnitHealthMax("player");
-		local missing = total - hcur;
-
-		local percent = (tonumber(hcur) / tonumber(total)) * 100;
-
-		local IsDead = UnitIsDeadOrGhost("player");
-
-		if (PlayerSideHealth == 1) then
-			if (IsDead == 1 and PlayerSideHealthPer == 1) then
-				InsightDisplay_PlayerSideHealth:SetText("Dead");
-				InsightDisplay_PlayerSideHealth:SetTextColor(1, 0, 0);
-			else
-				if (PlayerSideHealthPer == 0) then
-					if (PlayerSideMaxes == 1) then
-						if (PlayerSideMissing == 0) then
-							InsightDisplay_PlayerSideHealth:SetText(Insight_NumberFormat(hcur) .. " / " .. Insight_NumberFormat(total));
-						else
-							if (missing == 0) then
-								InsightDisplay_PlayerSideHealth:SetText("");
-							else
-								InsightDisplay_PlayerSideHealth:SetText("-" .. missing .. " / " .. Insight_NumberFormat(total));
-							end
-						end
-					else -- if maxes == 0
-						if (PlayerSideMissing == 0) then
-							InsightDisplay_PlayerSideHealth:SetText(Insight_NumberFormat(hcur));
-						else
-							if (missing == 0) then
-								InsightDisplay_PlayerSideHealth:SetText("");
-							else
-								InsightDisplay_PlayerSideHealth:SetText("-" .. missing);
-							end
-						end
-					end
-				else -- if percent == 0
-					if (PlayerSideMissing == 0) then
-						InsightDisplay_PlayerSideHealth:SetText(ceil(percent) .. "%");
-					else
-						if (missing == 0) then
-							InsightDisplay_PlayerSideHealth:SetText("");
-						else
-							InsightDisplay_PlayerSideHealth:SetText("-" .. ceil(100 - percent) .. "%");
-						end
-					end
-				end
-				if (ColorPlayerHealth == 1) then
-					if ((percent <= 100) and (percent > 75)) then
-						InsightDisplay_PlayerSideHealth:SetTextColor(0, 1, 0);
-					elseif ((percent <= 75) and (percent > 50)) then
-						InsightDisplay_PlayerSideHealth:SetTextColor(1, 1, 0);
-					elseif ((percent <= 50) and (percent > 25)) then
-						InsightDisplay_PlayerSideHealth:SetTextColor(1, 0.5, 0);
-					else
-						InsightDisplay_PlayerSideHealth:SetTextColor(1, 0, 0);
-					end
-				else
-					InsightDisplay_PlayerSideHealth:SetTextColor(0, 1, 0);
-				end
-			end
-		else -- if (PlayerSideHealth == 0) then
-			InsightDisplay_PlayerSideHealth:SetText("");
-		end
-		if (PlayerBarHealth == 1) then
-			PlayerFrameHealthBarText:SetWidth(1);
-			if (IsDead == 1 and PlayerBarHealthPer == 1) then
-				InsightDisplay_PlayerBarHealth:SetText("");
-			else
-				if (PlayerBarHealthPer == 0) then
-					if (PlayerBarMaxes == 1) then
-						if (PlayerBarMissing == 0) then
-							InsightDisplay_PlayerBarHealth:SetText(Insight_NumberFormat(hcur) .. " / " .. Insight_NumberFormat(total));
-						else
-							if (missing == 0) then
-								InsightDisplay_PlayerBarHealth:SetText("");
-							else
-								InsightDisplay_PlayerBarHealth:SetText("-" .. missing .. " / " .. Insight_NumberFormat(total));
-							end
-						end
-					else -- if maxes == 0
-						if (PlayerBarMissing == 0) then
-							InsightDisplay_PlayerBarHealth:SetText(Insight_NumberFormat(hcur));
-						else
-							if (missing == 0) then
-								InsightDisplay_PlayerBarHealth:SetText("");
-							else
-								InsightDisplay_PlayerBarHealth:SetText("-" .. missing);
-							end
-						end
-					end
-				else -- if percent == 0
-					if (PlayerBarMissing == 0) then
-						InsightDisplay_PlayerBarHealth:SetText(ceil(percent) .. "%");
-					else
-						if (missing == 0) then
-							InsightDisplay_PlayerBarHealth:SetText("");
-						else
-							InsightDisplay_PlayerBarHealth:SetText("-" .. ceil(100 - percent) .. "%");
-						end
-					end
-				end
-			end
-		else
-			InsightDisplay_PlayerBarHealth:SetText("");
-			PlayerFrameHealthBarText:SetWidth(115);
-		end
-		if (ColorPlayerHealthBar == 1) then  --  Old: PlayerFrameHealthBar:SetStatusBarColor((100 - percent) / 100, percent / 100, 0);
-			if ((percent <= 100) and (percent > 75)) then
-				PlayerFrameHealthBar:SetStatusBarColor(0, 1, 0);
-			elseif ((percent <= 75) and (percent > 50)) then
-				PlayerFrameHealthBar:SetStatusBarColor(1, 1, 0);
-			elseif ((percent <= 50) and (percent > 25)) then
-				PlayerFrameHealthBar:SetStatusBarColor(1, 0.5, 0);
-			else
-				PlayerFrameHealthBar:SetStatusBarColor(1, 0, 0);
-			end
-		else
-			PlayerFrameHealthBar:SetStatusBarColor(0, 1, 0);
-		end
-	end
-	if (PlayerSideHealth == 0  and PlayerBarHealth == 0 and ColorPlayerHealthBar == 0) then
-		InsightDisplay_PlayerSideHealth:SetText("");
-	end
+function Insight_FormatValues(type, value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing)
+    local currentText = Insight_FormatCurrentValue(type, value_current, value_max, Option_AsPer, Option_ShowMissing);
+    if (currentText == '') then
+        return '';
+    end
+    return currentText .. Insight_FormatMaxValue(type, value_max, Option_AsPer, Option_ShowMaxes);
 end
 
-function Insight_RenderPlayerMana()
-	if (PlayerSideMana == 1 or PlayerBarMana == 1) then
-		local mcur = UnitMana("player");
-		local total = UnitManaMax("player");
-		local missing = total - mcur;
+function Insight_PercentageAllowedForThisType(type)
+    if (type ~= 'mana') then
+        return 1;
+    elseif (type == 'mana' and PlayerManaType == 1 and RagePercent == 1) then
+        return 1;
+    elseif (type == 'mana' and PlayerManaType == 3 and EnergyPercent == 1) then
+        return 1;
+    end
+    return 0;
+end
 
-		local percent = (tonumber(mcur) / tonumber(total)) * 100;
+function Insight_FormatCurrentValue(type, value_current, value_max, Option_AsPer, Option_ShowMissing)
+    local percent = (tonumber(value_current) / tonumber(value_max)) * 100;
+    if (Option_ShowMissing == 1) then
+        local missing = value_max - value_current;
+        if (missing == 0) then
+            return '';
+        end
+        if (Option_AsPer == 1 and Insight_PercentageAllowedForThisType(type) == 1) then
+            return '-' .. ceil(100 - percent) .. '%';
+        else
+            return '-' .. Insight_NumberFormat(missing);
+        end
+    else
+        if (Option_AsPer == 1 and Insight_PercentageAllowedForThisType(type) == 1) then
+            return ceil(percent) .. '%';
+        else
+            return Insight_NumberFormat(value_current);
+        end
+    end
+end
 
-		IsDead = UnitIsDeadOrGhost("player");
-		PlayerManaType = UnitPowerType("player"); -- 0 = mana; 1 = rage; 2 = focus; 3 = energy; 4 = happiness
+function Insight_FormatMaxValue(type, value_max, Option_AsPer, Option_ShowMaxes)
+    if (Option_ShowMaxes == 0) then
+        return '';
+    end;
 
-		if (PlayerSideMana == 1) then
-			if (IsDead == 1 and PlayerSideManaPer == 1) then
-				InsightDisplay_PlayerSideMana:SetText("");
-				-- FIXME - doesn't set colors if this is the first calculation of their mana
-			else
-				if (PlayerSideManaPer == 0 or (PlayerManaType == 1 and RagePercent == 0) or (PlayerManaType == 3 and EnergyPercent == 0)) then
-					if (PlayerSideMaxes == 1) then
-						if (PlayerSideMissing == 0) then
-							InsightDisplay_PlayerSideMana:SetText(Insight_NumberFormat(mcur) .. " / " .. Insight_NumberFormat(total));
-						else
-							if (missing == 0) then
-								InsightDisplay_PlayerSideMana:SetText("");
-							else
-								InsightDisplay_PlayerSideMana:SetText("-" .. missing .. " / " .. Insight_NumberFormat(total));
-							end
-						end
-					else -- if maxes == 0
-						if (PlayerSideMissing == 0) then
-							InsightDisplay_PlayerSideMana:SetText(Insight_NumberFormat(mcur));
-						else
-							if (missing == 0) then
-								InsightDisplay_PlayerSideMana:SetText("");
-							else
-								InsightDisplay_PlayerSideMana:SetText("-" .. missing);
-							end
-						end
-					end
-				else -- if percent == 1
-					if (PlayerSideMissing == 0) then
-						InsightDisplay_PlayerSideMana:SetText(ceil(percent) .. "%");
-					else
-						if (missing == 0) then
-							InsightDisplay_PlayerSideMana:SetText("");
-						else
-							InsightDisplay_PlayerSideMana:SetText("-" .. ceil(100 - percent) .. "%");
-						end
-					end
-				end
-				if (ColorPlayerMana == 1) then
-					if (PlayerManaType == 1) then
-						InsightDisplay_PlayerSideMana:SetTextColor(1, 0.50, 0.50);
-					elseif (PlayerManaType == 3) then
-						InsightDisplay_PlayerSideMana:SetTextColor(1, 1, 0);
-					else
-						InsightDisplay_PlayerSideMana:SetTextColor(0.75, 0.75, 1);
-					end
-				else
-					InsightDisplay_PlayerSideMana:SetTextColor(0, 1, 0);
-				end
-			end
-		else -- if PlayerSideMana == 0 then
-			InsightDisplay_PlayerSideMana:SetText("");
+    if (Option_AsPer == 1 and Insight_PercentageAllowedForThisType(type) == 1) then
+        return ' / 100%';
+    else
+        return ' / ' .. Insight_NumberFormat(value_max);
+    end
+end
+
+function Insight_UpdateText(unit, type, spot, Option_Show, TextFrame, value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing, Option_Color, Frame_Bar, status_dead)
+    if (Option_Show == 1) then
+        if (spot == 'bar') then
+            if (unit == 'player') then
+                if (type == 'health') then
+                    PlayerFrameHealthBarText:SetWidth(1);
+                elseif (type == 'mana') then
+                    PlayerFrameManaBarText:SetWidth(1);
+                end
+            elseif (unit == 'target') then
+                if (type == 'health') then
+                    TargetFrameTextureFrameHealthBarText:SetWidth(1);
+                elseif (type == 'mana') then
+                    TargetFrameTextureFrameManaBarText:SetWidth(1);
+                end
+            end
+        end
+        if (status_dead == 1) then
+            if (Option_AsPer == 1 and unit ~= 'target' and type == 'health') then
+                TextFrame:SetText('Dead');
+                if (spot == 'side') then
+                    TextFrame:SetTextColor(1, 0, 0);
+                end
+            else
+                TextFrame:SetText('');
+            end
+        else
+            TextFrame:SetText(Insight_FormatValues(type,   value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing));
+            if (type == 'health') then
+                Insight_UpdateHealthColor(spot, TextFrame, value_current, value_max, Option_Color, Frame_Bar);
+            elseif (type == 'mana') then
+                Insight_UpdateManaColor(  spot, TextFrame,                           Option_Color);
+            end
+        end
+    else
+        TextFrame:SetText("");
+        if (spot == 'bar') then
+            TextFrame:SetWidth(115);
+        end
+    end
+end
+
+function Insight_UpdateHealthColor(spot, TextFrame, value_current, value_max, Option_Color, Frame_Bar)
+    local percent = (tonumber(value_current) / tonumber(value_max)) * 100;
+    if (spot == 'side') then
+        if (Option_Color == 1) then
+            if ((percent <= 100) and (percent > 75)) then
+                TextFrame:SetTextColor(0, 1, 0);
+            elseif ((percent <= 75) and (percent > 50)) then
+                TextFrame:SetTextColor(1, 1, 0);
+            elseif ((percent <= 50) and (percent > 25)) then
+                TextFrame:SetTextColor(1, 0.5, 0);
+            else
+                TextFrame:SetTextColor(1, 0, 0);
+            end
+        else
+            TextFrame:SetTextColor(0, 1, 0);
+        end
+    end
+    if (spot == 'bar') then
+        if (Option_Color == 1 and Frame_Bar ~= 0) then
+            if ((percent <= 100) and (percent > 75)) then
+                Frame_Bar:SetStatusBarColor(0, 1, 0);
+            elseif ((percent <= 75) and (percent > 50)) then
+                Frame_Bar:SetStatusBarColor(1, 1, 0);
+            elseif ((percent <= 50) and (percent > 25)) then
+                Frame_Bar:SetStatusBarColor(1, 0.5, 0);
+            else
+                Frame_Bar:SetStatusBarColor(1, 0, 0);
+            end
+        else
+            Frame_Bar:SetStatusBarColor(0, 1, 0);
+        end
+    end
+end
+
+function Insight_UpdateManaColor(spot, TextFrame, Option_Color)
+    if (spot == 'side') then
+        if (Option_Color == 1) then
+            if (PlayerManaType == 1) then
+                TextFrame:SetTextColor(1, 0.50, 0.50);
+            elseif (PlayerManaType == 3) then
+                TextFrame:SetTextColor(1, 1, 0);
+            else
+                TextFrame:SetTextColor(0.75, 0.75, 1);
+            end
+        else
+            TextFrame:SetTextColor(0, 1, 0);
+        end
+    end
+end
+
+function Insight_ProcessValues(unit, type)
+    if (unit == 'player') then
+        if (type == 'health') then
+            if (PlayerSideHealth == 1 or PlayerBarHealth == 1 or ColorPlayerHealthBar == 1) then
+                return 1;
+            end
+        elseif (type == 'mana') then
+            if (PlayerSideMana == 1 or PlayerBarMana == 1) then
+                return 1;
+            end
+        end
+    elseif (unit == 'target') then
+        if (type == 'health') then
+            if ((TargetSideHealth == 1 or TargetBarHealth == 1) and UnitExists("target") == 1) then
+                -- KEEPING OLD CODE FOR REFERENCE: and ((UnitIsPlayer("target") == 0) or (UnitInParty("target") or UnitInRaid("target") or UnitIsUnit("target", "pet")))
+                return 1;
+            end
+        elseif (type == 'mana') then
+            if ((TargetSideMana == 1 or TargetBarMana == 1) and UnitExists("target") == 1) then
+                return 1;
+            end
+        end
+    end
+    return 0;
+end
+
+function Insight_RenderUnitValues(unit, type)
+    local TextFrame_Side, TextFrame_Bar = 0;
+    if (unit == 'player' and type == 'health') then
+        TextFrame_Side = InsightDisplay_PlayerSideHealth;
+        TextFrame_Bar  = InsightDisplay_PlayerBarHealth;
+    elseif (unit == 'player' and type == 'mana') then
+        TextFrame_Side = InsightDisplay_PlayerSideMana;
+        TextFrame_Bar  = InsightDisplay_PlayerBarMana;
+    elseif (unit == 'target' and type == 'health') then
+        TextFrame_Side = InsightDisplay_TargetSideHealth;
+        TextFrame_Bar  = InsightDisplay_TargetBarHealth;
+    elseif (unit == 'target' and type == 'mana') then
+        TextFrame_Side = InsightDisplay_TargetSideMana;
+        TextFrame_Bar  = InsightDisplay_TargetBarMana;
+    end
+	if (Insight_ProcessValues(unit, type) == 1) then
+	    if (unit == 'target') then
+            if (MoveTarget == 1) then
+                TargetFrameVertPosTemp = 0 - TargetFrameVertPos;
+                TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", TargetFramePos, TargetFrameVertPosTemp);
+            else
+                TargetFrame:SetPoint("TOPLEFT", "UIParent", "TOPLEFT", 250, -4);
+            end
+	    end
+	    -- situational variables
+        local value_current, value_max = 0;
+        local status_dead = UnitIsDeadOrGhost(unit);
+        -- Options and Frames
+		local Option_Side_Show, Option_Side_AsPer, Option_Side_ShowMaxes, Option_Side_ShowMissing, Option_Side_Color           = 0;
+		local Option_Bar_Show,  Option_Bar_AsPer,  Option_Bar_ShowMaxes,  Option_Bar_ShowMissing,  Option_Bar_Color, Frame_Bar = 0;
+
+        if (unit == 'player') then
+            Option_Side_ShowMaxes = PlayerSideMaxes;
+            Option_Side_ShowMissing = PlayerSideMissing;
+            Option_Bar_ShowMaxes = PlayerBarMaxes;
+            Option_Bar_ShowMissing = PlayerBarMissing;
+        elseif (unit == 'target') then
+            Option_Side_ShowMaxes = TargetSideMaxes;
+            Option_Side_ShowMissing = TargetSideMissing;
+            Option_Bar_ShowMaxes = TargetBarMaxes;
+            Option_Bar_ShowMissing = TargetBarMissing;
+        end
+		if (type == 'health') then
+            value_current = UnitHealth(unit);
+            value_max = UnitHealthMax(unit);
+
+            if (unit == 'player') then
+                Option_Side_Show = PlayerSideHealth;
+                Option_Side_AsPer = PlayerSideHealthPer;
+                Option_Side_Color = ColorPlayerHealth;
+                Option_Bar_Show = PlayerBarHealth;
+                Option_Bar_AsPer = PlayerBarHealthPer;
+                Option_Bar_Color = ColorPlayerHealthBar;
+                Frame_Bar = PlayerFrameHealthBar;
+            elseif (unit == 'target') then
+                Option_Side_Show = TargetSideHealth;
+                Option_Side_AsPer = TargetSideHealthPer;
+                Option_Side_Color = ColorTargetHealth;
+                Option_Bar_Show = TargetBarHealth;
+                Option_Bar_AsPer = TargetBarHealthPer;
+                Option_Bar_Color = ColorTargetHealthBar;
+                Frame_Bar = TargetFrameHealthBar;
+            end
+        elseif (type == 'mana') then
+            value_current = UnitMana(unit);
+            value_max = UnitManaMax(unit);
+            PlayerManaType = UnitPowerType(unit); -- 0 = mana; 1 = rage; 2 = focus; 3 = energy; 4 = happiness
+
+            if (unit == 'player') then
+                Option_Side_Show = PlayerSideMana;
+                Option_Side_AsPer = PlayerSideManaPer;
+                Option_Side_Color = ColorPlayerMana;
+                Option_Bar_Show = PlayerBarMana;
+                Option_Bar_AsPer = PlayerBarManaPer;
+                Option_Bar_Color = ColorPlayerManaBar;
+                Frame_Bar = PlayerFrameManaBar;
+            elseif (unit == 'target') then
+                Option_Side_Show = TargetSideMana;
+                Option_Side_AsPer = TargetSideManaPer;
+                Option_Side_Color = ColorTargetMana;
+                Option_Bar_Show = TargetBarMana;
+                Option_Bar_AsPer = TargetBarManaPer;
+                Option_Bar_Color = ColorTargetManaBar;
+                Frame_Bar = TargetFrameManaBar;
+            end
 		end
-		if (PlayerBarMana == 1) then
-			PlayerFrameManaBarText:SetWidth(1);
-			if (IsDead == 1 and PlayerBarManaPer == 1) then
-				InsightDisplay_PlayerBarMana:SetText("");
-				-- FIXME - doesn't set colors if this is the first calculation of their mana
-			else
-				if (PlayerBarManaPer == 0 or (PlayerManaType == 1 and RagePercent == 0) or (PlayerManaType == 3 and EnergyPercent == 0)) then
-					if (PlayerBarMaxes == 1) then
-						if (PlayerBarMissing == 0) then
-							InsightDisplay_PlayerBarMana:SetText(Insight_NumberFormat(mcur) .. " / " .. Insight_NumberFormat(total));
-						else
-							if (missing == 0) then
-								InsightDisplay_PlayerBarMana:SetText("");
-							else
-								InsightDisplay_PlayerBarMana:SetText("-" .. missing .. " / " .. Insight_NumberFormat(total));
-							end
-						end
-					else -- if maxes == 0
-						if (PlayerBarMissing == 0) then
-							InsightDisplay_PlayerBarMana:SetText(Insight_NumberFormat(mcur));
-						else
-							if (missing == 0) then
-								InsightDisplay_PlayerBarMana:SetText("");
-							else
-								InsightDisplay_PlayerBarMana:SetText("-" .. missing);
-							end
-						end
-					end
-				else -- if percent == 0
-					if (PlayerBarMissing == 0) then
-						InsightDisplay_PlayerBarMana:SetText(ceil(percent) .. "%");
-					else
-						if (missing == 0) then
-							InsightDisplay_PlayerBarMana:SetText("");
-						else
-							InsightDisplay_PlayerBarMana:SetText("-" .. ceil(100 - percent) .. "%");
-						end
-					end
-				end
-			end
-		else
-			InsightDisplay_PlayerBarMana:SetText("");
-			PlayerFrameManaBarText:SetWidth(115);
-		end
-	end
-	if (PlayerSideMana == 0  and PlayerBarMana == 0) then
-		InsightDisplay_PlayerSideMana:SetText("");
+
+        Insight_UpdateText(unit, type, 'side', Option_Side_Show, TextFrame_Side, value_current, value_max, Option_Side_AsPer, Option_Side_ShowMaxes, Option_Side_ShowMissing, Option_Side_Color, 0,         status_dead);
+        Insight_UpdateText(unit, type, 'bar',  Option_Bar_Show,  TextFrame_Bar,  value_current, value_max, Option_Bar_AsPer,  Option_Bar_ShowMaxes,  Option_Bar_ShowMissing,  Option_Bar_Color,  Frame_Bar, status_dead);
+    else
+		TextFrame_Side:SetText("");
 	end
 end
 
