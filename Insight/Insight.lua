@@ -1,5 +1,5 @@
 --[[
-	Insight Release 8
+	Insight Release 9
 	Author: Jerek Dain
 	Email: jerekdain@gmail.com
 	Website: http://www.jerekdain.com/
@@ -74,11 +74,16 @@ if (RagePercent == nil) then RagePercent = 1; end   -- Allow Rage as a percentil
 -- That's the end of the Default Settings area!
 -- You can ignore the rest of this file.
 
+eventQueue = {};
 
 -- ** ONLOAD SETUP ** --
 
 function Insight_Log(message)
-	DEFAULT_CHAT_FRAME:AddMessage(message, 1, 1, 1);
+	if (message == nil) then
+		DEFAULT_CHAT_FRAME:AddMessage("nil", 1, .5, .5);
+	else
+		DEFAULT_CHAT_FRAME:AddMessage(message, 1, 1, 1);
+	end
 end
 
 function Insight_NumberFormat(num)
@@ -211,7 +216,7 @@ end
 -- ** TEXT DISPLAY FUNCTIONS ** --
 
 function Insight_RenderPlayerCharges()
-	if (PlayerSideCharges == 1 and PlayerManaType == 3) then
+	if (PlayerSideCharges == 1 and CurrentManaType == 3) then
 		local charges = GetComboPoints("player");
 
 		if (charges ~= 0) then
@@ -230,8 +235,8 @@ function Insight_RenderPlayerCharges()
 	end
 end
 
-function Insight_FormatValues(type, value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing)
-	local currentText = Insight_FormatCurrentValue(type, value_current, value_max, Option_AsPer, Option_ShowMissing);
+function Insight_FormatValues(unit, type, value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing)
+	local currentText = Insight_FormatCurrentValue(unit, type, value_current, value_max, Option_AsPer, Option_ShowMissing);
 	if (currentText == '') then
 		return '';
 	end
@@ -239,18 +244,29 @@ function Insight_FormatValues(type, value_current, value_max, Option_AsPer, Opti
 end
 
 function Insight_PercentageAllowedForThisType(type)
-	if (type ~= 'mana') then
-		return 1;
-	elseif (type == 'mana' and PlayerManaType == 1 and RagePercent == 1) then
-		return 1;
-	elseif (type == 'mana' and PlayerManaType == 3 and EnergyPercent == 1) then
+	if (type == 'mana') then
+		if (CurrentManaType == 1) then -- Rage
+			if (RagePercent == 1) then
+				return 1;
+			end
+		elseif (CurrentManaType == 3) then -- Energy
+			if (EnergyPercent == 1) then
+				return 1;
+			end
+		elseif (PlayerBarManaPer == 1) then -- Not Rage or Energy, must be Mana or an unknown Mana type
+			return 1;
+		end
+	else -- Health/unknown
 		return 1;
 	end
 	return 0;
 end
 
-function Insight_FormatCurrentValue(type, value_current, value_max, Option_AsPer, Option_ShowMissing)
+function Insight_FormatCurrentValue(unit, type, value_current, value_max, Option_AsPer, Option_ShowMissing)
 	local percent = (tonumber(value_current) / tonumber(value_max)) * 100;
+	if (tonumber(value_max) == 0) then
+		percent = 0;
+	end
 	if (Option_ShowMissing == 1) then
 		local missing = value_max - value_current;
 		if (missing == 0) then
@@ -284,7 +300,7 @@ end
 
 function Insight_UpdateText(unit, type, spot, Option_Show, TextFrame, value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing, Option_Color, Frame_Bar, status_dead)
 	if (Option_Show == 1) then
-		if (spot == 'bar') then
+		if (spot == 'bar' and InCombatLockdown() ~= 1) then
 			if (unit == 'player') then
 				if (type == 'health') then
 					PlayerFrameHealthBarText:SetWidth(1);
@@ -309,7 +325,7 @@ function Insight_UpdateText(unit, type, spot, Option_Show, TextFrame, value_curr
 				TextFrame:SetText('');
 			end
 		else
-			TextFrame:SetText(Insight_FormatValues(type,   value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing));
+			TextFrame:SetText(Insight_FormatValues(unit, type, value_current, value_max, Option_AsPer, Option_ShowMaxes, Option_ShowMissing));
 			if (type == 'health') then
 				Insight_UpdateHealthColor(spot, TextFrame, value_current, value_max, Option_Color, Frame_Bar);
 			elseif (type == 'mana') then
@@ -318,7 +334,7 @@ function Insight_UpdateText(unit, type, spot, Option_Show, TextFrame, value_curr
 		end
 	else
 		TextFrame:SetText("");
-		if (spot == 'bar') then
+		if (spot == 'bar' and InCombatLockdown() ~= 1) then
 			TextFrame:SetWidth(115);
 		end
 	end
@@ -361,9 +377,9 @@ end
 function Insight_UpdateManaColor(spot, TextFrame, Option_Color)
 	if (spot == 'side') then
 		if (Option_Color == 1) then
-			if (PlayerManaType == 1) then
+			if (CurrentManaType == 1) then
 				TextFrame:SetTextColor(1, 0.50, 0.50);
-			elseif (PlayerManaType == 3) then
+			elseif (CurrentManaType == 3) then
 				TextFrame:SetTextColor(1, 1, 0);
 			else
 				TextFrame:SetTextColor(0.75, 0.75, 1);
@@ -466,7 +482,7 @@ function Insight_RenderUnitValues(unit, type)
 		elseif (type == 'mana') then
 			value_current = UnitMana(unit);
 			value_max = UnitManaMax(unit);
-			PlayerManaType = UnitPowerType(unit); -- 0 = mana; 1 = rage; 2 = focus; 3 = energy; 4 = happiness
+			CurrentManaType = UnitPowerType(unit); -- 0 = mana; 1 = rage; 2 = focus; 3 = energy; 4 = happiness
 
 			if (unit == 'player') then
 				Option_Side_Show = PlayerSideMana;
@@ -702,4 +718,21 @@ function Insight_SlashHandler(msg)
 	DEFAULT_CHAT_FRAME:AddMessage(INSIGHT_SLASH_INSIGHT1, 1, 1, 0);
 	DEFAULT_CHAT_FRAME:AddMessage(INSIGHT_SLASH_INSIGHT2, 1, .65, 0);
 	DEFAULT_CHAT_FRAME:AddMessage(INSIGHT_SLASH_INSIGHT3, 1, .65, 0);
+end
+
+function Insight_QueueEvent(eventFunction, event, eventArg) -- Not used, saved for reference
+	if (InCombatLockdown() ~= 1) then
+		if (table.getn(eventQueue) > 0) then
+			table.foreach(eventQueue, function(key, value)
+				-- Do the things in the queue
+				eventFunction(value[0], value[1]);
+			end);
+			eventQueue = {};
+		end
+		-- Do the current event
+		eventFunction(event, eventArg);
+	else
+		-- Queue the event for later
+		table.insert(eventQueue, { event, eventArg });
+	end
 end

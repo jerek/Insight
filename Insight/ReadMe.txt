@@ -1,4 +1,4 @@
-Insight Release 8
+Insight Release 9
 -----------------
 Author: Jerek Dain
 Email: jerek@jerekdain.com
@@ -19,6 +19,10 @@ If you have MobInfo-2 or another MobHealth addon Insight will detect it and use 
 	+==========+
 	|Change Log|
 	+==========+
+
+RELEASE 9 - Sunday, April 14, 2013
+- Fixed a bug where the mana type of the target was not always handled correctly.
+- Fixed an issue with trying to change frame sizes during combat lockdown, causing combat lockdown errors.
 
 RELEASE 8 - Thursday, December 20, 2012
 - Improved styling of the experience display beneath the player portrait to use nice number formatting and use colors to distinguish between areas of the text.

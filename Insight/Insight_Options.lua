@@ -286,10 +286,10 @@ function Insight_OptionsFrame_Save()
 		RagePercent = 0;
 	end
 
-	Insight_RenderPlayerHealth();
-	Insight_RenderPlayerMana();
+	Insight_RenderUnitValues('player', 'health');
+	Insight_RenderUnitValues('player', 'mana');
 	Insight_RenderPlayerCharges();
 	Insight_RenderPlayerExp();
-	Insight_RenderTargetHealth();
-	Insight_RenderTargetMana();
+	Insight_RenderUnitValues('target', 'health');
+	Insight_RenderUnitValues('target', 'mana');
 end
