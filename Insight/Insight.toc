@@ -1,5 +1,5 @@
-## Interface: 50300
-## Title: Insight r9 |cff7fff7f (Patch 5.3)|r
+## Interface: 60000
+## Title: Insight |cff7fff7f (r9 for Patch 6.0)|r
 ## Notes: Display additional info at the player and target portraits.
 ## Author: Jerek Dain, jerekdain@gmail.com, http://www.jerekdain.com/
 ## SavedVariables: PlayerSideHealth, PlayerSideMana, PlayerSideMaxes, PlayerSideMissing, PlayerSideHealthPer, PlayerSideManaPer, ColorPlayerHealth, ColorPlayerMana, ColorPlayerHealthBar, PlayerBarHealth, PlayerBarMana, PlayerBarMaxes, PlayerBarMissing, PlayerBarHealthPer, PlayerBarManaPer, TargetSideHealth, TargetSideMana, TargetSideMaxes, TargetSideMissing, TargetSideHealthPer, TargetSideManaPer, ColorTargetHealth, ColorTargetMana, ColorTargetHealthBar, TargetBarHealth, TargetBarMana, TargetBarMaxes, TargetBarMissing, TargetBarHealthPer, TargetBarManaPer, Exp, Tnl, BarExp, ForceDecimals, AutohideExp, MoveTarget, TargetFramePos, TargetFrameVertPos, PlayerSideCharges, ColorPlayerName, EnergyPercent, RagePercent

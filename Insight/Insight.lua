@@ -514,7 +514,7 @@ end
 
 function Insight_RenderPlayerExp()
 	Level = UnitLevel("player");
-	if (AutohideExp == 1 and Level == 90) then
+	if (AutohideExp == 1 and Level == 100) then
 		InsightDisplay_PlayerExp:SetText("");
 		InsightDisplay_PlayerTnl:SetText("");
 	else
